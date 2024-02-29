@@ -1,0 +1,6 @@
+[
+  { "id": "1", "label": "pusher", "selected": false },
+  { "id": "2", "label": "ustrasound", "selected": false },
+  { "id": "3", "label": "weighing", "selected": false },
+  { "id": "4", "label": "custody", "selected": false }
+]

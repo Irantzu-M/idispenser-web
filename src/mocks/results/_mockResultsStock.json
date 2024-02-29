@@ -1,0 +1,92 @@
+[
+  {
+    "id": "111111",
+    "customer": "Código de cliente",
+    "warehouse id": "Identificador del almacén",
+    "warehouse name": "Nombre del almacén",
+    "product id": "Identificador de producto",
+    "product name": "Nombre producto",
+    "current units": "unidades actuales",
+    "max. units": "sumatorio de máximas unidades"
+  },
+  {
+    "id": "222222",
+    "customer": "Código de cliente",
+    "warehouse id": "Identificador del almacén",
+    "warehouse name": "Nombre del almacén",
+    "product id": "Identificador de producto",
+    "product name": "Nombre producto",
+    "current units": "unidades actuales",
+    "max. units": "sumatorio de máximas unidades"
+  },
+  {
+    "id": "333333",
+    "customer": "Código de cliente",
+    "warehouse id": "Identificador del almacén",
+    "warehouse name": "Nombre del almacén",
+    "product id": "Identificador de producto",
+    "product name": "Nombre producto",
+    "current units": "unidades actuales",
+    "max. units": "sumatorio de máximas unidades"
+  },
+  {
+    "id": "444444",
+    "customer": "Código de cliente",
+    "warehouse id": "Identificador del almacén",
+    "warehouse name": "Nombre del almacén",
+    "product id": "Identificador de producto",
+    "product name": "Nombre producto",
+    "current units": "unidades actuales",
+    "max. units": "sumatorio de máximas unidades"
+  },
+  {
+    "id": "555555",
+    "customer": "Código de cliente",
+    "warehouse id": "Identificador del almacén",
+    "warehouse name": "Nombre del almacén",
+    "product id": "Identificador de producto",
+    "product name": "Nombre producto",
+    "current units": "unidades actuales",
+    "max. units": "sumatorio de máximas unidades"
+  },
+  {
+    "id": "666666",
+    "customer": "Código de cliente",
+    "warehouse id": "Identificador del almacén",
+    "warehouse name": "Nombre del almacén",
+    "product id": "Identificador de producto",
+    "product name": "Nombre producto",
+    "current units": "unidades actuales",
+    "max. units": "sumatorio de máximas unidades"
+  },
+  {
+    "id": "777777",
+    "customer": "Código de cliente",
+    "warehouse id": "Identificador del almacén",
+    "warehouse name": "Nombre del almacén",
+    "product id": "Identificador de producto",
+    "product name": "Nombre producto",
+    "current units": "unidades actuales",
+    "max. units": "sumatorio de máximas unidades"
+  },
+  {
+    "id": "888888",
+    "customer": "Código de cliente",
+    "warehouse id": "Identificador del almacén",
+    "warehouse name": "Nombre del almacén",
+    "product id": "Identificador de producto",
+    "product name": "Nombre producto",
+    "current units": "unidades actuales",
+    "max. units": "sumatorio de máximas unidades"
+  },
+  {
+    "id": "999999",
+    "customer": "Código de cliente",
+    "warehouse id": "Identificador del almacén",
+    "warehouse name": "Nombre del almacén",
+    "product id": "Identificador de producto",
+    "product name": "Nombre producto",
+    "current units": "unidades actuales",
+    "max. units": "sumatorio de máximas unidades"
+  }
+]

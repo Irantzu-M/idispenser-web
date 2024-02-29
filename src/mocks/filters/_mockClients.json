@@ -1,0 +1,27 @@
+[
+  {
+    "id": "111111",
+    "Código": "cod956",
+    "Cliente": "Nombre cliente 1"
+  },
+  {
+    "id": "222222",
+    "Código": "cod715",
+    "Cliente": "Nombre cliente 2"
+  },
+  {
+    "id": "333333",
+    "Código": "cod632",
+    "Cliente": "Nombre cliente 3"
+  },
+  {
+    "id": "444444",
+    "Código": "cod788",
+    "Cliente": "Nombre cliente 4"
+  },
+  {
+    "id": "555555",
+    "Código": "cod562",
+    "Cliente": "Nombre cliente 5"
+  }
+]

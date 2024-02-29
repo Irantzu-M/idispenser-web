@@ -1,0 +1,22 @@
+[
+  {
+    "id": "5555555",
+    "code": "E03022",
+    "name": "Nombre quinto producto"
+  },
+  {
+    "id": "666666",
+    "code": "E03023",
+    "name": "Sexto producto a ver"
+  },
+  {
+    "id": "777777",
+    "code": "E03021",
+    "name": "Séptimo producto de la lista"
+  },
+  {
+    "id": "888888",
+    "code": "E03022",
+    "name": "Nombre octavo producto"
+  }
+]

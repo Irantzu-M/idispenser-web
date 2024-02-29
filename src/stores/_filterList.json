@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "name": "client",
+    "label": { "es": "Cliente", "en": "Client" },
+    "selected": []
+  },
+  {
+    "id": "2",
+    "name": "storage",
+    "label": { "es": "Almacén", "en": "Storage" },
+    "selected": []
+  },
+  {
+    "id": "3",
+    "name": "product",
+    "label": { "es": "Artículo", "en": "Product" },
+    "selected": []
+  },
+  {
+    "id": "4",
+    "name": "hub",
+    "label": { "es": "HUB", "en": "HUB" },
+    "selected": []
+  },
+  {
+    "id": "5",
+    "name": "sensor",
+    "label": { "es": "Sensor", "en": "Sensor" },
+    "selected": []
+  },
+  {
+    "id": "6",
+    "name": "sensortype",
+    "label": { "es": "Tipología de sensor", "en": "Sensor type" },
+    "selected": []
+  }
+]

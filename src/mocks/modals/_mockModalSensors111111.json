@@ -1,0 +1,18 @@
+[
+  {
+    "id": "111111",
+    "reference": "ref111",
+    "label": "Sensor 1",
+    "position": "A02DF",
+    "type": "Sensor type A",
+    "hub": "Nombre del HUB",
+    "customer id": "6549863",
+    "customer": "Nombre del cliente A",
+    "warehouse id": "65fe6",
+    "warehouse name": "Nombre del Almacen",
+    "sensor id": "CFG6784S",
+    "farmaconnect id": "RGJ-CFG6784S",
+    "max height": "120mm",
+    "comments": ""
+  }
+]

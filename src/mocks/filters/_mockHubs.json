@@ -1,0 +1,110 @@
+[
+  {
+    "id": "111111",
+    "reference": "ref111",
+    "position": "AGH658",
+    "label": "Hub 1",
+    "customer": "Nombre del cliente A",
+    "storage": "Nombre del Almacen",
+    "type": "tipo"
+  },
+  {
+    "id": "222222",
+    "reference": "ref222",
+    "position": "AGH658",
+    "label": "Hub 2",
+    "customer": "Nombre del cliente B",
+    "storage": "Nombre del Almacen",
+    "type": "tipo"
+  },
+  {
+    "id": "333333",
+    "reference": "ref333",
+    "position": "AGH658",
+    "label": "Hub 3",
+    "customer": "Nombre del cliente C",
+    "storage": "Nombre del Almacen",
+    "type": "tipo"
+  },
+  {
+    "id": "555555",
+    "reference": "ref555",
+    "position": "AGH658",
+    "label": "Hub 4",
+    "customer": "Nombre del cliente D",
+    "storage": "Nombre del Almacen",
+    "type": "tipo"
+  },
+  {
+    "id": "666666",
+    "reference": "ref666",
+    "position": "AGH658",
+    "label": "Otro nombre de HUB",
+    "customer": "Nombre del cliente E",
+    "storage": "Nombre del Almacen",
+    "type": "tipo"
+  },
+  {
+    "id": "888888",
+    "reference": "ref888",
+    "position": "AGH659",
+    "label": "HUB 8",
+    "customer": "Nombre del cliente F",
+    "storage": "Nombre del Almacen F",
+    "type": "tipo 2"
+  },
+  {
+    "id": "999999",
+    "reference": "ref999",
+    "position": "AGH660",
+    "label": "HUB 9",
+    "customer": "Nombre del cliente G",
+    "storage": "Nombre del Almacen G",
+    "type": "tipo 3"
+  },
+  {
+    "id": "101010",
+    "reference": "ref101",
+    "position": "AGH661",
+    "label": "Otro nombre de HUB",
+    "customer": "Nombre del cliente J",
+    "storage": "Nombre del Almacen J",
+    "type": "tipo"
+  },
+  {
+    "id": "110110",
+    "reference": "ref110",
+    "position": "AGH662",
+    "label": "Otro nombre de HUB",
+    "customer": "Nombre del cliente H",
+    "storage": "Nombre del Almacen H",
+    "type": "tipo"
+  },
+  {
+    "id": "120120",
+    "reference": "ref120",
+    "position": "AGH663",
+    "label": "Otro nombre de HUB",
+    "customer": "Nombre del cliente K",
+    "storage": "Nombre del Almacen K",
+    "type": "tipo"
+  },
+  {
+    "id": "130130",
+    "reference": "ref130",
+    "position": "AGH658",
+    "label": "Otro nombre de HUB",
+    "customer": "Nombre del cliente L",
+    "storage": "Nombre del Almacen L",
+    "type": "tipo"
+  },
+  {
+    "id": "140140",
+    "reference": "ref140",
+    "position": "AGH658",
+    "label": "Otro nombre de HUB",
+    "customer": "Nombre del cliente M",
+    "storage": "Nombre del Almacen M",
+    "type": "tipo"
+  }
+]
