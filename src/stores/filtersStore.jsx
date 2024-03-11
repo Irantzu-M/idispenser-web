@@ -1,6 +1,7 @@
 import React from "react";
 
 import { create } from "zustand";
+import { idispenserApi } from "../api/idispenserApi";
 
 const dataFilterList = [
   {
@@ -149,10 +150,10 @@ const useFilterStore = create((set) => ({
     }));
   },
   isLoading: false,
-  fetchFilterData: async () => {
+  fetchFilterData: async (endpoint) => {
     set({ isLoading: true });
     try {
-      const response = await getApiData(endpoint);
+      const response = await idispenserApi.fetchApi(endpoint);
       const rawData = await response["items"];
       if (rawData.length > 0) {
         setRemapData(remap(rawData));

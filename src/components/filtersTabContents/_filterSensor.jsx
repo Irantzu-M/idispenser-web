@@ -3,12 +3,8 @@ import { useEffect, useState } from "react";
 import useFilterStore from "../../stores/filtersStore";
 import SearchSectionAutocomplete from "../customSearchSelect/_searchSectionAutocomplete";
 import DefaultTable from "../tables/_defaultTable";
-// ejemplo : 00FF714E4CE5662D267668E67B8ABD96
-//API
-// import { getApiData } from "../../api/idispenserApi";
 
 function FilterSensor(props) {
-  // const [data, setData] = useState([]);
   const [data, setData] = useFilterStore((state) => state.selecable);
   const [remapData, setRemapData] = useState([{ "": "buscar" }]);
   const fieldsToSearchIn = [
@@ -35,7 +31,6 @@ function FilterSensor(props) {
   // TEXTO DE BÚSQUEDA
   const [searchedText, setSearchedText] = useState("");
   const handleChange = (text) => {
-    console.log("change", searchedText.length, searchedText);
     setSearchedText(text);
   };
 
@@ -79,32 +74,12 @@ function FilterSensor(props) {
 
   let endpoint = "sensors/list";
   const fetchFilterData = useFilterStore((state) => state.fetchFilterData);
-  const getData = (endpoint) => {
-    setRemapData();
-  };
-  useEffect(() => {
-    // console.log("search", searchedText.length, searchedText);
-    if (searchedText.length >= 6) {
-      endpoint += `?search=${searchedText}`;
-      fetchFilterData(endpoint);
-      setRemapData();
 
-      // async function fetchData() {
-      //   try {
-      //     const response = await getApiData(endpoint);
-      //     const rawData = await response["items"];
-      //     if (rawData.length > 0) {
-      //       setRemapData(remap(rawData));
-      //     } else {
-      //       setRemapData([{ "": "no hay resultados" }]);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error fetching data:", error);
-      //   }
-      // }
-      if (!data[0]) {
-        fetchData();
-      }
+  useEffect(() => {
+    if (searchedText.length >= 6) {
+      endpoint = `sensors/list` + `?search=${searchedText}`;
+      setData(fetchFilterData(endpoint));
+      setRemapData(remap(data));
 
       function remap(dataToremap) {
         const rmd = dataToremap.map((item) => {
