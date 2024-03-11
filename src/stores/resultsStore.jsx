@@ -7,21 +7,7 @@ const useResultsStore = create((set) => ({
       data: newData,
     }));
   },
-  // getStatusText: (status) => {
-  //   let statusText = "";
-  //   switch (status) {
-  //     case "0":
-  //       statusText = "OK";
-  //       break;
-  //     case "1":
-  //       statusText = "Erro de parámetros";
-  //       break;
-  //     case "2":
-  //       statusText = "Error de conexión";
-  //       break;
-  //   }
-  //   return statusText;
-  // },
+
   sortDataByFieldASC: (field) => {
     const getDataCopy = (initialData) => {
       const dataCopy = [...initialData];

@@ -26,7 +26,7 @@ const ModalProduct = (props) => {
   useEffect(() => {
     async function fetchData() {
       fetch(
-        "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/modals/_mockModalResults" +
+        "http://127.0.0.1:5500/src/mocks/modals/_mockModalResults" +
           capitalize(modalItemType) +
           ".json"
       )
@@ -41,7 +41,7 @@ const ModalProduct = (props) => {
   useEffect(() => {
     async function fetchModalItem() {
       fetch(
-        "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/modals/_mockModal" +
+        "http://127.0.0.1:5500/src/mocks/modals/_mockModal" +
           capitalize(modalItemType) +
           props.item.id +
           ".json"
@@ -265,7 +265,7 @@ const ModalProduct = (props) => {
                   getData={itemsFound}
                 ></ReplaceTable> */}
                 <DefaultTable
-                  stripped
+                  striped
                   select
                   // TODO - Acción al seleccionar
                   //handleSelect={handleSelect}

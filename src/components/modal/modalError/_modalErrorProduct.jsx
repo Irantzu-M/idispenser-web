@@ -20,7 +20,7 @@ const ModalErrorProduct = (props) => {
   useEffect(() => {
     async function fetchModalItem() {
       fetch(
-        "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/modals/_mockModal" +
+        "http://127.0.0.1:5500/src/mocks/modals/_mockModal" +
           // TODO - recuperar esto
           // capitalize(modalItemType) +
           // props.item.id +

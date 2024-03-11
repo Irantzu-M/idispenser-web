@@ -26,9 +26,9 @@ function TableDownload(props) {
   return (
     <a
       onClick={exportToExcel}
-      className="col-auto d-flex align-items-center mr-3"
+      className="btn-link col-auto d-flex align-items-center mr-3"
     >
-      <span className="py-3 pe-3 icon icon-download"></span>
+      <span className="py-3 pr-2 icon icon-download"></span>
       <span className="txt">Exportar</span>
     </a>
   );

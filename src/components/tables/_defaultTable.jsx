@@ -13,7 +13,7 @@ const DefaultTable = (props) => {
   // PROPERTIES OF TABLE
   const itemType = props.itemType || "";
   const tableQuery = props.tableQuery;
-  const stripped = props.stripped || false;
+  const striped = props.striped || false;
   const customHeader = props.customHeader || false;
   // Checkbox single select
   const select = props.select || false;
@@ -71,7 +71,7 @@ const DefaultTable = (props) => {
                   borderless={true}
                   hover={true}
                   className={
-                    "idispenser-table" + (stripped ? " table-striped" : "")
+                    "idispenser-table" + (striped ? " table-striped" : "")
                   }
                 >
                   {customHeader && customHeader != "none" && (

@@ -1,19 +1,11 @@
 import React from "react";
-// import ClayTable from "@clayui/table";
 import { useEffect, useState } from "react";
 import useFilterStore from "../../stores/filtersStore";
 import DefaultTable from "../tables/_defaultTable";
 
 function FilterSensorType(props) {
   const [data, setData] = useState([]);
-  // const [remapData, setRemapData] = useState([]);
-  // TODO - Use api
   useEffect(() => {
-    //   fetch(
-    //     "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/filters/_mockSensorType.json"
-    //   )
-    //     .then((response) => response.json())
-    //     .then((rawdata) => setData(rawdata));
     setData([
       { id: "1", label: "pusher", selected: false },
       { id: "2", label: "ustrasound", selected: false },
@@ -21,29 +13,6 @@ function FilterSensorType(props) {
       { id: "4", label: "custody", selected: false },
     ]);
   }, []);
-  // setData([
-  //   { id: "1", label: "pusher", selected: false },
-  //   { id: "2", label: "ustrasound", selected: false },
-  //   { id: "3", label: "weighing", selected: false },
-  //   { id: "4", label: "custody", selected: false },
-  // ]);
-
-  // useEffect(() => {
-  //   async function remap() {
-  //     if (data != undefined) {
-  //       setRemapData(
-  //         data.map((item) => {
-  //           return {
-  //             id: item.id,
-  //             "Código ": item.id,
-  //             "Nombre ": item["Cliente"],
-  //           };
-  //         })
-  //       );
-  //     }
-  //   }
-  //   remap();
-  // }, [data]);
 
   // const [anySensorSelected, setAnySensorSelected] = useState("");
   const [tabs, setTabs] = useState(useFilterStore((state) => state.filters));
@@ -81,7 +50,7 @@ function FilterSensorType(props) {
       <p>Selecciona la tipología del sensor:</p>
 
       <DefaultTable
-        stripped
+        striped
         select
         handleSelect={handleSelect}
         selectedItems={selectedItems}

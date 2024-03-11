@@ -13,13 +13,13 @@ const AutocompleteComponent = (props) => {
 
   useEffect(() => {
     setFilteredOptions(
-      options.filter((option) =>
+      props.items.filter((option) =>
         option[resultStringKeyName]
           .toLowerCase()
           .includes(inputValue.toLowerCase())
       )
     );
-  }, [inputValue, options]);
+  }, [inputValue, props.items]);
 
   const highlightMatch = (text, match) => {
     const startIndex = text.toLowerCase().indexOf(match.toLowerCase());
@@ -42,9 +42,9 @@ const AutocompleteComponent = (props) => {
   const handleInputChange = (event) => {
     const value = event.target.value;
     setInputValue(value);
-    setShowOptions(value.length > 6 && filteredOptions.length > 0);
-    if (value.length > 6) {
-      onSearch(value);
+    setShowOptions(value.length >= 6 && filteredOptions.length > 0);
+    if (value.length >= 6) {
+      props.onSearch(value);
     }
   };
 
@@ -89,7 +89,7 @@ const AutocompleteComponent = (props) => {
       </div>
       <div className="search-section--autocomplete--dropdown">
         <div className="wrapper">
-          {showOptions && inputValue.length > 6 && (
+          {showOptions && inputValue.length >= 6 && (
             <ul>
               {filteredOptions.map((option, index) => (
                 <li key={index} onClick={() => handleSelect(option)}>

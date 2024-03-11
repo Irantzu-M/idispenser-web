@@ -10,26 +10,27 @@ function SearchSectionAutocomplete(props) {
   // PROPS
   const options = props.options || [];
   const placeholder = props.placeholder || "";
-  const cellsToSearchIn = props.cellsToSearchIn || Object.keys(options[0]);
-  const cellsToDisplay = props.cellsToDisplay || Object.keys(options[0]);
+  const cellsToSearchIn =
+    props.cellsToSearchIn || Object.keys(props.options[0]);
+  const cellsToDisplay = props.cellsToDisplay || Object.keys(props.options[0]);
   const handleChange = props.handleChange;
   const [searchText, setSearchText] = useState("");
 
   // note: the id field is mandatory
   const handleOnSearch = (string) => {
-    handleChange(string);
+    props.handleChange(string);
     setSearchText(string);
   };
 
   const handleOnSelect = (item) => {
     setSearchText(item.combinedField);
-    props.handleChange(item.combinedField);
+    props.handleChange(item.id);
   };
 
   // HIGHLIGHT PRESSED LETTERS
 
   // COMBINED FIELDS
-  options.map((item) => {
+  props.options.map((item) => {
     if (!item.combinedField) {
       const combinedField = cellsToDisplay
         .map((field) => {
@@ -57,10 +58,10 @@ function SearchSectionAutocomplete(props) {
   };
 
   return (
-    options[0] && (
+    props.options[0] && (
       <AutocompleteComponent
-        items={options}
-        fuseOptions={{ minMatchCharLength: 6, keys: cellsToSearchIn }}
+        items={props.options}
+        //fuseOptions={{ minMatchCharLength: 6, keys: cellsToSearchIn }}
         showNoResults={false}
         resultStringKeyName="combinedField"
         onSearch={handleOnSearch}

@@ -19,7 +19,7 @@ const ResultTable = (props) => {
   useEffect(() => {
     //   async function fetchData() {
     //     fetch(
-    //       "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/results/_mockResults" +
+    //       "http://127.0.0.1:5500/src/mocks/results/_mockResults" +
     //         capitalize(props.itemType) +
     //         ".json"
     //     )

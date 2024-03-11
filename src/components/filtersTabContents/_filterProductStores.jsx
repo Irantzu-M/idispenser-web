@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useFilterStore from "../../stores/filtersStore";
 
 import DefaultTable from "../tables/_defaultTable";
@@ -33,25 +33,20 @@ function FilterProductStores(props) {
     <>
       {selectedItems.length > 0 && (
         <DefaultTable
-          stripped
+          striped
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}
           data={selectedItems}
           customHeader="Artículos seleccionados"
-          // itemType={"store}"}
         ></DefaultTable>
       )}
       <DefaultTable
-        stripped
+        striped
         multiselect
         handleSelect={handleSelect}
         selectedItems={selectedItems}
-        tableQuery={
-          "filters/_mockProductstores" +
-          /*capitalize(itemTypeToFind) +*/ ".json"
-        }
-        // itemType={"store"}
+        tableQuery={"filters/_mockProductstores" + ".json"}
         className="bg-lighter"
       ></DefaultTable>
     </>

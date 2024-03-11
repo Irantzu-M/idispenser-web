@@ -1,17 +1,16 @@
 import React from "react";
 import { useEffect, useState } from "react";
-// import SelectedItemsTable from "../filtersSelectableTables/_selectedItemsTable";
 import useFilterStore from "../../stores/filtersStore";
-// import FilterTable from "../filtersTabContents/_filterTable";
 import SearchSectionAutocomplete from "../customSearchSelect/_searchSectionAutocomplete";
 import DefaultTable from "../tables/_defaultTable";
-
+// ejemplo : 00FF714E4CE5662D267668E67B8ABD96
 //API
-import { getApiData } from "../../api/idispenserApi";
+// import { getApiData } from "../../api/idispenserApi";
 
 function FilterSensor(props) {
-  const [data, setData] = useState([]);
-  const [remapData, setRemapData] = useState([]);
+  // const [data, setData] = useState([]);
+  const [data, setData] = useFilterStore((state) => state.selecable);
+  const [remapData, setRemapData] = useState([{ "": "buscar" }]);
   const fieldsToSearchIn = [
     "Código sensor",
     "Posición ",
@@ -22,50 +21,21 @@ function FilterSensor(props) {
   ];
   const fieldsToDisplay = ["Código sensor", "HUB ", "Tipo "];
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await getApiData("sensor/list");
-        const rawData = await response.json();
-        setData(rawData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-    if (!data[0]) {
-      fetchData();
-    }
-  }, [data]);
-
-  useEffect(() => {
-    function remap() {
-      setRemapData(
-        data.map((item) => {
-          return {
-            id: item.id,
-            "Código sensor": item.id,
-            "Posición ": item.position,
-            "HUB ": item.hub,
-            "Cliente ": item.customer,
-            "Almacén ": item.storage,
-            "Tipo ": item.type,
-          };
-        })
-      );
-    }
-    remap();
-  }, [data]);
-
+  // TABS LATERALES
   const tabs = useFilterStore((state) => state.filters);
   const selectedTab = tabs.filter((tab) => {
     if (tab.id == props.filter.id) {
       return tab;
     }
   });
+
+  // TABLA DE ELEMENTOS SELECCIONADOS
   const [selectedItems, setSelectedItems] = useState(selectedTab[0].selected);
 
+  // TEXTO DE BÚSQUEDA
   const [searchedText, setSearchedText] = useState("");
   const handleChange = (text) => {
+    console.log("change", searchedText.length, searchedText);
     setSearchedText(text);
   };
 
@@ -107,9 +77,55 @@ function FilterSensor(props) {
     }
   };
 
+  let endpoint = "sensors/list";
+  const fetchFilterData = useFilterStore((state) => state.fetchFilterData);
+  const getData = (endpoint) => {
+    setRemapData();
+  };
+  useEffect(() => {
+    // console.log("search", searchedText.length, searchedText);
+    if (searchedText.length >= 6) {
+      endpoint += `?search=${searchedText}`;
+      fetchFilterData(endpoint);
+      setRemapData();
+
+      // async function fetchData() {
+      //   try {
+      //     const response = await getApiData(endpoint);
+      //     const rawData = await response["items"];
+      //     if (rawData.length > 0) {
+      //       setRemapData(remap(rawData));
+      //     } else {
+      //       setRemapData([{ "": "no hay resultados" }]);
+      //     }
+      //   } catch (error) {
+      //     console.error("Error fetching data:", error);
+      //   }
+      // }
+      if (!data[0]) {
+        fetchData();
+      }
+
+      function remap(dataToremap) {
+        const rmd = dataToremap.map((item) => {
+          return {
+            id: item.idSensor,
+            "Código sensor": item.idSensor,
+            "Posición ": item.sensorPosition,
+            "HUB ": item.idConcentrador,
+            "Cliente ": item.idCliente,
+            "Almacén ": item.almacenName,
+            "Tipo ": item.tipoSensor,
+          };
+        });
+        return rmd;
+      }
+    }
+  }, [searchedText]);
+
   return (
     <>
-      {remapData[0] && (
+      {remapData.length > 0 && (
         <div className="mb-3">
           {selectedItems.length > 0 && (
             <div className="reset-section">
@@ -129,7 +145,7 @@ function FilterSensor(props) {
       )}
       {selectedItems.length > 0 && (
         <DefaultTable
-          stripped
+          striped
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}
@@ -139,7 +155,7 @@ function FilterSensor(props) {
       )}
       {remapData[0] && searchedText.length >= 6 && (
         <DefaultTable
-          stripped
+          striped
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}

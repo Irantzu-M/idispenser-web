@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import SelectedItemsTable from "../filtersSelectableTables/_selectedItemsTable";
 import useFilterStore from "../../stores/filtersStore";
-// import useFilterStore from "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/stores/filtersStore";
-// import FilterTable from "../filtersTabContents/_filterTable";
 import SearchSectionAutocomplete from "../customSearchSelect/_searchSectionAutocomplete";
 import DefaultTable from "../tables/_defaultTable";
 
@@ -16,7 +13,7 @@ function FilterProducts(props) {
     async function fetchData() {
       try {
         const response = await fetch(
-          "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/filters/_mockProducts.json"
+          "http://127.0.0.1:5500/src/mocks/filters/_mockProducts.json"
         );
         const rawData = await response.json();
         setData(rawData);
@@ -114,7 +111,7 @@ function FilterProducts(props) {
       )}
       {selectedItems.length > 0 && (
         <DefaultTable
-          stripped
+          striped
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}
@@ -125,7 +122,7 @@ function FilterProducts(props) {
       {remapData[0] && searchedText.length >= 6 && (
         <>
           <DefaultTable
-            stripped
+            striped
             multiselect
             handleSelect={handleSelect}
             selectedItems={selectedItems}

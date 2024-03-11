@@ -50,13 +50,7 @@ const Results = (props) => {
                     params={props.params}
                     itemType={itemTypeToFind}
                     handleOpenModal={handleOpenModal}
-                    fixedTableCols={[
-                      "status",
-                      "customer",
-                      "warehouse id",
-                      "warehouse name",
-                      "hub id",
-                    ]}
+                    fixedTableCols={["status", "customer"]}
                   ></ResultTable>
                 </>
               ) : (
@@ -71,7 +65,7 @@ const Results = (props) => {
               }
               {/* {itemTypeToFind == "huberror" ? (
                 <DefaultTable
-                  stripped
+                  striped
                   orderable
                   customHeader=""
                   tableQuery={
@@ -90,7 +84,7 @@ const Results = (props) => {
                 ></DefaultTable>
               ) : (
                 <DefaultTable
-                  stripped
+                  striped
                   orderable
                   customHeader=""
                   tableQuery={

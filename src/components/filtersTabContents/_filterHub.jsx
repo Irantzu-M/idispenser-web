@@ -6,6 +6,8 @@ import useFilterStore from "../../stores/filtersStore";
 import SearchSectionAutocomplete from "../customSearchSelect/_searchSectionAutocomplete";
 import DefaultTable from "../tables/_defaultTable";
 
+import { getApiData } from "../../api/idispenserApi";
+
 function FilterHubs(props) {
   const [data, setData] = useState([]);
   const [remapData, setRemapData] = useState([]);
@@ -13,43 +15,78 @@ function FilterHubs(props) {
   const fieldsToDisplay = ["Código HUB", "Almacén ", "Alias "];
 
   // TODO - Use api
-  useEffect(() => {
-    async function fetchData() {
-      fetch(
-        "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/filters/_mockHubs.json"
-      )
-        .then((response) => response.json())
-        .then((rawData) => setData(rawData));
-    }
-    if (!data[0]) {
-      fetchData();
-    }
-    async function remap() {
-      setRemapData(
-        data.map((item) => {
-          return {};
-        })
-      );
-    }
-    remap();
-  }, [data]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     fetch("http://127.0.0.1:5500/src/mocks/filters/_mockHubs.json")
+  //       .then((response) => response.json())
+  //       .then((rawData) => setData(rawData));
+  //   }
+  //   if (!data[0]) {
+  //     fetchData();
+  //   }
+  //   async function remap() {
+  //     setRemapData(
+  //       data.map((item) => {
+  //         return {};
+  //       })
+  //     );
+  //   }
+  //   remap();
+  // }, [data]);
 
+  // useEffect(() => {
+  //   async function remap() {
+  //     setRemapData(
+  //       data.map((item) => {
+  //         return {
+  //           id: item.id,
+  //           "Código HUB": item.id,
+  //           "Cliente ": item.client,
+  //           "Almacén ": item.storage,
+  //           "Alias ": item.label,
+  //         };
+  //       })
+  //     );
+  //   }
+  //   remap();
+  // }, [data]);
+
+  let endpoint = "hubs/list";
   useEffect(() => {
-    async function remap() {
-      setRemapData(
-        data.map((item) => {
+    console.log("search", searchedText.length, searchedText);
+    if (searchedText.length >= 6) {
+      endpoint += `?search=${searchedText}`;
+      async function fetchData() {
+        try {
+          const response = await getApiData(endpoint);
+          const rawData = await response["items"];
+          if (rawData.length > 0) {
+            setRemapData(remap(rawData));
+          } else {
+            setRemapData([{ "": "no hay resultados" }]);
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+      if (!data[0]) {
+        fetchData();
+      }
+
+      function remap(dataToremap) {
+        const rmd = dataToremap.map((item) => {
           return {
-            id: item.id,
-            "Código HUB": item.id,
-            "Cliente ": item.client,
-            "Almacén ": item.storage,
-            "Alias ": item.label,
+            id: item.idConcentrador,
+            "Código HUB": item.idConcentrador,
+            "Cliente ": item.idCliente,
+            "Almacén ": item.idAlmacenQuirofano,
+            "Alias ": item.aliasIDC,
           };
-        })
-      );
+        });
+        return rmd;
+      }
     }
-    remap();
-  }, [data]);
+  }, [searchedText]);
 
   // STORE FUNCTIONS
   const tabs = useFilterStore((state) => state.filters);
@@ -131,7 +168,7 @@ function FilterHubs(props) {
       )}
       {selectedItems.length > 0 && (
         <DefaultTable
-          stripped
+          striped
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}
@@ -141,7 +178,7 @@ function FilterHubs(props) {
       )}
       {remapData[0] && searchedText.length >= 6 && (
         <DefaultTable
-          stripped
+          striped
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}

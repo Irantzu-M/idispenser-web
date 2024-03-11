@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import SelectedItemsTable from "../filtersSelectableTables/_selectedItemsTable";
 import useFilterStore from "../../stores/filtersStore";
-// import useFilterStore from "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/stores/filtersStore";
+// import useFilterStore from "http://127.0.0.1:5500/src/stores/filtersStore";
 // import FilterTable from "../filtersTabContents/_filterTable";
 import DefaultTable from "../tables/_defaultTable";
 
@@ -10,7 +10,7 @@ function FilterClients(props) {
   // const [remapData, setRemapData] = useState([]);
   // TODO - Use api
   // useEffect(() => {
-  //   fetch("http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/filters/_mockClients.json")
+  //   fetch("http://127.0.0.1:5500/src/mocks/filters/_mockClients.json")
   //     .then((response) => response.json())
   //     .then((rawdata) => setData(rawdata));
   // }, []);
@@ -85,7 +85,7 @@ function FilterClients(props) {
 
       {selectedItems.length > 0 && (
         <DefaultTable
-          stripped
+          striped
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}
@@ -95,7 +95,7 @@ function FilterClients(props) {
         ></DefaultTable>
       )}
       <DefaultTable
-        stripped
+        striped
         multiselect
         handleSelect={handleSelect}
         selectedItems={selectedItems}

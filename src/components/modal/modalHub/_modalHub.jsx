@@ -22,7 +22,7 @@ const ModalHub = (props) => {
   useEffect(() => {
     async function fetchData() {
       fetch(
-        "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/modals/_mockModalResults" +
+        "http://127.0.0.1:5500/src/mocks/modals/_mockModalResults" +
           capitalize(modalItemType) +
           ".json"
       )
@@ -34,7 +34,7 @@ const ModalHub = (props) => {
     }
     async function fetchModalItem() {
       fetch(
-        "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/modals/_mockModal" +
+        "http://127.0.0.1:5500/src/mocks/modals/_mockModal" +
           // TODO - recuperar esto
           //capitalize(modalItemType) +
           //props.item.id +
@@ -53,9 +53,7 @@ const ModalHub = (props) => {
   const [clients, setClients] = useState([]);
   useEffect(() => {
     async function fetchClients() {
-      fetch(
-        "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/filters/_mockClients.json"
-      )
+      fetch("http://127.0.0.1:5500/src/mocks/filters/_mockClients.json")
         .then((response) => response.json())
         .then((allClients) => {
           setClients(allClients);
@@ -66,9 +64,7 @@ const ModalHub = (props) => {
   const [warehouses, setWarehouses] = useState([]);
   useEffect(() => {
     async function fetchWarehouses() {
-      fetch(
-        "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/modals/_mockWarehouses.json"
-      )
+      fetch("http://127.0.0.1:5500/src/mocks/modals/_mockWarehouses.json")
         .then((response) => response.json())
         .then((allWarehouses) => {
           setWarehouses(allWarehouses);
@@ -79,9 +75,7 @@ const ModalHub = (props) => {
   const [hubPosition, setHubPosition] = useState([]);
   useEffect(() => {
     async function fetchHubPosition() {
-      fetch(
-        "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/mocks/modals/_mockHubPosition.json"
-      )
+      fetch("http://127.0.0.1:5500/src/mocks/modals/_mockHubPosition.json")
         .then((response) => response.json())
         .then((allHubs) => {
           setHubPosition(allHubs);
@@ -129,6 +123,7 @@ const ModalHub = (props) => {
                 borderedColumns={false}
                 borderless={true}
                 hover={false}
+                striped={false}
                 className="table-borderless"
               >
                 <ClayTable.Body>
@@ -183,6 +178,7 @@ const ModalHub = (props) => {
                 borderedColumns={false}
                 borderless={true}
                 hover={false}
+                striped={false}
                 className="table-borderless"
               >
                 <ClayTable.Body>

@@ -1,46 +1,52 @@
 import React from "react";
 
 import { create } from "zustand";
-// import dataFilterList from "./_filterList.json";
-// import dataButtons from "./_buttonList.json";
+
 const dataFilterList = [
   {
     id: "1",
     name: "client",
     label: { es: "Cliente", en: "Client" },
+    selectable: [],
     selected: [],
   },
   {
     id: "2",
     name: "storage",
     label: { es: "Almacén", en: "Storage" },
+    selectable: [],
     selected: [],
   },
   {
     id: "3",
     name: "product",
     label: { es: "Artículo", en: "Product" },
+    selectable: [],
     selected: [],
   },
   {
     id: "4",
     name: "hub",
     label: { es: "HUB", en: "HUB" },
+    selectable: [],
     selected: [],
   },
   {
     id: "5",
     name: "sensor",
     label: { es: "Sensor", en: "Sensor" },
+    selectable: [],
     selected: [],
   },
   {
     id: "6",
     name: "sensortype",
     label: { es: "Tipología de sensor", en: "Sensor type" },
+    selectable: [],
     selected: [],
   },
 ];
+
 const dataButtons = [
   {
     id: "1",
@@ -91,6 +97,7 @@ const dataButtons = [
     },
   },
 ];
+
 const useFilterStore = create((set) => ({
   filters: dataFilterList,
   active: 0,
@@ -140,6 +147,22 @@ const useFilterStore = create((set) => ({
         return item;
       }),
     }));
+  },
+  isLoading: false,
+  fetchFilterData: async () => {
+    set({ isLoading: true });
+    try {
+      const response = await getApiData(endpoint);
+      const rawData = await response["items"];
+      if (rawData.length > 0) {
+        setRemapData(remap(rawData));
+      } else {
+        setRemapData([{ "": "no hay resultados" }]);
+      }
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      set({ isLoading: false });
+    }
   },
 }));
 

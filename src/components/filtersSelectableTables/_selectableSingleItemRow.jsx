@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import ClayTable from "@clayui/table";
-import useModalProductStore from "http://127.0.0.1:5500/modules/idispenser/src/main/resources/META-INF/resources/lib/stores/modalProductStore";
+import useModalProductStore from "http://127.0.0.1:5500/src/stores/modalProductStore";
 
 function SelectableSingleItemRow(props) {
   const replacementItem = useModalProductStore((state) => state.replaceBy);
