@@ -6,7 +6,6 @@ function App() {
   return (
     <>
       <div className="container py-5">
-        idispenser app container
         <Filters />
         <Results />
       </div>

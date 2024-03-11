@@ -4,12 +4,11 @@ import ReactDOM from "react-dom";
 function Autocomplete(props) {
   const items = props.items || [];
   const resultStringKeyName = props.resultStringKeyName || "id";
-  const onSearch = props.onSearch;
-  const onSelect = props.onSelect;
+  // const onSearch = props.onSearch;
+  // const onSelect = props.onSelect;
 
   return (
     <>
-      // TODO autocomplete a partir de 6 caracteres lanzar búsqueda
       <div className="search-section--autocomplete">
         <div className="wrapper">
           <div className="">

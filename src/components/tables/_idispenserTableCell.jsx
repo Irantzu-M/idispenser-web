@@ -1,5 +1,5 @@
 import React from "react";
-// import ClayTable from "@clayui/table";
+import ClayTable from "@clayui/table";
 import CommentTooltip from "../tooltips/_commentTooltip";
 import Status from "../status/_status";
 
@@ -9,7 +9,8 @@ const IDispenserTableCell = (props) => {
   const field = props.field;
 
   return (
-    <td key={"key--" + item.id + "-" + field + "-" + item[field]}>
+    <ClayTable.Cell key={"key--" + item.id + "-" + field + "-" + item[field]}>
+      {/* <td key={"key--" + item.id + "-" + field + "-" + item[field]}> */}
       {field === "comentario" ? (
         <>
           <CommentTooltip {...item} field={field} />
@@ -19,7 +20,8 @@ const IDispenserTableCell = (props) => {
       ) : (
         <span className="txt">{item[field]}</span>
       )}
-    </td>
+      {/* </td> */}
+    </ClayTable.Cell>
   );
 };
 export default IDispenserTableCell;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const API_BASE_URL = "http://localhost:8080/o/idispenser-rest/v1.0/";
 
-const fetchApi = async (
+export const fetchApi = async (
   endpoint,
   options = {
     method: "GET",
@@ -17,7 +17,6 @@ const fetchApi = async (
     }
     return await response.json();
   } catch (error) {
-    console.error("Fallo al recuperar los datos:", error);
     throw error;
   }
 };

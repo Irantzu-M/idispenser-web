@@ -4,7 +4,8 @@ import useFilterStore from "../../stores/filtersStore";
 import DefaultTable from "../tables/_defaultTable";
 
 function FilterProductStores(props) {
-  const [tabs, setTabs] = useState(useFilterStore((state) => state.filters));
+  const [tabs, setTabs] =
+    useState(useFilterStore((state) => state.filters)) || [];
   const selectedTab = tabs.filter((tab) => {
     if (tab.id === props.filter.id) {
       return tab;

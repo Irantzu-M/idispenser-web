@@ -1,7 +1,7 @@
 import React from "react";
 
 import { create } from "zustand";
-import { idispenserApi } from "../api/idispenserApi";
+import { fetchApi } from "../api/idispenserApi";
 
 const dataFilterList = [
   {
@@ -149,21 +149,26 @@ const useFilterStore = create((set) => ({
       }),
     }));
   },
-  isLoading: false,
-  fetchFilterData: async (endpoint) => {
-    set({ isLoading: true });
+  fetchFilterData: async (parentTab, endpoint) => {
+    let selectableData;
     try {
-      const response = await idispenserApi.fetchApi(endpoint);
+      const response = await fetchApi(endpoint);
       const rawData = await response["items"];
-      if (rawData.length > 0) {
-        setRemapData(remap(rawData));
-      } else {
-        setRemapData([{ "": "no hay resultados" }]);
+
+      if (rawData[0]) {
+        selectableData = rawData;
       }
     } catch (error) {
-      console.error("Error fetching user:", error);
-      set({ isLoading: false });
+      throw error;
     }
+    set((state) => ({
+      filters: state.filters.map((tab) => {
+        if (parentTab.id === tab.id) {
+          tab.selectable = newData;
+        }
+        return tab;
+      }),
+    }));
   },
 }));
 

@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from "react";
 
-// import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import Autocomplete from "./_autocomplete";
 import { getHighlightedFormat } from "../../functions/functions";
 import AutocompleteComponent from "./_autocompleteComponent";
 
@@ -10,10 +7,7 @@ function SearchSectionAutocomplete(props) {
   // PROPS
   const options = props.options || [];
   const placeholder = props.placeholder || "";
-  const cellsToSearchIn =
-    props.cellsToSearchIn || Object.keys(props.options[0]);
   const cellsToDisplay = props.cellsToDisplay || Object.keys(props.options[0]);
-  const handleChange = props.handleChange;
   const [searchText, setSearchText] = useState("");
 
   // note: the id field is mandatory
@@ -28,7 +22,6 @@ function SearchSectionAutocomplete(props) {
   };
 
   // HIGHLIGHT PRESSED LETTERS
-
   // COMBINED FIELDS
   props.options.map((item) => {
     if (!item.combinedField) {
@@ -61,7 +54,6 @@ function SearchSectionAutocomplete(props) {
     props.options[0] && (
       <AutocompleteComponent
         items={props.options}
-        //fuseOptions={{ minMatchCharLength: 6, keys: cellsToSearchIn }}
         showNoResults={false}
         resultStringKeyName="combinedField"
         onSearch={handleOnSearch}
@@ -75,24 +67,6 @@ function SearchSectionAutocomplete(props) {
         placeholder={placeholder}
       />
     )
-
-    // options[0] && (
-    //   <ReactSearchAutocomplete
-    //     items={options}
-    //     fuseOptions={{ minMatchCharLength: 6, keys: cellsToSearchIn }}
-    //     showNoResults={false}
-    //     resultStringKeyName="combinedField"
-    //     onSearch={handleOnSearch}
-    //     onSelect={handleOnSelect}
-    //     formatResult={autocompleteFormat}
-    //     className={
-    //       props.formControl
-    //         ? "search-section--autocomplete form-control"
-    //         : "search-section--autocomplete"
-    //     }
-    //     placeholder={placeholder}
-    //   />
-    // )
   );
 }
 export default SearchSectionAutocomplete;

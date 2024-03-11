@@ -53,7 +53,7 @@ function FilterHubs(props) {
 
   let endpoint = "hubs/list";
   useEffect(() => {
-    console.log("search", searchedText.length, searchedText);
+    //console.log("search", searchedText.length, searchedText);
     if (searchedText.length >= 6) {
       endpoint += `?search=${searchedText}`;
       async function fetchData() {

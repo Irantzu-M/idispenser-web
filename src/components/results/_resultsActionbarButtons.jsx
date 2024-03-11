@@ -7,7 +7,6 @@ const ResultsActionbarButtons = (props) => {
   const [openModal, setOpenModal] = useState(false);
   // const [item, setItem] = useState([]);
   const handleOpenModal = () => {
-    console.log("handleopenmodal");
     setOpenModal(!openModal);
   };
   const handleCloseModal = () => {

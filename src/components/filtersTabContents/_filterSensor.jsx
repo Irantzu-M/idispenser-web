@@ -1,12 +1,11 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useFilterStore from "../../stores/filtersStore";
 import SearchSectionAutocomplete from "../customSearchSelect/_searchSectionAutocomplete";
 import DefaultTable from "../tables/_defaultTable";
 
 function FilterSensor(props) {
-  const [data, setData] = useFilterStore((state) => state.selecable);
-  const [remapData, setRemapData] = useState([{ "": "buscar" }]);
+  const [data, setData] = useFilterStore((state) => state.selecable) || [];
+  const [remapData, setRemapData] = useState([{ "": "No hay resultados" }]);
   const fieldsToSearchIn = [
     "Código sensor",
     "Posición ",
@@ -34,18 +33,6 @@ function FilterSensor(props) {
     setSearchedText(text);
   };
 
-  const itemsFound = remapData.filter((item) => {
-    const combinedField = fieldsToDisplay
-      .map((field) => {
-        return item[field];
-      })
-      .toString()
-      .replaceAll(",", " ");
-    if (combinedField.toLowerCase().includes(searchedText.toLowerCase())) {
-      return item;
-    }
-  });
-
   const addFilterItem = useFilterStore((state) => state.addFilterItem);
   const removeFilterItem = useFilterStore((state) => state.removeFilterItem);
   const handleAdd = (itemToAdd) => {
@@ -56,14 +43,12 @@ function FilterSensor(props) {
     removeFilterItem(itemToRemove, selectedTab[0]);
     setSelectedItems(selectedItems.filter((item) => item !== itemToRemove));
   };
-
   const handleResetSelection = () => {
     selectedItems.forEach((item) => {
       removeFilterItem(item, selectedTab[0]);
     });
     setSelectedItems([]);
   };
-
   const handleSelect = (checkSelected, item) => {
     if (!checkSelected) {
       handleAdd(item);
@@ -72,14 +57,21 @@ function FilterSensor(props) {
     }
   };
 
+  // LLAMADA A API
   let endpoint = "sensors/list";
   const fetchFilterData = useFilterStore((state) => state.fetchFilterData);
+  const [fetchCompleted, setFetchCompleted] = useState(false);
 
   useEffect(() => {
     if (searchedText.length >= 6) {
       endpoint = `sensors/list` + `?search=${searchedText}`;
-      setData(fetchFilterData(endpoint));
-      setRemapData(remap(data));
+      try {
+        setData(fetchFilterData(selectedTab, endpoint));
+        setRemapData(remap(data));
+        setFetchCompleted(true);
+      } catch (error) {
+        setFetchCompleted(false);
+      }
 
       function remap(dataToremap) {
         const rmd = dataToremap.map((item) => {
@@ -100,25 +92,24 @@ function FilterSensor(props) {
 
   return (
     <>
-      {remapData.length > 0 && (
-        <div className="mb-3">
-          {selectedItems.length > 0 && (
-            <div className="reset-section">
-              <button onClick={handleResetSelection}>
-                <span className="icon icon-close"></span>Eliminar selección
-              </button>
-            </div>
-          )}
-          <SearchSectionAutocomplete
-            options={remapData}
-            handleChange={handleChange}
-            cellsToDisplay={fieldsToDisplay}
-            cellsToSearchIn={fieldsToSearchIn}
-            placeholder="Search by code or name"
-          />
-        </div>
-      )}
-      {selectedItems.length > 0 && (
+      <div className="mb-3">
+        {selectedItems.length > 0 && (
+          <div className="reset-section">
+            <button onClick={handleResetSelection}>
+              <span className="icon icon-close"></span>Eliminar selección
+            </button>
+          </div>
+        )}
+
+        <SearchSectionAutocomplete
+          options={remapData}
+          handleChange={handleChange}
+          cellsToDisplay={fieldsToDisplay}
+          cellsToSearchIn={fieldsToSearchIn}
+          placeholder="Search by code or name"
+        />
+      </div>
+      {selectedItems[0] && fetchCompleted && (
         <DefaultTable
           striped
           multiselect
@@ -128,15 +119,21 @@ function FilterSensor(props) {
           customHeader="Artículos seleccionados"
         ></DefaultTable>
       )}
-      {remapData[0] && searchedText.length >= 6 && (
-        <DefaultTable
-          striped
-          multiselect
-          handleSelect={handleSelect}
-          selectedItems={selectedItems}
-          data={itemsFound}
-          className="bg-lighter"
-        ></DefaultTable>
+      {searchedText.length >= 6 && fetchCompleted && (
+        <>
+          {remapData[0] ? (
+            <DefaultTable
+              striped
+              multiselect
+              handleSelect={handleSelect}
+              selectedItems={selectedItems}
+              data={remapData}
+              className="bg-lighter"
+            ></DefaultTable>
+          ) : (
+            <>No hay resultados</>
+          )}
+        </>
       )}
     </>
   );
