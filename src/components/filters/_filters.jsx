@@ -21,7 +21,7 @@ const Filters = (props) => {
           <FiltersTabsContent />
         </div>
         <div className="col-xxl-2 col-lg-12 mb-3">
-          {/* <FiltersButtonGroup /> */}
+          <FiltersButtonGroup />
         </div>
       </div>
     </>
