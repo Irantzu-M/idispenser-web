@@ -1,7 +1,7 @@
 import React from "react";
 
-import Filters from "./components/filters/_filters";
-import Results from "./components/results/_results";
+// import Filters from "./components/filters/_filters";
+// import Results from "./components/results/_results";
 // import useFilterStore from "http://127.0.0.1:5500/src/stores/filtersStore";
 // import useFilterStore from "./stores/filtersStore";
 
