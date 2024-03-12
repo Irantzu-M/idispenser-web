@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "products",
+    "label": {
+      "es": "Artículos",
+      "en": "Products"
+    }
+  },
+  {
+    "id": "2",
+    "name": "hubs",
+    "label": {
+      "es": "Hubs",
+      "en": "Hubs"
+    }
+  },
+  {
+    "id": "3",
+    "name": "sensors",
+    "label": {
+      "es": "Sensores",
+      "en": "Sensors"
+    }
+  },
+  {
+    "id": "4",
+    "name": "stock",
+    "label": {
+      "es": "Stock",
+      "en": "Stock"
+    }
+  },
+  {
+    "id": "5",
+    "name": "error",
+    "label": {
+      "es": "Errores Artículo / Sensor",
+      "en": "Product / Sensor error"
+    }
+  },
+  {
+    "id": "6",
+    "name": "huberror",
+    "label": {
+      "es": "Errores Hub",
+      "en": "Hub errors"
+    }
+  }
+]

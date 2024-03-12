@@ -1,0 +1,23 @@
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "release.portal.api"
+}
+
+node {
+	nodeVersion = "10.15.3"
+	npmVersion = "6.4.1"
+
+	if (isBamboo()) {
+		download = true
+		global = true
+	}
+
+}
+
+task copyToDeploy(type: Copy) {
+	group = 'idispenser'
+	description = 'deploy to docker container'
+	dependsOn(build)
+	from "$buildDir/libs"
+	include "*.jar"
+	into rootProject.ext.get("deployPath")
+}
