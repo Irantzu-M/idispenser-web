@@ -70,7 +70,7 @@ const useResultsStore = create((set) => ({
     } catch (error) {
       throw error;
     }
-    setData(resultData);
+    state.setData(resultData);
   },
 }));
 
