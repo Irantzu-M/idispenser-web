@@ -54,7 +54,7 @@ const Results = (props) => {
         console.log("no results");
       }
     }
-  }, [filters]);
+  }, [filters, itemTypeToFind]);
 
   // MODAL
   const [openModal, setOpenModal] = useState(false);
