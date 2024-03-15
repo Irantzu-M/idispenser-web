@@ -7,10 +7,10 @@ function FilterSensorType(props) {
   const [data, setData] = useState([]);
   useEffect(() => {
     setData([
-      { id: "1", label: "pusher", selected: false },
-      { id: "2", label: "ustrasound", selected: false },
-      { id: "3", label: "weighing", selected: false },
-      { id: "4", label: "custody", selected: false },
+      { id: "PUSHERS", label: "pusher", selected: false },
+      { id: "ULTRASOUND", label: "ustrasound", selected: false },
+      { id: "WEIGHING", label: "weighing", selected: false },
+      { id: "CUSTODY", label: "custody", selected: false },
     ]);
   }, []);
 
@@ -56,7 +56,7 @@ function FilterSensorType(props) {
         selectedItems={selectedItems}
         data={data}
         customHeader="none"
-        // itemType={"sensortype"}
+        itemType={"sensortype"}
         className="table--sm"
       />
     </>

@@ -26,7 +26,7 @@ const ResultsAppliedFilters = (props) => {
                 key={"results--applied-filters--item-" + item.name}
                 onClick={() => removeSelectedFilter(item)}
               >
-                {item.label.es}
+                {item.label}
                 <span className="icon icon-x"></span>
               </div>
             );

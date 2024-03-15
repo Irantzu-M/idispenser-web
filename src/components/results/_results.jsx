@@ -1,22 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { useFilterButtonsStore } from "../../stores/filtersStore";
-import ResultTable from "../results/_resultTable";
+import useFilterStore, {
+  useFilterButtonsStore,
+} from "../../stores/filtersStore";
 import ResultsAppliedFilters from "./_resultsAppliedFilters";
 import ModalEdit from "../modal/_modalEdit";
 import ResultsActionbarButtons from "./_resultsActionbarButtons";
 import ResultsOptionGroup from "./_resultsOptionGroup";
 import useResultsStore from "../../stores/resultsStore";
 import DefaultTable from "../tables/_defaultTable";
-import { capitalize } from "../../functions/functions";
 
 const Results = (props) => {
-  // TODO - Use api
-  // TODO - los buttons en realidad no van a ser un mock, podemos ponerlos como archivo normal e importarlos
-  const [buttons, setButtons] = useState(
-    useFilterButtonsStore((state) => state.buttons)
-  );
+  const [data, setData] = useState([]);
+  // const [buttons, setButtons] = useState(
+  //   useFilterButtonsStore((state) => state.buttons)
+  // );
 
   const itemTypeToFind = useFilterButtonsStore((state) => state.itemTypeToFind);
+  const filters = useFilterStore((state) => state.filters);
+  let endpoint = itemTypeToFind + "/list?";
+
+  const fetchResultData = useResultsStore((state) => state.fetchResultData);
+
+  useEffect(() => {
+    filters.map((item) => {
+      if (item.name == "client") {
+        item.selected.map((selected) => {
+          endpoint = endpoint + "clientIds=" + selected.id + "&";
+        });
+      } else if (item.name == "storage") {
+        item.selected.map((selected) => {
+          endpoint = endpoint + "almacenIds=" + selected.id + "&";
+        });
+      } else if (item.name == "product") {
+        item.selected.map((selected) => {
+          endpoint = endpoint + "articuloIds=" + selected.id + "&";
+        });
+      } else if (item.name == "hub") {
+        item.selected.map((selected) => {
+          endpoint = endpoint + "concentradorIds=" + selected.id + "&";
+        });
+      } else if (item.name == "sensortype") {
+        item.selected.map((selected) => {
+          endpoint = endpoint + "tipoSensor=" + selected.id + "&";
+        });
+      }
+    });
+
+    if (endpoint != "") {
+      try {
+        setData(fetchResultData(selectedTab, endpoint));
+        console.log("results");
+      } catch (error) {
+        console.log("no results");
+      }
+    }
+  }, [filters]);
 
   // MODAL
   const [openModal, setOpenModal] = useState(false);
@@ -44,7 +82,7 @@ const Results = (props) => {
             </div>
             <div className="results--content bg-light  p-4">
               <ResultsAppliedFilters />
-              {itemTypeToFind === "huberror" ? (
+              {/* {itemTypeToFind === "huberror" ? (
                 <>
                   <ResultTable
                     params={props.params}
@@ -59,42 +97,26 @@ const Results = (props) => {
                   itemType={itemTypeToFind}
                   handleOpenModal={handleOpenModal}
                 ></ResultTable>
-              )}
+              )} */}
               {
                 // TODO - terminar modales de tabla default, descomentarlo porque funciona, pero necesita modales
               }
-              {/* {itemTypeToFind == "huberror" ? (
-                <DefaultTable
-                  striped
-                  orderable
-                  customHeader=""
-                  tableQuery={
-                    "results/_mockResults" +
-                    capitalize(itemTypeToFind) +
-                    ".json"
-                  }
-                  itemType={itemTypeToFind}
-                  fixedTableCols={[
-                    "status",
-                    "customer",
-                    "warehouse id",
-                    "warehouse name",
-                    "hub id",
-                  ]}
-                ></DefaultTable>
-              ) : (
-                <DefaultTable
-                  striped
-                  orderable
-                  customHeader=""
-                  tableQuery={
-                    "results/_mockResults" +
-                    capitalize(itemTypeToFind) +
-                    ".json"
-                  }
-                  itemType={itemTypeToFind}
-                ></DefaultTable>
-              )} */}
+
+              <DefaultTable
+                striped
+                orderable
+                customHeader=""
+                // endpoint={endpoint}
+                data={data}
+                itemType={itemTypeToFind}
+                fixedTableCols={[
+                  "status",
+                  "customer",
+                  "warehouse id",
+                  "warehouse name",
+                  "hub id",
+                ]}
+              ></DefaultTable>
             </div>
           </>
         )}

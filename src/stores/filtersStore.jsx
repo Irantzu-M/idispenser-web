@@ -7,42 +7,42 @@ const dataFilterList = [
   {
     id: "1",
     name: "client",
-    label: { es: "Cliente", en: "Client" },
+    label: "Cliente",
     selectable: [],
     selected: [],
   },
   {
     id: "2",
     name: "storage",
-    label: { es: "Almacén", en: "Storage" },
+    label: "Almacén",
     selectable: [],
     selected: [],
   },
   {
     id: "3",
     name: "product",
-    label: { es: "Artículo", en: "Product" },
+    label: "Artículo",
     selectable: [],
     selected: [],
   },
   {
     id: "4",
     name: "hub",
-    label: { es: "HUB", en: "HUB" },
+    label: "HUB",
     selectable: [],
     selected: [],
   },
   {
     id: "5",
     name: "sensor",
-    label: { es: "Sensor", en: "Sensor" },
+    label: "Sensor",
     selectable: [],
     selected: [],
   },
   {
     id: "6",
     name: "sensortype",
-    label: { es: "Tipología de sensor", en: "Sensor type" },
+    label: "Tipología de sensor",
     selectable: [],
     selected: [],
   },
@@ -52,50 +52,32 @@ const dataButtons = [
   {
     id: "1",
     name: "products",
-    label: {
-      es: "Artículos",
-      en: "Products",
-    },
+    label: "Artículos",
   },
   {
     id: "2",
     name: "hubs",
-    label: {
-      es: "Hubs",
-      en: "Hubs",
-    },
+    label: "Hubs",
   },
   {
     id: "3",
     name: "sensors",
-    label: {
-      es: "Sensores",
-      en: "Sensors",
-    },
+    label: "Sensores",
   },
   {
     id: "4",
     name: "stock",
-    label: {
-      es: "Stock",
-      en: "Stock",
-    },
+    label: "Stock",
   },
   {
     id: "5",
     name: "error",
-    label: {
-      es: "Errores Artículo / Sensor",
-      en: "Product / Sensor error",
-    },
+    label: "Errores Artículo / Sensor",
   },
   {
     id: "6",
     name: "huberror",
-    label: {
-      es: "Errores Hub",
-      en: "Hub errors",
-    },
+    label: "Errores Hub",
   },
 ];
 

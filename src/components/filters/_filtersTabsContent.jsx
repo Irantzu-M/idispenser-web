@@ -6,7 +6,6 @@ import useFilterStore from "../../stores/filtersStore";
 // import FilterHubs from "../filtersTabContents/_filterHub";
 import FilterSensor from "../filtersTabContents/_filterSensor";
 import FilterSensorType from "../filtersTabContents/_filterSensorType";
-// import ClayTabs from "@clayui/tabs";
 
 function FiltersTabsContent(props) {
   const filterStoreFilters = useFilterStore((state) => state.filters) || [];
@@ -32,7 +31,7 @@ function FiltersTabsContent(props) {
               >
                 <div className="search-section--tab-header">
                   <h2 className="search-section--tab-header-title">
-                    Search by {item.label.es}
+                    Search by {item.label}
                   </h2>
                 </div>
                 <div className="search-section--tab-body py-4">

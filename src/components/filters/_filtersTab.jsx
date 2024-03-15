@@ -44,7 +44,7 @@ function FilterTab(props) {
               id={"search-section--pills-" + index + "-tab"}
               onClick={() => handleClick(index)}
             >
-              <span className="search-section--name">{tab.label.es}</span>
+              <span className="search-section--name">{tab.label}</span>
               {tab.selected.length > 0 && (
                 <span className="search-section--count">
                   {tab.selected.length}
@@ -89,7 +89,7 @@ function FilterTab(props) {
                 role="tab"
                 // tabindex="-1"
               >
-                <span className="search-section--name">{tab.label.es}</span>
+                <span className="search-section--name">{tab.label}</span>
                 {tab.selected.length > 0 && (
                   <span className="search-section--count">
                     {tab.selected.length}

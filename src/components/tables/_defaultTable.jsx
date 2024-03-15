@@ -3,20 +3,20 @@ import ClayTable from "@clayui/table";
 import { useEffect, useState } from "react";
 import TableHeaderOrderable from "./_tableHeaderOrderable";
 import { sortASC, sortDES } from "../../functions/functions";
-import { apiGetItems } from "../../functions/api";
 import FixedTableCols from "./_fixedTableCols";
 import SelectableDEFAULTTableRow from "../filtersSelectableTables/_selectableDEFAULTTableRow";
 import IDispenserTableCell from "./_idispenserTableCell";
-import ClayTableCell from "@clayui/table/lib/Cell";
 
 const DefaultTable = (props) => {
   // PROPERTIES OF TABLE
   const itemType = props.itemType || "";
-  const tableQuery = props.tableQuery;
+  const endpoint = props.endpoint || "";
   const striped = props.striped || false;
   const customHeader = props.customHeader || false;
+
   // Checkbox single select
   const select = props.select || false;
+
   // Checkbox multiselect
   const multiselect = props.multiselect || false;
   const handleSelect = props.handleSelect || false;
@@ -29,15 +29,10 @@ const DefaultTable = (props) => {
 
   // Get table data
   const [data, setData] = useState([]);
+
   useEffect(() => {
-    if (tableQuery) {
-      apiGetItems(tableQuery).then((rawData) => {
-        setData(rawData);
-      });
-    } else {
-      setData(props.data);
-    }
-  }, [props.itemType, props.data]);
+    setData(props.data);
+  }, [props.data]);
 
   // Orderable headers
   // TODO - Itemstopop
@@ -57,7 +52,7 @@ const DefaultTable = (props) => {
 
   return (
     <>
-      {data[0] && (
+      {data[0] ? (
         <>
           <div
             className={
@@ -224,6 +219,8 @@ const DefaultTable = (props) => {
             </div>
           </div>
         </>
+      ) : (
+        <div className="text-center mb-4">No hay resultados</div>
       )}
     </>
   );

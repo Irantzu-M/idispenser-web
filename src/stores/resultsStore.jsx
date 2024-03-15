@@ -52,6 +52,21 @@ const useResultsStore = create((set) => ({
       }),
     }));
   },
+
+  fetchResultData: async (endpoint) => {
+    let resultData;
+    try {
+      const response = await fetchApi(endpoint);
+      const rawData = await response["items"];
+
+      if (rawData[0]) {
+        resultData = rawData;
+      }
+    } catch (error) {
+      throw error;
+    }
+    setData(resultData);
+  },
 }));
 
 export default useResultsStore;

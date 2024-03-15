@@ -23,7 +23,7 @@ const ResultsOptionGroup = () => {
           .filter((btn) => btn.name === itemTypeToFind)
           .map((b) => (
             <span key={"result-option-selected-" + b.name}>
-              {b.label.es}
+              {b.label}
               <span className="icon icon-chevron-down"></span>
             </span>
           ))}

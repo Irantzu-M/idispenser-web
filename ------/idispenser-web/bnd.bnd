@@ -1,5 +1,0 @@
-Bundle-Name: idispenser-web
-Bundle-SymbolicName: com.hartmann.idispenser.web
-Bundle-Version: 1.0.0
-Export-Package: com.hartmann.idispenser.web.constants
-Web-ContextPath: /idispenser-web

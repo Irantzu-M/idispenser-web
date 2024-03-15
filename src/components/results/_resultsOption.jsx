@@ -24,7 +24,7 @@ const ResultsOption = (props) => {
       >
         <span className={"txt col " + props.itemClass}>
           {"Consulta de "}
-          {props.item.label.es}
+          {props.item.label}
         </span>
         <span className="icon icon-check"></span>
       </div>

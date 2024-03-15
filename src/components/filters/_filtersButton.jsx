@@ -22,7 +22,7 @@ const FiltersButton = (props) => {
           onClick={() => handleFindClick(props.item.name)}
           className={props.itemClass}
         >
-          {props.item.label.es}
+          {props.item.label}
         </ClayButton>
       </div>
     </>
