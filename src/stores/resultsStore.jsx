@@ -56,8 +56,10 @@ const useResultsStore = create((set) => ({
   fetchResultData: async (endpoint) => {
     let resultData;
     try {
+      console.log("resultstore > fetchResultData > endpoint", endpoint);
       const response = await fetchApi(endpoint);
       const rawData = await response["items"];
+      console.log("resultstore > fetchResultData > rawData", rawData);
 
       if (rawData[0]) {
         resultData = rawData;
