@@ -66,13 +66,14 @@ const useResultsStore = create((set) => ({
 
       if (rawData[0]) {
         resultData = rawData;
+        set(() => ({
+          data: resultData,
+        }));
+        console.log("resultstore > fetchResultData > data", state.data);
       }
     } catch (error) {
       throw error;
     }
-    set(() => ({
-      data: resultData,
-    }));
   },
 }));
 

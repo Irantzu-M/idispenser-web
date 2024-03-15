@@ -108,22 +108,23 @@ const Results = (props) => {
                 {
                   // TODO - terminar modales de tabla default, descomentarlo porque funciona, pero necesita modales
                 }
-
-                <DefaultTable
-                  striped
-                  orderable
-                  customHeader=""
-                  // endpoint={endpoint}
-                  data={data}
-                  itemType={itemTypeToFind}
-                  fixedTableCols={[
-                    "status",
-                    "customer",
-                    "warehouse id",
-                    "warehouse name",
-                    "hub id",
-                  ]}
-                ></DefaultTable>
+                {data[0] && (
+                  <DefaultTable
+                    striped
+                    orderable
+                    customHeader=""
+                    // endpoint={endpoint}
+                    data={data}
+                    itemType={itemTypeToFind}
+                    fixedTableCols={[
+                      "status",
+                      "customer",
+                      "warehouse id",
+                      "warehouse name",
+                      "hub id",
+                    ]}
+                  ></DefaultTable>
+                )}
               </div>
             </>
           )}
