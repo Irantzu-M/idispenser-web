@@ -43,12 +43,14 @@ function FilterSensor(props) {
     removeFilterItem(itemToRemove, selectedTab[0]);
     setSelectedItems(selectedItems.filter((item) => item !== itemToRemove));
   };
+
   const handleResetSelection = () => {
     selectedItems.forEach((item) => {
       removeFilterItem(item, selectedTab[0]);
     });
     setSelectedItems([]);
   };
+
   const handleSelect = (checkSelected, item) => {
     if (!checkSelected) {
       handleAdd(item);

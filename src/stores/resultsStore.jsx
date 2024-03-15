@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { fetchApi } from "../api/idispenserApi";
 
 const useResultsStore = create((set) => ({
   data: [{}],

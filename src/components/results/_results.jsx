@@ -21,6 +21,7 @@ const Results = (props) => {
 
   const fetchResultData = useResultsStore((state) => state.fetchResultData);
 
+  console.log("results.js");
   useEffect(() => {
     console.log("entroenuseeefect");
     filters.map((item) => {
@@ -52,7 +53,7 @@ const Results = (props) => {
       try {
         console.log("entro en el if del endpoint y try");
 
-        setData(fetchResultData(selectedTab, endpoint));
+        setData(fetchResultData(endpoint));
         console.log("results");
       } catch (error) {
         console.log("no results");
