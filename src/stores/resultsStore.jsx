@@ -54,6 +54,8 @@ const useResultsStore = create((set) => ({
   },
 
   fetchResultData: async (endpoint) => {
+    console.log("resultstore > fetchResultData");
+
     let resultData;
     try {
       console.log("resultstore > fetchResultData > endpoint", endpoint);

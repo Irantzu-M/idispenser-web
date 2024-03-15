@@ -22,6 +22,7 @@ const Results = (props) => {
   const fetchResultData = useResultsStore((state) => state.fetchResultData);
 
   useEffect(() => {
+    console.log("entroenuseeefect");
     filters.map((item) => {
       if (item.name == "client") {
         item.selected.map((selected) => {
@@ -47,7 +48,10 @@ const Results = (props) => {
     });
 
     if (endpoint != "") {
+      console.log("entro en el if del endpoint");
       try {
+        console.log("entro en el if del endpoint y try");
+
         setData(fetchResultData(selectedTab, endpoint));
         console.log("results");
       } catch (error) {
