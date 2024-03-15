@@ -66,13 +66,13 @@ const useResultsStore = create((set) => ({
 
       if (rawData[0]) {
         resultData = rawData;
-        set(() => ({
-          data: resultData,
-        }));
       }
     } catch (error) {
       throw error;
     }
+    set(() => ({
+      data: resultData,
+    }));
   },
 }));
 
