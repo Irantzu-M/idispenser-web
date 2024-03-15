@@ -70,19 +70,21 @@ const Results = (props) => {
   return (
     <>
       <div id="results-block" className="results my-5">
-        {itemTypeToFind !== "" && itemTypeToFind !== undefined && (
-          <>
-            <div className="results--actionbar p-3">
-              <div className="row">
-                <div className="col-12 d-flex flex-wrap align-items-center">
-                  <ResultsOptionGroup />
-                  <ResultsActionbarButtons />
+        {itemTypeToFind !== "" &&
+          itemTypeToFind !== undefined &&
+          filters[0] && (
+            <>
+              <div className="results--actionbar p-3">
+                <div className="row">
+                  <div className="col-12 d-flex flex-wrap align-items-center">
+                    <ResultsOptionGroup />
+                    <ResultsActionbarButtons />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="results--content bg-light  p-4">
-              <ResultsAppliedFilters />
-              {/* {itemTypeToFind === "huberror" ? (
+              <div className="results--content bg-light  p-4">
+                <ResultsAppliedFilters />
+                {/* {itemTypeToFind === "huberror" ? (
                 <>
                   <ResultTable
                     params={props.params}
@@ -98,28 +100,28 @@ const Results = (props) => {
                   handleOpenModal={handleOpenModal}
                 ></ResultTable>
               )} */}
-              {
-                // TODO - terminar modales de tabla default, descomentarlo porque funciona, pero necesita modales
-              }
+                {
+                  // TODO - terminar modales de tabla default, descomentarlo porque funciona, pero necesita modales
+                }
 
-              <DefaultTable
-                striped
-                orderable
-                customHeader=""
-                // endpoint={endpoint}
-                data={data}
-                itemType={itemTypeToFind}
-                fixedTableCols={[
-                  "status",
-                  "customer",
-                  "warehouse id",
-                  "warehouse name",
-                  "hub id",
-                ]}
-              ></DefaultTable>
-            </div>
-          </>
-        )}
+                <DefaultTable
+                  striped
+                  orderable
+                  customHeader=""
+                  // endpoint={endpoint}
+                  data={data}
+                  itemType={itemTypeToFind}
+                  fixedTableCols={[
+                    "status",
+                    "customer",
+                    "warehouse id",
+                    "warehouse name",
+                    "hub id",
+                  ]}
+                ></DefaultTable>
+              </div>
+            </>
+          )}
       </div>
       {itemTypeToFind && (
         <ModalEdit
