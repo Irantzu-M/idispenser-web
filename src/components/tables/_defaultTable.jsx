@@ -54,6 +54,14 @@ const DefaultTable = (props) => {
     setData(sortDES(data, field));
   };
 
+  const getAllFields = () => {
+    const allFields = new Set();
+    data.forEach((item) => {
+      Object.keys(item).forEach((field) => allFields.add(field));
+    });
+    return Array.from(allFields);
+  };
+
   return (
     <>
       {data[0] ? (
@@ -78,7 +86,7 @@ const DefaultTable = (props) => {
                       <ClayTable.Row>
                         <ClayTable.Cell
                           headingCell
-                          colSpan={data[0] && Object.keys(data[0]).length + 1}
+                          colSpan={data[0] && getAllFields().length + 1}
                         >
                           {customHeader}
                         </ClayTable.Cell>
@@ -96,7 +104,7 @@ const DefaultTable = (props) => {
                           ></ClayTable.Cell>
                         )}
                         {data[0] &&
-                          Object.keys(data[0]).map((field) => {
+                          getAllFields().map((field) => {
                             if (field != "id" && field != "combinedField") {
                               return (
                                 <ClayTable.Cell
@@ -151,8 +159,12 @@ const DefaultTable = (props) => {
                             "table-body--" + uniqueId + itemType + "-" + item.id
                           }
                         >
-                          {Object.keys(item).map((field) => {
-                            if (field != "id" && field != "combinedField") {
+                          {getAllFields().map((allField) => {
+                            if (
+                              item[allField] != undefined &&
+                              item[allField] != "id" &&
+                              item[allField] != "combinedField"
+                            ) {
                               return (
                                 <IDispenserTableCell
                                   key={
@@ -178,8 +190,12 @@ const DefaultTable = (props) => {
                             "table-body--" + uniqueId + itemType + "-" + item.id
                           }
                         >
-                          {Object.keys(item).map((field) => {
-                            if (field != "id" && field != "combinedField") {
+                          {getAllFields().map((allField) => {
+                            if (
+                              item[allField] != undefined &&
+                              item[allField] != "id" &&
+                              item[allField] != "combinedField"
+                            ) {
                               return (
                                 <IDispenserTableCell
                                   key={
@@ -203,8 +219,12 @@ const DefaultTable = (props) => {
                             "table-body--" + uniqueId + itemType + "-" + item.id
                           }
                         >
-                          {Object.keys(item).map((field) => {
-                            if (field != "id") {
+                          {getAllFields().map((allField) => {
+                            if (
+                              item[allField] != undefined &&
+                              item[allField] != "id" &&
+                              item[allField] != "combinedField"
+                            ) {
                               return (
                                 <IDispenserTableCell
                                   key={
