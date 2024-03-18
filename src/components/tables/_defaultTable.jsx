@@ -259,6 +259,12 @@ const DefaultTable = (props) => {
                                     />
                                   </>
                                 );
+                              } else {
+                                return (
+                                  <>
+                                    <td></td>
+                                  </>
+                                );
                               }
                             })}
                         </ClayTable.Row>
