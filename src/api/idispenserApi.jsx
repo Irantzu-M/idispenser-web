@@ -8,7 +8,7 @@ export const fetchApi = async (
     method: "GET",
   }
 ) => {
-  const url = `${API_BASE_URL}${endpoint}`;
+  const url = `${API_BASE_URL}${endpoint}&pageSize=10`;
   try {
     const response = await Liferay.Util.fetch(url, options);
 

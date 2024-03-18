@@ -17,9 +17,11 @@ const Results = (props) => {
 
   const itemTypeToFind = useFilterButtonsStore((state) => state.itemTypeToFind);
   const filters = useFilterStore((state) => state.filters);
-  let endpoint = itemTypeToFind + "/list?pageSize=100&";
+  let endpoint = itemTypeToFind + "/list?";
 
   const fetchResultData = useResultsStore((state) => state.fetchResultData);
+  const updateResults = useResultsStore((state) => state.updateResults);
+  const setUpdateResults = useResultsStore((state) => state.setUpdateResults);
 
   useEffect(() => {
     filters.map((item) => {
@@ -51,6 +53,7 @@ const Results = (props) => {
         fetchResultData(endpoint)
           .then((data) => {
             setData(data);
+            setUpdateResults(false);
           })
           .catch((error) => {
             console.error("Fallo", error);
@@ -59,6 +62,7 @@ const Results = (props) => {
         console.error("No hay resultados");
       }
 
+      // TODO - hacer un remap distinto para cada resultado
       function remap(dataToremap) {
         const rmd = dataToremap.map((item) => {
           return {
@@ -74,7 +78,7 @@ const Results = (props) => {
         return rmd;
       }
     }
-  }, [filters, itemTypeToFind]);
+  }, [itemTypeToFind, updateResults]);
 
   // MODAL
   const [openModal, setOpenModal] = useState(false);

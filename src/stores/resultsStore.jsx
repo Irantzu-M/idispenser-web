@@ -71,6 +71,13 @@ const useResultsStore = create((set) => ({
       throw error;
     }
   },
+
+  updateResults: false,
+  setUpdateResults: (value) => {
+    set(() => ({
+      updateResults: value,
+    }));
+  },
 }));
 
 export default useResultsStore;
