@@ -8,11 +8,10 @@ export const fetchApi = async (
     method: "GET",
   }
 ) => {
-  //const url = `${API_BASE_URL}${endpoint}`;
-  const url = `${API_BASE_URL}`;
+  const url = `${API_BASE_URL}${endpoint}`;
   try {
     const response = await Liferay.Util.fetch(url, options);
-    console.log("he entrado en try", url);
+    console.log("::: he entrado en try", url);
 
     if (!response.ok) {
       throw new Error("Fallo en la conexión");
