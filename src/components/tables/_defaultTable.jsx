@@ -155,7 +155,7 @@ const DefaultTable = (props) => {
                                     data[0][field]
                                   }
                                 >
-                                  {/* {orderable ? (
+                                  {orderable ? (
                                     <TableHeaderOrderable
                                       data={data}
                                       field={field}
@@ -173,7 +173,7 @@ const DefaultTable = (props) => {
                                     </TableHeaderOrderable>
                                   ) : (
                                     <span>{field}</span>
-                                  )} */}
+                                  )}
                                 </ClayTable.Cell>
                               );
                             }
