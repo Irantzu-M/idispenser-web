@@ -11,6 +11,7 @@ export const fetchApi = async (
   const url = `${API_BASE_URL}${endpoint}`;
   try {
     const response = await Liferay.Util.fetch(url, options);
+    console.log("he entrado en try", endpoint);
 
     if (!response.ok) {
       throw new Error("Fallo en la conexión");
