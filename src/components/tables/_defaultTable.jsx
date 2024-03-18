@@ -167,21 +167,18 @@ const DefaultTable = (props) => {
                                 item[allField] != "combinedField"
                               ) {
                                 return (
-                                  <>
-                                    {item[allField]} ---
-                                    <IDispenserTableCell
-                                      key={
-                                        "key--" +
-                                        uniqueId +
-                                        allField +
-                                        "-" +
-                                        item.id
-                                      }
-                                      item={item}
-                                      itemType={itemType}
-                                      field={item[allField]}
-                                    />
-                                  </>
+                                  <IDispenserTableCell
+                                    key={
+                                      "key--" +
+                                      uniqueId +
+                                      allField +
+                                      "-" +
+                                      item.id
+                                    }
+                                    item={item}
+                                    itemType={itemType}
+                                    field={item[allField]}
+                                  />
                                 );
                               }
                             })}
@@ -206,21 +203,18 @@ const DefaultTable = (props) => {
                                 item[allField] != "combinedField"
                               ) {
                                 return (
-                                  <>
-                                    {item[allField]} ---
-                                    <IDispenserTableCell
-                                      key={
-                                        "key--" +
-                                        uniqueId +
-                                        allField +
-                                        "-" +
-                                        item.id
-                                      }
-                                      item={item}
-                                      itemType={itemType}
-                                      field={allField}
-                                    />
-                                  </>
+                                  <IDispenserTableCell
+                                    key={
+                                      "key--" +
+                                      uniqueId +
+                                      allField +
+                                      "-" +
+                                      item.id
+                                    }
+                                    item={item}
+                                    itemType={itemType}
+                                    field={allField}
+                                  />
                                 );
                               }
                             })}
@@ -243,21 +237,18 @@ const DefaultTable = (props) => {
                                 item[allField] != "combinedField"
                               ) {
                                 return (
-                                  <>
-                                    {item[allField]} ---
-                                    <IDispenserTableCell
-                                      key={
-                                        "key--" +
-                                        uniqueId +
-                                        allField +
-                                        "-" +
-                                        item.id
-                                      }
-                                      item={item}
-                                      itemType={itemType}
-                                      field={item[allField]}
-                                    />
-                                  </>
+                                  <IDispenserTableCell
+                                    key={
+                                      "key--" +
+                                      uniqueId +
+                                      allField +
+                                      "-" +
+                                      item.id
+                                    }
+                                    item={item}
+                                    itemType={itemType}
+                                    field={item[allField]}
+                                  />
                                 );
                               } else {
                                 return (
