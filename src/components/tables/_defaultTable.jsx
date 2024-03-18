@@ -2,7 +2,7 @@ import React from "react";
 import ClayTable from "@clayui/table";
 import { useEffect, useState } from "react";
 import TableHeaderOrderable from "./_tableHeaderOrderable";
-import { sortASC, sortDES } from "../../functions/functions";
+import { generateUniqueId, sortASC, sortDES } from "../../functions/functions";
 import FixedTableCols from "./_fixedTableCols";
 import SelectableDEFAULTTableRow from "../filtersSelectableTables/_selectableDEFAULTTableRow";
 import IDispenserTableCell from "./_idispenserTableCell";
