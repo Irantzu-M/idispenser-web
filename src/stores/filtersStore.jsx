@@ -138,21 +138,19 @@ const useFilterStore = create((set) => ({
       const rawData = await response["items"];
 
       if (rawData[0]) {
-        set(() => ({
-          selectableData: rawData,
+        set((state) => ({
+          filters: state.filters.map((tab) => {
+            if (parentTab.id === tab.id) {
+              tab.selectable = rawData;
+            }
+            return tab;
+          }),
         }));
       }
     } catch (error) {
       throw error;
     }
-    set((state) => ({
-      filters: state.filters.map((tab) => {
-        if (parentTab.id === tab.id) {
-          tab.selectable = newData;
-        }
-        return tab;
-      }),
-    }));
+    return rawData;
   },
 }));
 
