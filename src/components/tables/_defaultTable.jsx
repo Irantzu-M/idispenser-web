@@ -419,6 +419,8 @@ const DefaultTable = (props) => {
                       data={data}
                       itemType={itemType}
                       fixedTableCols={fixedTableCols}
+                      fieldToSearchIn={fieldToSearchIn}
+                      itemsToPop={itemsToPop}
                     />
                   )}
               </div>

@@ -48,18 +48,18 @@ const FixedTableCols = (props) => {
               <ClayTable.Row
                 key={"table-body--" + generateUniqueId() + item.id}
                 className={
-                  (fieldToSearchIn !== undefined &&
-                    fieldToSearchIn !== "" &&
-                    !item[fieldToSearchIn]
+                  (props.fieldToSearchIn != undefined &&
+                    props.fieldToSearchIn != "" &&
+                    !item[props.fieldToSearchIn]
                       .toLowerCase()
-                      .includes(itemsToPop.toLowerCase()) &&
+                      .includes(props.itemsToPop.toLowerCase()) &&
                     "selectable-item dash") ||
-                  (fieldToSearchIn !== undefined &&
-                    fieldToSearchIn !== "" &&
-                    item[fieldToSearchIn]
+                  (props.fieldToSearchIn != undefined &&
+                    props.fieldToSearchIn != "" &&
+                    item[props.fieldToSearchIn]
                       .toLowerCase()
-                      .includes(itemsToPop.toLowerCase()) &&
-                    "selectable-item pop") +
+                      .includes(props.itemsToPop.toLowerCase()) &&
+                    "selectable-item pop ") +
                     (props.itemType == "error" &&
                       item["product id"] === "" &&
                       " err-product ") +
