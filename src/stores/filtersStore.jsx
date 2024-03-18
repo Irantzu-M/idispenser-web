@@ -137,7 +137,9 @@ const useFilterStore = create((set) => ({
       const rawData = await response["items"];
 
       if (rawData[0]) {
-        selectableData = rawData;
+        set(() => ({
+          selectableData: rawData,
+        }));
       }
     } catch (error) {
       throw error;

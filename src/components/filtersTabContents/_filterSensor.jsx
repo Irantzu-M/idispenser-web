@@ -62,7 +62,6 @@ function FilterSensor(props) {
   // LLAMADA A API
   let endpoint = "sensors/list";
   const fetchFilterData = useFilterStore((state) => state.fetchFilterData);
-  // const [fetchCompleted, setFetchCompleted] = useState(false);
 
   useEffect(() => {
     if (searchedText.length >= 6) {
@@ -70,9 +69,7 @@ function FilterSensor(props) {
       try {
         setData(fetchFilterData(selectedTab, endpoint));
         setRemapData(remap(data));
-        // setFetchCompleted(true);
       } catch (error) {
-        // setFetchCompleted(false);
         console.error("Fallo al recuperar los datos del sensor");
       }
 
