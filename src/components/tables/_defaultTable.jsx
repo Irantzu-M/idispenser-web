@@ -175,17 +175,17 @@ const DefaultTable = (props) => {
                           item={item}
                           className={
                             "key--table-row--" +
-                            uniqueId +
                             itemType +
                             "-" +
-                            item.id
+                            item.id +
+                            generateUniqueId()
                           }
                           key={
                             "key--table-row--" +
-                            uniqueId +
                             itemType +
                             "-" +
-                            item.id
+                            item.id +
+                            generateUniqueId()
                           }
                         >
                           {data[0] &&
@@ -213,7 +213,7 @@ const DefaultTable = (props) => {
                                     }
                                     item={item}
                                     itemType={itemType}
-                                    field={item[allField]}
+                                    field={allField}
                                   />
                                 );
                               }
@@ -229,17 +229,17 @@ const DefaultTable = (props) => {
                           item={item}
                           className={
                             "key--tableselect--row--" +
-                            uniqueId +
                             itemType +
                             "-" +
-                            item.id
+                            item.id +
+                            generateUniqueId()
                           }
                           key={
                             "key--tableselect--row--" +
-                            uniqueId +
                             itemType +
                             "-" +
-                            item.id
+                            item.id +
+                            generateUniqueId()
                           }
                         >
                           {data[0] &&
@@ -281,17 +281,17 @@ const DefaultTable = (props) => {
                         <ClayTable.Row
                           className={
                             "key--table--row--" +
-                            uniqueId +
                             itemType +
                             "-" +
-                            item.id
+                            item.id +
+                            generateUniqueId()
                           }
                           key={
                             "key--table--row--" +
-                            uniqueId +
                             itemType +
                             "-" +
-                            item.id
+                            item.id +
+                            generateUniqueId()
                           }
                         >
                           {data[0] &&
@@ -319,7 +319,7 @@ const DefaultTable = (props) => {
                                     }
                                     item={item}
                                     itemType={itemType}
-                                    field={item[allField]}
+                                    field={allField}
                                   />
                                 );
                               } else {
