@@ -298,14 +298,14 @@ const DefaultTable = (props) => {
                       data.map((item) => (
                         <ClayTable.Row
                           className={
-                            (fieldToSearchIn !== undefined &&
-                              fieldToSearchIn !== "" &&
+                            (fieldToSearchIn != undefined &&
+                              fieldToSearchIn != "" &&
                               !item[fieldToSearchIn]
                                 .toLowerCase()
                                 .includes(itemsToPop.toLowerCase()) &&
                               "selectable-item dash") ||
-                            (fieldToSearchIn !== undefined &&
-                              fieldToSearchIn !== "" &&
+                            (fieldToSearchIn != undefined &&
+                              fieldToSearchIn != "" &&
                               item[fieldToSearchIn]
                                 .toLowerCase()
                                 .includes(itemsToPop.toLowerCase()) &&

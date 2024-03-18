@@ -1,35 +1,33 @@
 import React, { useState } from "react";
-// import useResultsStore from "../../stores/resultsStore";
 import DropDown from "@clayui/drop-down";
 import { formatResult, getStatusColor } from "../../functions/functions";
 
 const TableHeaderOrderable = (props) => {
-  const data = props.data; // useResultsStore((state) => state.data);
+  const data = props.data;
 
   const handleSortDataByFieldASC = props.handleSortDataByFieldASC;
   const handleSortDataByFieldDES = props.handleSortDataByFieldDES;
 
   const [value, setValue] = useState("");
-  const minimunChars = 1;
-  const handleChange = (searchText) => {
-    setValue(searchText);
-    if (searchText.length >= minimunChars) {
-      props.change(searchText, props.field);
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    if (event.target.value.length >= 1) {
+      props.change(event.target.value, props.field);
     }
   };
 
   const handleSearch = (searchText) => {
     setValue(searchText);
-    if (searchText.length >= minimunChars) {
+    if (searchText.length >= 1) {
       props.change(searchText, props.field);
     }
   };
 
-  // Gets the text related to each status value
-  // const getStatusText = useResultsStore((state) => state.getStatusText);
   const handleBlur = () => {
     setValue("");
   };
+
   return (
     <>
       <DropDown
@@ -59,51 +57,45 @@ const TableHeaderOrderable = (props) => {
           </div>
           <div className="tableheader--orderable--item">
             <span className="icon icon-search"></span>
-            <DropDown.Search
+            <input
+              type="text"
               className="tableheader--orderable--search d-inline-block"
               placeholder="Type to filter"
-              defaultValue=""
               value={value}
               onChange={handleChange}
             />
           </div>
           {value && (
-            <DropDown.ItemList items={data}>
+            <DropDown.ItemList>
               {data.map((item) => {
                 if (
                   item[props.field]
                     .toString()
                     .toLowerCase()
-                    .includes(value.toString().toLowerCase())
+                    .includes(value.toLowerCase())
                 ) {
                   return (
                     <DropDown.Item
                       key={item[props.field] + "-" + item.id}
                       onClick={() => handleSearch(item[props.field])}
                     >
-                      {
-                        // TODO - revisar que tenemos que hacer este proceso para el STATUS o viene directamente el texto, en este y en otros tsx
-                        props.field == "status" ? (
-                          <>
-                            <span className="txt">
-                              <span
-                                className={
-                                  "icon icon-circle err-type--" +
-                                  getStatusColor(item[props.field])
-                                }
-                              ></span>
-                              {item[props.field]}
-                            </span>
-                          </>
-                        ) : (
-                          <span>
-                            {formatResult(item, value, [props.field])}
-                          </span>
-                        )
-                      }
+                      {props.field === "status" ? (
+                        <>
+                          <span
+                            className={
+                              "icon icon-circle err-type--" +
+                              getStatusColor(item[props.field])
+                            }
+                          ></span>
+                          <span className="txt">{item[props.field]}</span>
+                        </>
+                      ) : (
+                        <span>{formatResult(item, value, [props.field])}</span>
+                      )}
                     </DropDown.Item>
                   );
                 }
+                return null;
               })}
             </DropDown.ItemList>
           )}
@@ -112,4 +104,5 @@ const TableHeaderOrderable = (props) => {
     </>
   );
 };
+
 export default TableHeaderOrderable;
