@@ -120,25 +120,6 @@ const Results = (props) => {
               </div>
               <div className="results--content bg-light  p-4">
                 <ResultsAppliedFilters />
-                {/* {itemTypeToFind === "huberror" ? (
-                <>
-                  <ResultTable
-                    params={props.params}
-                    itemType={itemTypeToFind}
-                    handleOpenModal={handleOpenModal}
-                    fixedTableCols={["status", "customer"]}
-                  ></ResultTable>
-                </>
-              ) : (
-                <ResultTable
-                  params={props.params}
-                  itemType={itemTypeToFind}
-                  handleOpenModal={handleOpenModal}
-                ></ResultTable>
-              )} */}
-                {
-                  // TODO - terminar modales de tabla default, descomentarlo porque funciona, pero necesita modales
-                }
                 {updateResults ? (
                   <div>Buscando</div>
                 ) : (
