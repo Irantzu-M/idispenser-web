@@ -148,8 +148,8 @@ const useFilterStore = create((set) => ({
             return tab;
           }),
         }));
+        return rawData;
       }
-      return rawData;
     } catch (error) {
       throw error;
     }
