@@ -70,37 +70,35 @@ const FixedTableCols = (props) => {
                 }
               >
                 {Object.keys(item).map((field) => {
-                  if (props.fixedTableCols.indexOf(field) >= 0) {
-                    return (
-                      <ClayTable.Cell
-                        key={
-                          "key--" + item.id + "-" + field + "-" + item[field]
-                        }
-                      >
-                        {field === "comentario" ? (
-                          <>
-                            <CommentTooltip {...item} field={field} />
-                          </>
-                        ) : field === "status" ? (
-                          <>
-                            {props.itemType == "hubs" ? (
-                              <>
-                                <StatusTooltip itemValue={item[field]} />
-                              </>
-                            ) : (
-                              <Status
-                                itemType={props.itemType}
-                                item={item}
-                                field={field}
-                              ></Status>
-                            )}
-                          </>
-                        ) : (
-                          <span className="txt">{item[field]}</span>
-                        )}
-                      </ClayTable.Cell>
-                    );
-                  }
+                  // if (props.fixedTableCols.indexOf(field) >= 0) {
+                  return (
+                    <ClayTable.Cell
+                      key={"key--" + item.id + "-" + field + "-" + item[field]}
+                    >
+                      {field === "comentario" ? (
+                        <>
+                          <CommentTooltip {...item} field={field} />
+                        </>
+                      ) : field === "status" ? (
+                        <>
+                          {props.itemType == "hubs" ? (
+                            <>
+                              <StatusTooltip itemValue={item[field]} />
+                            </>
+                          ) : (
+                            <Status
+                              itemType={props.itemType}
+                              item={item}
+                              field={field}
+                            ></Status>
+                          )}
+                        </>
+                      ) : (
+                        <span className="txt">{item[field]}</span>
+                      )}
+                    </ClayTable.Cell>
+                  );
+                  // }
                 })}
               </ClayTable.Row>
             ))}
