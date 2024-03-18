@@ -176,7 +176,7 @@ const DefaultTable = (props) => {
                                   }
                                   item={item}
                                   itemType={itemType}
-                                  field={field}
+                                  field={item[allField]}
                                 />
                               );
                             }
@@ -211,7 +211,7 @@ const DefaultTable = (props) => {
                                   }
                                   item={item}
                                   itemType={itemType}
-                                  field={field}
+                                  field={allField}
                                 />
                               );
                             }
@@ -244,7 +244,7 @@ const DefaultTable = (props) => {
                                   }
                                   item={item}
                                   itemType={itemType}
-                                  field={field}
+                                  field={item[allField]}
                                 />
                               );
                             }
