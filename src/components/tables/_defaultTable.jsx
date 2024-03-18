@@ -13,22 +13,18 @@ const DefaultTable = (props) => {
     endpoint = props.endpoint || "",
     striped = props.striped || false,
     customHeader = props.customHeader || false,
+    // Checkbox single select
     select = props.select || false,
+    // Checkbox multiselect
     multiselect = props.multiselect || false,
     handleSelect = props.handleSelect || false,
+    selectedItems = props.selectedItems || false,
+
+    selectableHeader = props.selectableHeader || false,
+    orderable = props.orderable || false,
+    fixedTableCols = props.fixedTableCols || false,
+    openDetails = props.openDetails,
   } = props;
-  // Checkbox single select
-  const select = props.select || false;
-
-  // Checkbox multiselect
-  const multiselect = props.multiselect || false;
-  const handleSelect = props.handleSelect || false;
-  const selectedItems = props.selectedItems || false;
-
-  const selectableHeader = props.selectableHeader || false;
-  const orderable = props.orderable || false;
-  const fixedTableCols = props.fixedTableCols || false;
-  const openDetails = props.openDetails;
 
   const uniqueId = generateUniqueId();
 
