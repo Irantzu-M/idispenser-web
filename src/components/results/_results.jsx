@@ -51,6 +51,7 @@ const Results = (props) => {
         fetchResultData(endpoint)
           .then((data) => {
             setData(data);
+            console.log("RESULTS > data", data);
           })
           .catch((error) => {
             console.error("Fallo", error);
