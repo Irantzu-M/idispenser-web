@@ -132,6 +132,7 @@ const useFilterStore = create((set) => ({
     }));
   },
   fetchFilterData: async (parentTab, endpoint) => {
+    console.log("entro el fetchfilterdata");
     try {
       const response = await fetchApi(endpoint);
       const rawData = await response["items"];

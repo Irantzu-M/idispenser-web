@@ -5,7 +5,7 @@ import DefaultTable from "../tables/_defaultTable";
 
 function FilterSensor(props) {
   const [data, setData] = useFilterStore((state) => state.selecable) || [];
-  const [remapData, setRemapData] = useState([{ "": "No hay resultados" }]);
+  const [remapData, setRemapData] = useState([{}]);
   const fieldsToSearchIn = [
     "Código sensor",
     "Posición ",
