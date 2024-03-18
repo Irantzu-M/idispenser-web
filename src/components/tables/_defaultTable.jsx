@@ -237,18 +237,21 @@ const DefaultTable = (props) => {
                                 item[allField] != "combinedField"
                               ) {
                                 return (
-                                  <IDispenserTableCell
-                                    key={
-                                      "key--" +
-                                      uniqueId +
-                                      allField +
-                                      "-" +
-                                      item.id
-                                    }
-                                    item={item}
-                                    itemType={itemType}
-                                    field={item[allField]}
-                                  />
+                                  <>
+                                    {item[allField]} ---
+                                    <IDispenserTableCell
+                                      key={
+                                        "key--" +
+                                        uniqueId +
+                                        allField +
+                                        "-" +
+                                        item.id
+                                      }
+                                      item={item}
+                                      itemType={itemType}
+                                      field={item[allField]}
+                                    />
+                                  </>
                                 );
                               }
                             })}
