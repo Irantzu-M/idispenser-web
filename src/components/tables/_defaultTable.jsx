@@ -159,28 +159,29 @@ const DefaultTable = (props) => {
                             "table-body--" + uniqueId + itemType + "-" + item.id
                           }
                         >
-                          {getAllFields().map((allField) => {
-                            if (
-                              item[allField] != undefined &&
-                              item[allField] != "id" &&
-                              item[allField] != "combinedField"
-                            ) {
-                              return (
-                                <IDispenserTableCell
-                                  key={
-                                    "key--" +
-                                    uniqueId +
-                                    allField +
-                                    "-" +
-                                    item.id
-                                  }
-                                  item={item}
-                                  itemType={itemType}
-                                  field={item[allField]}
-                                />
-                              );
-                            }
-                          })}
+                          {data[0] &&
+                            getAllFields().map((allField) => {
+                              if (
+                                item[allField] != undefined &&
+                                item[allField] != "id" &&
+                                item[allField] != "combinedField"
+                              ) {
+                                return (
+                                  <IDispenserTableCell
+                                    key={
+                                      "key--" +
+                                      uniqueId +
+                                      allField +
+                                      "-" +
+                                      item.id
+                                    }
+                                    item={item}
+                                    itemType={itemType}
+                                    field={item[allField]}
+                                  />
+                                );
+                              }
+                            })}
                         </SelectableDEFAULTTableRow>
                       ))}
                     {data != undefined &&
@@ -194,28 +195,29 @@ const DefaultTable = (props) => {
                             "table-body--" + uniqueId + itemType + "-" + item.id
                           }
                         >
-                          {getAllFields().map((allField) => {
-                            if (
-                              item[allField] != undefined &&
-                              item[allField] != "id" &&
-                              item[allField] != "combinedField"
-                            ) {
-                              return (
-                                <IDispenserTableCell
-                                  key={
-                                    "key--" +
-                                    uniqueId +
-                                    allField +
-                                    "-" +
-                                    item.id
-                                  }
-                                  item={item}
-                                  itemType={itemType}
-                                  field={allField}
-                                />
-                              );
-                            }
-                          })}
+                          {data[0] &&
+                            getAllFields().map((allField) => {
+                              if (
+                                item[allField] != undefined &&
+                                item[allField] != "id" &&
+                                item[allField] != "combinedField"
+                              ) {
+                                return (
+                                  <IDispenserTableCell
+                                    key={
+                                      "key--" +
+                                      uniqueId +
+                                      allField +
+                                      "-" +
+                                      item.id
+                                    }
+                                    item={item}
+                                    itemType={itemType}
+                                    field={allField}
+                                  />
+                                );
+                              }
+                            })}
                         </SelectableDEFAULTTableRow>
                       ))}
                     {data != undefined &&
@@ -227,28 +229,29 @@ const DefaultTable = (props) => {
                             "table-body--" + uniqueId + itemType + "-" + item.id
                           }
                         >
-                          {getAllFields().map((allField) => {
-                            if (
-                              item[allField] != undefined &&
-                              item[allField] != "id" &&
-                              item[allField] != "combinedField"
-                            ) {
-                              return (
-                                <IDispenserTableCell
-                                  key={
-                                    "key--" +
-                                    uniqueId +
-                                    allField +
-                                    "-" +
-                                    item.id
-                                  }
-                                  item={item}
-                                  itemType={itemType}
-                                  field={item[allField]}
-                                />
-                              );
-                            }
-                          })}
+                          {data[0] &&
+                            getAllFields().map((allField) => {
+                              if (
+                                item[allField] != undefined &&
+                                item[allField] != "id" &&
+                                item[allField] != "combinedField"
+                              ) {
+                                return (
+                                  <IDispenserTableCell
+                                    key={
+                                      "key--" +
+                                      uniqueId +
+                                      allField +
+                                      "-" +
+                                      item.id
+                                    }
+                                    item={item}
+                                    itemType={itemType}
+                                    field={item[allField]}
+                                  />
+                                );
+                              }
+                            })}
                         </ClayTable.Row>
                       ))}
                   </ClayTable.Body>
