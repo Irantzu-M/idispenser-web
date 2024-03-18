@@ -4,12 +4,13 @@ import { formatResult, getStatusColor } from "../../functions/functions";
 
 const TableHeaderOrderable = (props) => {
   const data = props.data;
+  const selectedItems = props.selected;
+  const setSelectedItems = props.setSelectedItems;
 
   const handleSortDataByFieldASC = props.handleSortDataByFieldASC;
   const handleSortDataByFieldDES = props.handleSortDataByFieldDES;
 
   const [value, setValue] = useState("");
-  const [selectedItems, setSelectedItems] = useState([]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
