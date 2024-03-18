@@ -66,7 +66,7 @@ const TableHeaderOrderable = (props) => {
             />
           </div>
           {value && (
-            <DropDown.ItemList>
+            <DropDown.ItemList items={data}>
               {data.map((item) => {
                 if (
                   item[props.field]
