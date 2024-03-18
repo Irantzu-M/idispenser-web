@@ -48,13 +48,9 @@ const Results = (props) => {
       }
     });
 
-    if (endpoint != "") {
-      console.log("entro en el if del endpoint");
+    if (endpoint != "" && itemTypeToFind != "") {
       try {
-        console.log("entro en el if del endpoint y try");
-
         setData(fetchResultData(endpoint));
-        console.log("results");
       } catch (error) {
         console.log("no results");
       }
