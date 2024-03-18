@@ -3,6 +3,7 @@ import ClayButton from "@clayui/button";
 import useFilterStore, {
   useFilterButtonsStore,
 } from "../../stores/filtersStore";
+import useResultsStore from "../../stores/resultsStore";
 
 const FiltersButton = (props) => {
   const setItemTypeToFind = useFilterButtonsStore(
