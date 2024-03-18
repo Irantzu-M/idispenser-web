@@ -23,6 +23,8 @@ const Results = (props) => {
   const updateResults = useResultsStore((state) => state.updateResults);
   const setUpdateResults = useResultsStore((state) => state.setUpdateResults);
 
+  const [fixedTableCols, setFixedTableCols] = useState([]);
+
   useEffect(() => {
     filters.map((item) => {
       if (item.name == "client") {
@@ -60,6 +62,16 @@ const Results = (props) => {
           });
       } catch (error) {
         console.error("No hay resultados");
+      }
+
+      if (itemTypeToFind == "sensors") {
+        setFixedTableCols([
+          "status",
+          "idCliente",
+          "idAlmacenQuirofano",
+          "almacenName",
+          "idConcentrador",
+        ]);
       }
 
       // TODO - hacer un remap distinto para cada resultado
@@ -139,13 +151,7 @@ const Results = (props) => {
                         // endpoint={endpoint}
                         data={data}
                         itemType={itemTypeToFind}
-                        fixedTableCols={[
-                          "status",
-                          "idCliente",
-                          "idAlmacenQuirofano",
-                          //   "warehouse name",
-                          "idConcentrador",
-                        ]}
+                        fixedTableCols={fixedTableCols}
                         openDetails={handleOpenModal}
                       ></DefaultTable>
                     )}

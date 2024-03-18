@@ -2,6 +2,7 @@ import React from "react";
 import ClayTable from "@clayui/table";
 import { useState } from "react";
 import Status from "../status/_status";
+import { generateUniqueId } from "../../functions/functions";
 
 const FixedTableCols = (props) => {
   const data = props.data;
@@ -52,7 +53,7 @@ const FixedTableCols = (props) => {
           {data != undefined &&
             data.map((item) => (
               <ClayTable.Row
-                key={"table-body--" + item.id}
+                key={"table-body--" + generateUniqueId() + item.id}
                 className={
                   (fieldToSearchIn !== undefined &&
                     fieldToSearchIn !== "" &&

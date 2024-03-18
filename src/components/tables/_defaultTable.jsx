@@ -29,8 +29,6 @@ const DefaultTable = (props) => {
     openDetails = props.openDetails || false,
   } = props;
 
-  const uniqueId = generateUniqueId();
-
   // Get table data
   const [data, setData] = useState([]);
 
@@ -109,8 +107,8 @@ const DefaultTable = (props) => {
                   )}
                   {!customHeader && (
                     <ClayTable.Head
-                      className={"key--table-head-" + uniqueId}
-                      key={"key--table-head-" + uniqueId}
+                      className={"key--table-head-" + generateUniqueId()}
+                      key={"key--table-head-" + generateUniqueId()}
                     >
                       <ClayTable.Row className={multiselect && "multiselect"}>
                         {data[0] && (multiselect || select) && (
@@ -119,11 +117,16 @@ const DefaultTable = (props) => {
                             className={
                               "tableheader--orderable " +
                               "key--" +
-                              uniqueId +
+                              generateUniqueId() +
                               data[0].id +
                               "-checkbox"
                             }
-                            key={"key--" + uniqueId + data[0].id + "-checkbox"}
+                            key={
+                              "key--" +
+                              generateUniqueId() +
+                              data[0].id +
+                              "-checkbox"
+                            }
                           ></ClayTable.Cell>
                         )}
                         {data[0] &&
@@ -135,7 +138,7 @@ const DefaultTable = (props) => {
                                   className={
                                     "text-uppercase " +
                                     "key--" +
-                                    uniqueId +
+                                    generateUniqueId() +
                                     data[0].id +
                                     "-" +
                                     field +
@@ -144,7 +147,7 @@ const DefaultTable = (props) => {
                                   }
                                   key={
                                     "key--" +
-                                    uniqueId +
+                                    generateUniqueId() +
                                     data[0].id +
                                     "-" +
                                     field +
@@ -213,14 +216,14 @@ const DefaultTable = (props) => {
                                   <IDispenserTableCell
                                     className={
                                       "key--" +
-                                      uniqueId +
+                                      generateUniqueId() +
                                       allField +
                                       "-" +
                                       item.id
                                     }
                                     key={
                                       "key--" +
-                                      uniqueId +
+                                      generateUniqueId() +
                                       allField +
                                       "-" +
                                       item.id
@@ -268,14 +271,14 @@ const DefaultTable = (props) => {
                                   <IDispenserTableCell
                                     className={
                                       "key--" +
-                                      uniqueId +
+                                      generateUniqueId() +
                                       allField +
                                       "-" +
                                       item.id
                                     }
                                     key={
                                       "key--" +
-                                      uniqueId +
+                                      generateUniqueId() +
                                       allField +
                                       "-" +
                                       item.id
@@ -321,14 +324,14 @@ const DefaultTable = (props) => {
                                   <IDispenserTableCell
                                     className={
                                       "key--" +
-                                      uniqueId +
+                                      generateUniqueId() +
                                       allField +
                                       "-" +
                                       item.id
                                     }
                                     key={
                                       "key--" +
-                                      uniqueId +
+                                      generateUniqueId() +
                                       allField +
                                       "-" +
                                       item.id
@@ -377,14 +380,14 @@ const DefaultTable = (props) => {
                                   <IDispenserTableCell
                                     className={
                                       "key--" +
-                                      uniqueId +
+                                      generateUniqueId() +
                                       allField +
                                       "-" +
                                       item.id
                                     }
                                     key={
                                       "key--" +
-                                      uniqueId +
+                                      generateUniqueId() +
                                       allField +
                                       "-" +
                                       item.id
