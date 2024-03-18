@@ -8,21 +8,23 @@ import IDispenserTableCell from "./_idispenserTableCell";
 
 const DefaultTable = (props) => {
   // PROPERTIES OF TABLE
-  const {
-    itemType = "",
-    endpoint = "",
-    striped = false,
-    customHeader = false,
-    select = false,
-    multiselect = false,
-    handleSelect = false,
-    selectedItems = false,
-    selectableHeader = false,
-    orderable = false,
-    fixedTableCols = false,
-    openDetails,
-    data: initialData = [],
-  } = props;
+  const itemType = props.itemType || "";
+  const endpoint = props.endpoint || "";
+  const striped = props.striped || false;
+  const customHeader = props.customHeader || false;
+
+  // Checkbox single select
+  const select = props.select || false;
+
+  // Checkbox multiselect
+  const multiselect = props.multiselect || false;
+  const handleSelect = props.handleSelect || false;
+  const selectedItems = props.selectedItems || false;
+
+  const selectableHeader = props.selectableHeader || false;
+  const orderable = props.orderable || false;
+  const fixedTableCols = props.fixedTableCols || false;
+  const openDetails = props.openDetails;
 
   const uniqueId = generateUniqueId();
 
@@ -30,7 +32,7 @@ const DefaultTable = (props) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(initialData);
+    setData(props.data);
   }, [initialData]);
 
   // Orderable headers
