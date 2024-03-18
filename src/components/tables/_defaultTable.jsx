@@ -168,7 +168,11 @@ const DefaultTable = (props) => {
                               return (
                                 <IDispenserTableCell
                                   key={
-                                    "key--" + uniqueId + field + "-" + item.id
+                                    "key--" +
+                                    uniqueId +
+                                    allField +
+                                    "-" +
+                                    item.id
                                   }
                                   item={item}
                                   itemType={itemType}
@@ -199,7 +203,11 @@ const DefaultTable = (props) => {
                               return (
                                 <IDispenserTableCell
                                   key={
-                                    "key--" + uniqueId + field + "-" + item.id
+                                    "key--" +
+                                    uniqueId +
+                                    allField +
+                                    "-" +
+                                    item.id
                                   }
                                   item={item}
                                   itemType={itemType}
@@ -228,7 +236,11 @@ const DefaultTable = (props) => {
                               return (
                                 <IDispenserTableCell
                                   key={
-                                    "key--" + uniqueId + field + "-" + item.id
+                                    "key--" +
+                                    uniqueId +
+                                    allField +
+                                    "-" +
+                                    item.id
                                   }
                                   item={item}
                                   itemType={itemType}
