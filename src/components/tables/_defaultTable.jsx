@@ -163,8 +163,8 @@ const DefaultTable = (props) => {
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
-                                item[allField] != "id" &&
-                                item[allField] != "combinedField"
+                                allField != "id" &&
+                                allField != "combinedField"
                               ) {
                                 return (
                                   <IDispenserTableCell
@@ -199,8 +199,8 @@ const DefaultTable = (props) => {
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
-                                item[allField] != "id" &&
-                                item[allField] != "combinedField"
+                                allField != "id" &&
+                                allField != "combinedField"
                               ) {
                                 return (
                                   <IDispenserTableCell
@@ -233,8 +233,8 @@ const DefaultTable = (props) => {
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
-                                item[allField] != "id" &&
-                                item[allField] != "combinedField"
+                                allField != "id" &&
+                                allField != "combinedField"
                               ) {
                                 return (
                                   <IDispenserTableCell
