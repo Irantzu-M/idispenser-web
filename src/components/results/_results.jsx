@@ -127,22 +127,29 @@ const Results = (props) => {
                 {
                   // TODO - terminar modales de tabla default, descomentarlo porque funciona, pero necesita modales
                 }
-                {data[0] && (
-                  <DefaultTable
-                    striped
-                    orderable
-                    customHeader=""
-                    // endpoint={endpoint}
-                    data={data}
-                    itemType={itemTypeToFind}
-                    fixedTableCols={[
-                      "status",
-                      "customer",
-                      "warehouse id",
-                      "warehouse name",
-                      "hub id",
-                    ]}
-                  ></DefaultTable>
+                {updateResults ? (
+                  <div>Buscando</div>
+                ) : (
+                  <>
+                    {data[0] && (
+                      <DefaultTable
+                        striped
+                        orderable
+                        customHeader=""
+                        // endpoint={endpoint}
+                        data={data}
+                        itemType={itemTypeToFind}
+                        // fixedTableCols={[
+                        //   "status",
+                        //   "customer",
+                        //   "warehouse id",
+                        //   "warehouse name",
+                        //   "hub id",
+                        // ]}
+                        openDetails={handleOpenModal}
+                      ></DefaultTable>
+                    )}
+                  </>
                 )}
               </div>
             </>

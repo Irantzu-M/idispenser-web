@@ -26,7 +26,7 @@ const DefaultTable = (props) => {
     selectableHeader = props.selectableHeader || false,
     orderable = props.orderable || false,
     fixedTableCols = props.fixedTableCols || false,
-    openDetails = props.openDetails,
+    openDetails = props.openDetails || false,
   } = props;
 
   const uniqueId = generateUniqueId();
@@ -60,6 +60,12 @@ const DefaultTable = (props) => {
       Object.keys(item).forEach((field) => allFields.add(field));
     });
     return Array.from(allFields);
+  };
+
+  const handleOpenModal = (item) => {
+    console.log("handleopenmodal:: ", item);
+    props.openDetails(item);
+    setSelected(true);
   };
 
   return (
@@ -220,6 +226,7 @@ const DefaultTable = (props) => {
                             })}
                         </SelectableDEFAULTTableRow>
                       ))}
+
                     {data != undefined &&
                       select &&
                       data.map((item) => (
@@ -274,9 +281,66 @@ const DefaultTable = (props) => {
                             })}
                         </SelectableDEFAULTTableRow>
                       ))}
+
+                    {data != undefined &&
+                      openDetails &&
+                      data.map((item) => (
+                        <ClayTable.Row
+                          className={
+                            "key--table--row--" +
+                            itemType +
+                            "-" +
+                            item.id +
+                            generateUniqueId()
+                          }
+                          onClick={handleOpenModal(item)}
+                          key={
+                            "key--table--row--" +
+                            itemType +
+                            "-" +
+                            item.id +
+                            generateUniqueId()
+                          }
+                        >
+                          {data[0] &&
+                            getAllFields().map((allField) => {
+                              if (
+                                item[allField] != undefined &&
+                                allField != "id" &&
+                                allField != "combinedField"
+                              ) {
+                                return (
+                                  <IDispenserTableCell
+                                    className={
+                                      "key--" +
+                                      uniqueId +
+                                      allField +
+                                      "-" +
+                                      item.id
+                                    }
+                                    key={
+                                      "key--" +
+                                      uniqueId +
+                                      allField +
+                                      "-" +
+                                      item.id
+                                    }
+                                    item={item}
+                                    itemType={itemType}
+                                    field={allField}
+                                  />
+                                );
+                              } else {
+                                return <ClayTable.Cell></ClayTable.Cell>;
+                              }
+                            })}
+                        </ClayTable.Row>
+                      ))}
+
                     {data != undefined &&
                       !multiselect &&
                       !select &&
+                      !openDetails &&
                       data.map((item) => (
                         <ClayTable.Row
                           className={
@@ -333,13 +397,11 @@ const DefaultTable = (props) => {
 
                 {props.fixedTableCols !== undefined &&
                   props.fixedTableCols[0] !== "" && (
-                    <>
-                      <FixedTableCols
-                        data={data}
-                        itemType={itemType}
-                        fixedTableCols={fixedTableCols}
-                      />
-                    </>
+                    <FixedTableCols
+                      data={data}
+                      itemType={itemType}
+                      fixedTableCols={fixedTableCols}
+                    />
                   )}
               </div>
             </div>
