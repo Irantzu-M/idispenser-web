@@ -70,13 +70,10 @@ function FilterSensor(props) {
       try {
         fetchFilterData(selectedTab, endpoint)
           .then((data) => {
-            if (data[0]) {
-              setRemapData(remap(data));
-            }
+            setRemapData(remap(data));
           })
           .catch((error) => {
             console.error("Fallo", error);
-            setRemapData([{}]);
           });
       } catch (error) {
         console.error("Fallo al recuperar los datos del sensor");
@@ -96,8 +93,6 @@ function FilterSensor(props) {
         });
         return rmd;
       }
-    } else {
-      setRemapData([{}]);
     }
   }, [searchedText]);
 
@@ -132,7 +127,7 @@ function FilterSensor(props) {
       )}
       {searchedText.length >= 6 && (
         <>
-          {remapData[0][0] ? (
+          {remapData[0] ? (
             <DefaultTable
               striped
               multiselect
