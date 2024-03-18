@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import DropDown from "@clayui/drop-down";
-import { formatResult, getStatusColor } from "../../functions/functions";
+import {
+  formatResult,
+  generateUniqueId,
+  getStatusColor,
+} from "../../functions/functions";
 
 const TableHeaderOrderable = (props) => {
   const data = props.data;
@@ -20,10 +24,10 @@ const TableHeaderOrderable = (props) => {
   };
 
   const handleSelect = (item) => {
-    console.log("he seleccionado");
     setValue(item[props.field]);
     props.change(item[props.field], props.field);
     setSelectedItems([...selectedItems, item]);
+    console.log("he seleccionado", item, "sekectedites", selectedItems);
   };
 
   const handleRemove = (itemToRemove) => {
@@ -74,7 +78,7 @@ const TableHeaderOrderable = (props) => {
           {selectedItems.length > 0 && (
             <div className="selected-items">
               {selectedItems.map((item) => (
-                <div key={item.id} className="selected-item">
+                <div key={generateUniqueId()} className="selected-item">
                   <span>{item[props.field]}</span>
                   <button
                     className="remove-btn"
