@@ -152,7 +152,6 @@ const useFilterStore = create((set) => ({
     } catch (error) {
       throw error;
     }
-    return rawData;
   },
 }));
 
