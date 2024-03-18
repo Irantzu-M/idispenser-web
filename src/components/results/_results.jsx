@@ -17,7 +17,7 @@ const Results = (props) => {
 
   const itemTypeToFind = useFilterButtonsStore((state) => state.itemTypeToFind);
   const filters = useFilterStore((state) => state.filters);
-  let endpoint = itemTypeToFind + "/list?";
+  let endpoint = itemTypeToFind + "/list?pageSize=100&";
 
   const fetchResultData = useResultsStore((state) => state.fetchResultData);
 
@@ -51,13 +51,27 @@ const Results = (props) => {
         fetchResultData(endpoint)
           .then((data) => {
             setData(data);
-            console.log("RESULTS > data", data);
           })
           .catch((error) => {
             console.error("Fallo", error);
           });
       } catch (error) {
         console.error("No hay resultados");
+      }
+
+      function remap(dataToremap) {
+        const rmd = dataToremap.map((item) => {
+          return {
+            id: item.idSensor,
+            "Código sensor": item.idSensor,
+            "Posición ": item.sensorPosition,
+            "HUB ": item.idConcentrador,
+            "Cliente ": item.idCliente,
+            "Almacén ": item.almacenName,
+            "Tipo ": item.tipoSensor,
+          };
+        });
+        return rmd;
       }
     }
   }, [filters, itemTypeToFind]);
