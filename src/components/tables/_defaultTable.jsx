@@ -95,15 +95,16 @@ const DefaultTable = (props) => {
                   )}
                   {!customHeader && (
                     <ClayTable.Head
-                      className={"table-head-" + uniqueId}
-                      key={"table-head-" + uniqueId}
+                      className={"key--table-head-" + uniqueId}
+                      key={"key--table-head-" + uniqueId}
                     >
                       <ClayTable.Row className={multiselect && "multiselect"}>
                         {data[0] && (multiselect || select) && (
                           <ClayTable.Cell
                             headingCell
                             className={
-                              "tableheader--orderable key--" +
+                              "tableheader--orderable " +
+                              "key--" +
                               uniqueId +
                               data[0].id +
                               "-checkbox"
@@ -173,10 +174,18 @@ const DefaultTable = (props) => {
                           selectedItems={selectedItems}
                           item={item}
                           className={
-                            "table-body--" + uniqueId + itemType + "-" + item.id
+                            "key--table-body--" +
+                            uniqueId +
+                            itemType +
+                            "-" +
+                            item.id
                           }
                           key={
-                            "table-body--" + uniqueId + itemType + "-" + item.id
+                            "key--table-body--" +
+                            uniqueId +
+                            itemType +
+                            "-" +
+                            item.id
                           }
                         >
                           {data[0] &&
@@ -219,10 +228,18 @@ const DefaultTable = (props) => {
                           selectedItems={selectedItems}
                           item={item}
                           className={
-                            "table-body--" + uniqueId + itemType + "-" + item.id
+                            "key--table-body--" +
+                            uniqueId +
+                            itemType +
+                            "-" +
+                            item.id
                           }
                           key={
-                            "table-body--" + uniqueId + itemType + "-" + item.id
+                            "key--table-body--" +
+                            uniqueId +
+                            itemType +
+                            "-" +
+                            item.id
                           }
                         >
                           {data[0] &&
@@ -263,10 +280,18 @@ const DefaultTable = (props) => {
                       data.map((item) => (
                         <ClayTable.Row
                           className={
-                            "table-body--" + uniqueId + itemType + "-" + item.id
+                            "key--table-body--" +
+                            uniqueId +
+                            itemType +
+                            "-" +
+                            item.id
                           }
                           key={
-                            "table-body--" + uniqueId + itemType + "-" + item.id
+                            "key--table-body--" +
+                            uniqueId +
+                            itemType +
+                            "-" +
+                            item.id
                           }
                         >
                           {data[0] &&
