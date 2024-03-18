@@ -62,7 +62,7 @@ function FilterSensor(props) {
   // LLAMADA A API
   let endpoint = "sensors/list";
   const fetchFilterData = useFilterStore((state) => state.fetchFilterData);
-  const [fetchCompleted, setFetchCompleted] = useState(false);
+  // const [fetchCompleted, setFetchCompleted] = useState(false);
 
   useEffect(() => {
     if (searchedText.length >= 6) {
@@ -70,9 +70,10 @@ function FilterSensor(props) {
       try {
         setData(fetchFilterData(selectedTab, endpoint));
         setRemapData(remap(data));
-        setFetchCompleted(true);
+        // setFetchCompleted(true);
       } catch (error) {
-        setFetchCompleted(false);
+        // setFetchCompleted(false);
+        console.error("Fallo al recuperar los datos del sensor");
       }
 
       function remap(dataToremap) {
@@ -111,7 +112,7 @@ function FilterSensor(props) {
           placeholder="Search by code or name"
         />
       </div>
-      {selectedItems[0] && fetchCompleted && (
+      {selectedItems[0] && (
         <DefaultTable
           striped
           multiselect
@@ -121,7 +122,7 @@ function FilterSensor(props) {
           customHeader="Artículos seleccionados"
         ></DefaultTable>
       )}
-      {searchedText.length >= 6 && fetchCompleted && (
+      {searchedText.length >= 6 && (
         <>
           {remapData[0] ? (
             <DefaultTable

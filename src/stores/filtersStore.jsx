@@ -132,7 +132,6 @@ const useFilterStore = create((set) => ({
     }));
   },
   fetchFilterData: async (parentTab, endpoint) => {
-    let selectableData;
     try {
       const response = await fetchApi(endpoint);
       const rawData = await response["items"];
