@@ -47,6 +47,7 @@ function FilterSensor(props) {
   const handleResetSelection = () => {
     selectedItems.forEach((item) => {
       removeFilterItem(item, selectedTab[0]);
+      setSearchedText("");
     });
     setSelectedItems([]);
   };
@@ -72,7 +73,7 @@ function FilterSensor(props) {
             setRemapData(remap(data));
           })
           .catch((error) => {
-            console.error("Fallo al recuperar los datos del sensor", error);
+            console.error("Fallo", error);
           });
       } catch (error) {
         console.error("Fallo al recuperar los datos del sensor");

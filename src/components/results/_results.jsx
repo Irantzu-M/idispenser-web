@@ -21,9 +21,7 @@ const Results = (props) => {
 
   const fetchResultData = useResultsStore((state) => state.fetchResultData);
 
-  console.log("results.js");
   useEffect(() => {
-    console.log("entroenuseeefect");
     filters.map((item) => {
       if (item.name == "client") {
         item.selected.map((selected) => {
@@ -50,10 +48,15 @@ const Results = (props) => {
 
     if (endpoint != "" && itemTypeToFind != "") {
       try {
-        setData(fetchResultData(endpoint));
-        console.log("results > useeffect > try ::", data);
+        fetchResultData(endpoint)
+          .then((data) => {
+            setData(data);
+          })
+          .catch((error) => {
+            console.error("Fallo", error);
+          });
       } catch (error) {
-        console.log("no results");
+        console.error("No hay resultados");
       }
     }
   }, [filters, itemTypeToFind]);

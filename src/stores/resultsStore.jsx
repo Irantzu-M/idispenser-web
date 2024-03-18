@@ -55,22 +55,18 @@ const useResultsStore = create((set) => ({
   },
 
   fetchResultData: async (endpoint) => {
-    console.log("resultstore > fetchResultData");
-
     let resultData;
     try {
-      console.log("resultstore > fetchResultData > endpoint", endpoint);
       const response = await fetchApi(endpoint);
       const rawData = await response["items"];
-      console.log("resultstore > fetchResultData > rawData", rawData);
 
       if (rawData[0]) {
         resultData = rawData;
         set(() => ({
           data: resultData,
         }));
-        // console.log("resultstore > fetchResultData > data", data);
       }
+      return rawData;
     } catch (error) {
       throw error;
     }

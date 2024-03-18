@@ -17,7 +17,7 @@ function SearchSectionAutocomplete(props) {
   };
 
   const handleOnSelect = (item) => {
-    setSearchText(item.combinedField);
+    setSearchText(item.id);
     props.handleChange(item.id);
   };
 
