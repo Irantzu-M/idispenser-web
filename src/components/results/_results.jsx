@@ -48,7 +48,7 @@ const Results = (props) => {
       }
     });
 
-    if (endpoint != "" && itemTypeToFind != "") {
+    if (endpoint != "" && itemTypeToFind != "" && updateResults) {
       try {
         fetchResultData(endpoint)
           .then((data) => {

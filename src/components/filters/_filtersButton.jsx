@@ -1,14 +1,18 @@
 import React from "react";
 import ClayButton from "@clayui/button";
-import { useFilterButtonsStore } from "../../stores/filtersStore";
+import useFilterStore, {
+  useFilterButtonsStore,
+} from "../../stores/filtersStore";
 
 const FiltersButton = (props) => {
   const setItemTypeToFind = useFilterButtonsStore(
     (state) => state.setItemTypeToFind
   );
+  const setUpdateResults = useResultsStore((state) => state.setUpdateResults);
 
   const handleFindClick = (itemType) => {
     setItemTypeToFind(itemType);
+    setUpdateResults(true);
   };
 
   return (

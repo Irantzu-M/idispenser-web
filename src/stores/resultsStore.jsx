@@ -53,7 +53,6 @@ const useResultsStore = create((set) => ({
       }),
     }));
   },
-
   fetchResultData: async (endpoint) => {
     let resultData;
     try {
@@ -71,7 +70,6 @@ const useResultsStore = create((set) => ({
       throw error;
     }
   },
-
   updateResults: false,
   setUpdateResults: (value) => {
     set(() => ({
