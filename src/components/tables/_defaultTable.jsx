@@ -8,11 +8,15 @@ import IDispenserTableCell from "./_idispenserTableCell";
 
 const DefaultTable = (props) => {
   // PROPERTIES OF TABLE
-  const itemType = props.itemType || "";
-  const endpoint = props.endpoint || "";
-  const striped = props.striped || false;
-  const customHeader = props.customHeader || false;
-
+  const {
+    itemType = props.itemType || "",
+    endpoint = props.endpoint || "",
+    striped = props.striped || false,
+    customHeader = props.customHeader || false,
+    select = props.select || false,
+    multiselect = props.multiselect || false,
+    handleSelect = props.handleSelect || false,
+  } = props;
   // Checkbox single select
   const select = props.select || false;
 
@@ -33,7 +37,7 @@ const DefaultTable = (props) => {
 
   useEffect(() => {
     setData(props.data);
-  }, [initialData]);
+  }, [props.data]);
 
   // Orderable headers
   const [selected, setSelected] = useState(false);
