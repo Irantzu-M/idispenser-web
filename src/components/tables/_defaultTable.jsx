@@ -27,6 +27,8 @@ const DefaultTable = (props) => {
   const fixedTableCols = props.fixedTableCols || false;
   const openDetails = props.openDetails;
 
+  const uniqueId = generateUniqueId();
+
   // Get table data
   const [data, setData] = useState([]);
 
@@ -82,13 +84,13 @@ const DefaultTable = (props) => {
                     </ClayTable.Head>
                   )}
                   {!customHeader && (
-                    <ClayTable.Head key={"table-head"}>
+                    <ClayTable.Head key={"table-head" + uniqueId}>
                       <ClayTable.Row className={multiselect && "multiselect"}>
                         {data[0] && (multiselect || select) && (
                           <ClayTable.Cell
                             headingCell
                             className="tableheader--orderable"
-                            key={"key--" + data[0].id + "-checkbox"}
+                            key={"key--" + uniqueId + data[0].id + "-checkbox"}
                           ></ClayTable.Cell>
                         )}
                         {data[0] &&
@@ -100,6 +102,7 @@ const DefaultTable = (props) => {
                                   className="text-uppercase"
                                   key={
                                     "key--" +
+                                    uniqueId +
                                     data[0].id +
                                     "-" +
                                     field +
@@ -142,13 +145,17 @@ const DefaultTable = (props) => {
                           handleSelect={handleSelect}
                           selectedItems={selectedItems}
                           item={item}
-                          key={"table-body--" + itemType + "-" + item.id}
+                          key={
+                            "table-body--" + uniqueId + itemType + "-" + item.id
+                          }
                         >
                           {Object.keys(item).map((field) => {
                             if (field != "id" && field != "combinedField") {
                               return (
                                 <IDispenserTableCell
-                                  key={"key--" + field + "-" + item.id}
+                                  key={
+                                    "key--" + uniqueId + field + "-" + item.id
+                                  }
                                   item={item}
                                   itemType={itemType}
                                   field={field}
@@ -165,13 +172,17 @@ const DefaultTable = (props) => {
                           handleSelect={handleSelect}
                           selectedItems={selectedItems}
                           item={item}
-                          key={"table-body--" + itemType + "-" + item.id}
+                          key={
+                            "table-body--" + uniqueId + itemType + "-" + item.id
+                          }
                         >
                           {Object.keys(item).map((field) => {
                             if (field != "id" && field != "combinedField") {
                               return (
                                 <IDispenserTableCell
-                                  key={"key--" + field + "-" + item.id}
+                                  key={
+                                    "key--" + uniqueId + field + "-" + item.id
+                                  }
                                   item={item}
                                   itemType={itemType}
                                   field={field}
@@ -186,13 +197,17 @@ const DefaultTable = (props) => {
                       !select &&
                       data.map((item) => (
                         <ClayTable.Row
-                          key={"table-body--" + itemType + "-" + item.id}
+                          key={
+                            "table-body--" + uniqueId + itemType + "-" + item.id
+                          }
                         >
                           {Object.keys(item).map((field) => {
                             if (field != "id") {
                               return (
                                 <IDispenserTableCell
-                                  key={"key--" + field + "-" + item.id}
+                                  key={
+                                    "key--" + uniqueId + field + "-" + item.id
+                                  }
                                   item={item}
                                   itemType={itemType}
                                   field={field}
