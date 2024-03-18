@@ -5,7 +5,7 @@ import DefaultTable from "../tables/_defaultTable";
 
 function FilterSensor(props) {
   const [data, setData] = useFilterStore((state) => state.selecable) || [];
-  const [remapData, setRemapData] = useState([]);
+  const [remapData, setRemapData] = useState([{}]);
   const fieldsToSearchIn = [
     "Código sensor",
     "Posición ",
@@ -76,7 +76,7 @@ function FilterSensor(props) {
           })
           .catch((error) => {
             console.error("Fallo", error);
-            setRemapData([]);
+            setRemapData([{}]);
           });
       } catch (error) {
         console.error("Fallo al recuperar los datos del sensor");
@@ -97,7 +97,7 @@ function FilterSensor(props) {
         return rmd;
       }
     } else {
-      setRemapData([]);
+      setRemapData([{}]);
     }
   }, [searchedText]);
 
@@ -132,7 +132,7 @@ function FilterSensor(props) {
       )}
       {searchedText.length >= 6 && (
         <>
-          {remapData[0] ? (
+          {remapData[0][0] ? (
             <DefaultTable
               striped
               multiselect
