@@ -23,28 +23,21 @@ const FixedTableCols = (props) => {
         <ClayTable.Head key={"table-head"}>
           <ClayTable.Row className={"selectable"}>
             {data[0] != undefined &&
-              Object.keys(data[0]).map((field) => {
-                if (props.fixedTableCols.indexOf(field) >= 0) {
-                  return (
-                    <ClayTable.Cell
-                      headingCell
-                      className="tableheader--orderable text-uppercase"
-                      key={
-                        "key--" +
-                        data[0].id +
-                        "-" +
-                        field +
-                        "-" +
-                        data[0][field]
-                      }
-                    >
-                      <span>
-                        {field}
-                        <span className="icon icon-chevron-down ms-2"></span>
-                      </span>
-                    </ClayTable.Cell>
-                  );
-                }
+              props.fixedTableCols.map((field) => {
+                return (
+                  <ClayTable.Cell
+                    headingCell
+                    className="tableheader--orderable text-uppercase"
+                    key={
+                      "key--" + data[0].id + "-" + field + "-" + data[0][field]
+                    }
+                  >
+                    <span>
+                      {field}
+                      <span className="icon icon-chevron-down ms-2"></span>
+                    </span>
+                  </ClayTable.Cell>
+                );
               })}
           </ClayTable.Row>
         </ClayTable.Head>
@@ -75,8 +68,8 @@ const FixedTableCols = (props) => {
                       " err-sensor ")
                 }
               >
-                {Object.keys(item).map((field) => {
-                  if (props.fixedTableCols.indexOf(field) >= 0) {
+                {props.fixedTableCols.map((field) => {
+                  if (Object.keys(item).indexOf(field) >= 0) {
                     return (
                       <ClayTable.Cell
                         key={
@@ -105,6 +98,19 @@ const FixedTableCols = (props) => {
                           <span className="txt">{item[field]}</span>
                         )}
                       </ClayTable.Cell>
+                    );
+                  } else {
+                    return (
+                      <ClayTable.Cell
+                        key={
+                          "key--" +
+                          item.id +
+                          "-" +
+                          field +
+                          "-" +
+                          generateUniqueId()
+                        }
+                      ></ClayTable.Cell>
                     );
                   }
                 })}

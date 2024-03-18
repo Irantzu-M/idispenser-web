@@ -115,7 +115,7 @@ const DefaultTable = (props) => {
                           <ClayTable.Cell
                             headingCell
                             className={
-                              "tableheader--orderable " +
+                              "tableheader--selectable " +
                               "key--" +
                               generateUniqueId() +
                               data[0].id +
@@ -298,11 +298,18 @@ const DefaultTable = (props) => {
                       data.map((item) => (
                         <ClayTable.Row
                           className={
-                            "key--table--row--" +
-                            itemType +
-                            "-" +
-                            item.id +
-                            generateUniqueId()
+                            (fieldToSearchIn !== undefined &&
+                              fieldToSearchIn !== "" &&
+                              !item[fieldToSearchIn]
+                                .toLowerCase()
+                                .includes(itemsToPop.toLowerCase()) &&
+                              "selectable-item dash") ||
+                            (fieldToSearchIn !== undefined &&
+                              fieldToSearchIn !== "" &&
+                              item[fieldToSearchIn]
+                                .toLowerCase()
+                                .includes(itemsToPop.toLowerCase()) &&
+                              "selectable-item pop ")
                           }
                           onClick={() => handleOpenModal(item)}
                           key={
