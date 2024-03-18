@@ -36,7 +36,7 @@ const TableHeaderOrderable = (props) => {
         trigger={
           <span>
             {props.children}
-            <span className="icon icon-chevron-down ms-2"></span>
+            <span className="icon icon-chevron-down ml-2"></span>
           </span>
         }
       >
