@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ClayTable from "@clayui/table";
+import { useEffect, useState } from "react";
+import TableHeaderOrderable from "./_tableHeaderOrderable";
 import { generateUniqueId, sortASC, sortDES } from "../../functions/functions";
 import FixedTableCols from "./_fixedTableCols";
-import TableHeaderOrderable from "./_tableHeaderOrderable";
 import SelectableDEFAULTTableRow from "../filtersSelectableTables/_selectableDEFAULTTableRow";
 import IDispenserTableCell from "./_idispenserTableCell";
 
 const DefaultTable = (props) => {
+  // PROPERTIES OF TABLE
+
   // PROPERTIES OF TABLE
   const {
     itemType = props.itemType || "",
@@ -36,34 +39,24 @@ const DefaultTable = (props) => {
   }, [props.data]);
 
   // Orderable headers
+  // TODO - Itemstopop
   const [selected, setSelected] = useState(false);
   const [fieldToSearchIn, setFieldToSearchIn] = useState("");
   const [itemsToPop, setItemsToPop] = useState("");
-
   const handleItemsToSearchChange = (item, field) => {
     setItemsToPop(item);
     setFieldToSearchIn(field);
   };
-
   const handleSortDataByFieldASC = (field) => {
     setData(sortASC(data, field));
   };
-
   const handleSortDataByFieldDES = (field) => {
     setData(sortDES(data, field));
   };
 
-  const getAllFields = () => {
-    const allFields = new Set();
-    data.forEach((item) => {
-      Object.keys(item).forEach((field) => allFields.add(field));
-    });
-    return Array.from(allFields);
-  };
-
   return (
     <>
-      {data.length > 0 ? (
+      {data[0] ? (
         <>
           <div
             className={
@@ -80,12 +73,12 @@ const DefaultTable = (props) => {
                     "idispenser-table" + (striped ? " table-striped" : "")
                   }
                 >
-                  {customHeader && customHeader !== "none" && (
+                  {customHeader && customHeader != "none" && (
                     <ClayTable.Head>
                       <ClayTable.Row>
                         <ClayTable.Cell
                           headingCell
-                          colSpan={getAllFields().length + 1}
+                          colSpan={data[0] && Object.keys(data[0]).length + 1}
                         >
                           {customHeader}
                         </ClayTable.Cell>
@@ -93,60 +86,152 @@ const DefaultTable = (props) => {
                     </ClayTable.Head>
                   )}
                   {!customHeader && (
-                    <ClayTable.Head>
-                      <ClayTable.Row>
-                        {getAllFields().map((field) => (
+                    <ClayTable.Head key={"table-head" + uniqueId}>
+                      <ClayTable.Row className={multiselect && "multiselect"}>
+                        {data[0] && (multiselect || select) && (
                           <ClayTable.Cell
                             headingCell
-                            key={field}
-                            className="text-uppercase"
-                          >
-                            {orderable ? (
-                              <TableHeaderOrderable
-                                data={data}
-                                field={field}
-                                change={handleItemsToSearchChange}
-                                handleSortDataByFieldASC={
-                                  handleSortDataByFieldASC
-                                }
-                                handleSortDataByFieldDES={
-                                  handleSortDataByFieldDES
-                                }
-                                selected={selected}
-                                setSelected={setSelected}
-                              >
-                                {field}
-                              </TableHeaderOrderable>
-                            ) : (
-                              <span>{field}</span>
-                            )}
-                          </ClayTable.Cell>
-                        ))}
+                            className="tableheader--orderable"
+                            key={"key--" + uniqueId + data[0].id + "-checkbox"}
+                          ></ClayTable.Cell>
+                        )}
+                        {data[0] &&
+                          Object.keys(data[0]).map((field) => {
+                            if (field != "id" && field != "combinedField") {
+                              return (
+                                <ClayTable.Cell
+                                  headingCell
+                                  className="text-uppercase"
+                                  key={
+                                    "key--" +
+                                    uniqueId +
+                                    data[0].id +
+                                    "-" +
+                                    field +
+                                    "-" +
+                                    data[0][field]
+                                  }
+                                >
+                                  {orderable ? (
+                                    <TableHeaderOrderable
+                                      data={data}
+                                      field={field}
+                                      change={handleItemsToSearchChange}
+                                      handleSortDataByFieldASC={
+                                        handleSortDataByFieldASC
+                                      }
+                                      handleSortDataByFieldDES={
+                                        handleSortDataByFieldDES
+                                      }
+                                      selected={selected}
+                                      setSelected={setSelected}
+                                    >
+                                      {field}
+                                    </TableHeaderOrderable>
+                                  ) : (
+                                    <span>{field}</span>
+                                  )}
+                                </ClayTable.Cell>
+                              );
+                            }
+                          })}
                       </ClayTable.Row>
                     </ClayTable.Head>
                   )}
                   <ClayTable.Body>
-                    {data.map((item) => (
-                      <ClayTable.Row key={generateUniqueId()}>
-                        {getAllFields().map((field) => (
-                          <IDispenserTableCell
-                            key={generateUniqueId()}
-                            item={item}
-                            itemType={itemType}
-                            field={field}
-                          />
-                        ))}
-                      </ClayTable.Row>
-                    ))}
+                    {data != undefined &&
+                      multiselect &&
+                      data.map((item) => (
+                        <SelectableDEFAULTTableRow
+                          multiselect={multiselect}
+                          handleSelect={handleSelect}
+                          selectedItems={selectedItems}
+                          item={item}
+                          key={
+                            "table-body--" + uniqueId + itemType + "-" + item.id
+                          }
+                        >
+                          {Object.keys(item).map((field) => {
+                            if (field != "id" && field != "combinedField") {
+                              return (
+                                <IDispenserTableCell
+                                  key={
+                                    "key--" + uniqueId + field + "-" + item.id
+                                  }
+                                  item={item}
+                                  itemType={itemType}
+                                  field={field}
+                                />
+                              );
+                            }
+                          })}
+                        </SelectableDEFAULTTableRow>
+                      ))}
+                    {data != undefined &&
+                      select &&
+                      data.map((item) => (
+                        <SelectableDEFAULTTableRow
+                          handleSelect={handleSelect}
+                          selectedItems={selectedItems}
+                          item={item}
+                          key={
+                            "table-body--" + uniqueId + itemType + "-" + item.id
+                          }
+                        >
+                          {Object.keys(item).map((field) => {
+                            if (field != "id" && field != "combinedField") {
+                              return (
+                                <IDispenserTableCell
+                                  key={
+                                    "key--" + uniqueId + field + "-" + item.id
+                                  }
+                                  item={item}
+                                  itemType={itemType}
+                                  field={field}
+                                />
+                              );
+                            }
+                          })}
+                        </SelectableDEFAULTTableRow>
+                      ))}
+                    {data != undefined &&
+                      !multiselect &&
+                      !select &&
+                      data.map((item) => (
+                        <ClayTable.Row
+                          key={
+                            "table-body--" + uniqueId + itemType + "-" + item.id
+                          }
+                        >
+                          {Object.keys(item).map((field) => {
+                            if (field != "id") {
+                              return (
+                                <IDispenserTableCell
+                                  key={
+                                    "key--" + uniqueId + field + "-" + item.id
+                                  }
+                                  item={item}
+                                  itemType={itemType}
+                                  field={field}
+                                />
+                              );
+                            }
+                          })}
+                        </ClayTable.Row>
+                      ))}
                   </ClayTable.Body>
                 </ClayTable>
-                {fixedTableCols !== undefined && fixedTableCols[0] !== "" && (
-                  <FixedTableCols
-                    data={data}
-                    itemType={itemType}
-                    fixedTableCols={fixedTableCols}
-                  />
-                )}
+
+                {props.fixedTableCols !== undefined &&
+                  props.fixedTableCols[0] !== "" && (
+                    <>
+                      <FixedTableCols
+                        data={data}
+                        itemType={itemType}
+                        fixedTableCols={fixedTableCols}
+                      />
+                    </>
+                  )}
               </div>
             </div>
           </div>
@@ -157,5 +242,4 @@ const DefaultTable = (props) => {
     </>
   );
 };
-
 export default DefaultTable;
