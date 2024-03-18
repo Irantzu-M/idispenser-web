@@ -56,8 +56,17 @@ const DefaultTable = (props) => {
 
   const getAllFields = () => {
     const allFields = new Set();
+    if (Array.isArray(fixedTableCols)) {
+      fixedTableCols.forEach((field) => allFields.add(field));
+    }
+
     data.forEach((item) => {
-      Object.keys(item).forEach((field) => allFields.add(field));
+      Object.keys(item).forEach((field) => {
+        // Si el campo no está en fixedTableCols, agregarlo al conjunto
+        if (!fixedTableCols || !fixedTableCols.includes(field)) {
+          allFields.add(field);
+        }
+      });
     });
     return Array.from(allFields);
   };

@@ -23,8 +23,8 @@ const TableHeaderOrderable = (props) => {
     if (searchText.length >= minimunChars) {
       props.change(searchText, props.field);
     }
-    // TODO - pasar esto como parámetro de búsqueda para que se vuelva a lanzar la query ??
   };
+
   // Gets the text related to each status value
   // const getStatusText = useResultsStore((state) => state.getStatusText);
   const handleBlur = () => {

@@ -139,13 +139,13 @@ const Results = (props) => {
                         // endpoint={endpoint}
                         data={data}
                         itemType={itemTypeToFind}
-                        // fixedTableCols={[
-                        //   "status",
-                        //   "customer",
-                        //   "warehouse id",
-                        //   "warehouse name",
-                        //   "hub id",
-                        // ]}
+                        fixedTableCols={[
+                          "status",
+                          "idCliente",
+                          "idAlmacenQuirofano",
+                          //   "warehouse name",
+                          "idConcentrador",
+                        ]}
                         openDetails={handleOpenModal}
                       ></DefaultTable>
                     )}
