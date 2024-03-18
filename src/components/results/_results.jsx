@@ -51,6 +51,7 @@ const Results = (props) => {
     if (endpoint != "" && itemTypeToFind != "") {
       try {
         setData(fetchResultData(endpoint));
+        console.log("results > useeffect > try ::", data);
       } catch (error) {
         console.log("no results");
       }
