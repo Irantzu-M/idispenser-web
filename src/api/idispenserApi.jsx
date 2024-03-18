@@ -16,7 +16,6 @@ export const fetchApi = async (
     if (!response.ok) {
       throw new Error("Fallo en la conexión");
     }
-    console.log("response::: ", response.json());
     return await response.json();
   } catch (error) {
     throw error;
