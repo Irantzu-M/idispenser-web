@@ -67,8 +67,14 @@ function FilterSensor(props) {
     if (searchedText.length >= 6) {
       endpoint = `sensors/list` + `?search=${searchedText}`;
       try {
-        setData(fetchFilterData(selectedTab, endpoint));
-        setRemapData(remap(data));
+        let fetched = fetchFilterData(selectedTab, endpoint);
+        console.log("fetched", fetched);
+        setData(fetched);
+        console.log("data", data);
+        let r = remap(data);
+        console.log("r", r);
+        setRemapData(r);
+        console.log("remapdata", remapData);
       } catch (error) {
         console.error("Fallo al recuperar los datos del sensor");
       }
