@@ -41,6 +41,13 @@ const useResultsStore = create((set) => ({
       data: getDataCopy(state.data),
     }));
   },
+  // filterByField: (field, value) => {
+  //   set((state) => ({
+  //     data: state.data.filter((item) =>
+  //       String(item[field]).toLowerCase().includes(String(value).toLowerCase())
+  //     ),
+  //   }));
+  // },
   addMessage: (message, itemId) => {
     set((state) => ({
       data: state.data.map((item) => {

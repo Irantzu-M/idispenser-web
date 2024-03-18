@@ -20,6 +20,7 @@ const TableHeaderOrderable = (props) => {
   };
 
   const handleSelect = (item) => {
+    console.log("he seleccionado");
     setValue(item[props.field]);
     props.change(item[props.field], props.field);
     setSelectedItems([...selectedItems, item]);
