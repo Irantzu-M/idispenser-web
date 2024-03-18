@@ -174,14 +174,14 @@ const DefaultTable = (props) => {
                           selectedItems={selectedItems}
                           item={item}
                           className={
-                            "key--table-body--" +
+                            "key--table-row--" +
                             uniqueId +
                             itemType +
                             "-" +
                             item.id
                           }
                           key={
-                            "key--table-body--" +
+                            "key--table-row--" +
                             uniqueId +
                             itemType +
                             "-" +
@@ -228,14 +228,14 @@ const DefaultTable = (props) => {
                           selectedItems={selectedItems}
                           item={item}
                           className={
-                            "key--table-body--" +
+                            "key--tableselect--row--" +
                             uniqueId +
                             itemType +
                             "-" +
                             item.id
                           }
                           key={
-                            "key--table-body--" +
+                            "key--tableselect--row--" +
                             uniqueId +
                             itemType +
                             "-" +
@@ -280,14 +280,14 @@ const DefaultTable = (props) => {
                       data.map((item) => (
                         <ClayTable.Row
                           className={
-                            "key--table-body--" +
+                            "key--table--row--" +
                             uniqueId +
                             itemType +
                             "-" +
                             item.id
                           }
                           key={
-                            "key--table-body--" +
+                            "key--table--row--" +
                             uniqueId +
                             itemType +
                             "-" +
@@ -323,11 +323,7 @@ const DefaultTable = (props) => {
                                   />
                                 );
                               } else {
-                                return (
-                                  <>
-                                    <td></td>
-                                  </>
-                                );
+                                return <ClayTable.Cell></ClayTable.Cell>;
                               }
                             })}
                         </ClayTable.Row>
