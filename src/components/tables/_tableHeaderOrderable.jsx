@@ -9,19 +9,23 @@ const TableHeaderOrderable = (props) => {
   const handleSortDataByFieldDES = props.handleSortDataByFieldDES;
 
   const [value, setValue] = useState("");
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    if (event.target.value.length >= 1) {
+    if (event.target.value.length >= 3) {
       props.change(event.target.value, props.field);
     }
   };
 
-  const handleSearch = (searchText) => {
-    setValue(searchText);
-    if (searchText.length >= 1) {
-      props.change(searchText, props.field);
-    }
+  const handleSelect = (item) => {
+    setValue(item[props.field]);
+    props.change(item[props.field], props.field);
+    setSelectedItems([...selectedItems, item]);
+  };
+
+  const handleRemove = (itemToRemove) => {
+    setSelectedItems(selectedItems.filter((item) => item !== itemToRemove));
   };
 
   const handleBlur = () => {
@@ -65,6 +69,21 @@ const TableHeaderOrderable = (props) => {
               onChange={handleChange}
             />
           </div>
+          {selectedItems.length > 0 && (
+            <div className="selected-items">
+              {selectedItems.map((item) => (
+                <div key={item.id} className="selected-item">
+                  <span>{item[props.field]}</span>
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleRemove(item)}
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
           {value && (
             <DropDown.ItemList items={data}>
               {data.map((item) => {
@@ -77,7 +96,7 @@ const TableHeaderOrderable = (props) => {
                   return (
                     <DropDown.Item
                       key={item[props.field] + "-" + item.id}
-                      onClick={() => handleSearch(item[props.field])}
+                      onClick={() => handleSelect(item)}
                     >
                       {props.field === "status" ? (
                         <>

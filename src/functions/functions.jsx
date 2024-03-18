@@ -52,7 +52,7 @@ const getStatusColor = (status) => {
   switch (status) {
     case "OK":
       return "0";
-    case "Error de conexión":
+    case "ERROR 1- Conexion Sensor":
       return "1";
     case "Error de parámetros":
       return "2";

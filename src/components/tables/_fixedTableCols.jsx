@@ -34,7 +34,7 @@ const FixedTableCols = (props) => {
                   >
                     <span>
                       {field}
-                      <span className="icon icon-chevron-down ms-2"></span>
+                      <span className="icon icon-chevron-down ml-2"></span>
                     </span>
                   </ClayTable.Cell>
                 );
