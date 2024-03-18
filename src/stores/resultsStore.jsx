@@ -69,7 +69,7 @@ const useResultsStore = create((set) => ({
         set(() => ({
           data: resultData,
         }));
-        console.log("resultstore > fetchResultData > data", state.data);
+        console.log("resultstore > fetchResultData > data", data);
       }
     } catch (error) {
       throw error;
