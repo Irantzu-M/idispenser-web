@@ -63,7 +63,6 @@ const DefaultTable = (props) => {
   };
 
   const handleOpenModal = (item) => {
-    console.log("handleopenmodal:: ", item);
     props.openDetails(item);
     setSelected(true);
   };
@@ -293,7 +292,7 @@ const DefaultTable = (props) => {
                             item.id +
                             generateUniqueId()
                           }
-                          onClick={handleOpenModal(item)}
+                          onClick={() => handleOpenModal(item)}
                           key={
                             "key--table--row--" +
                             itemType +
