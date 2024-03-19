@@ -27,10 +27,11 @@ const TableHeaderOrderable = (props) => {
     setValue(item[props.field]);
     props.change(item[props.field], props.field);
     setSelectedItem(item);
-    console.log("he seleccionado", item, "sekectedites", selectedItem);
   };
 
   const handleRemove = (itemToRemove) => {
+    setValue("");
+    props.change("", props.field);
     setSelectedItem([]);
   };
 
