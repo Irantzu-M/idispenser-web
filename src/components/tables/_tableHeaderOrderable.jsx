@@ -90,46 +90,45 @@ const TableHeaderOrderable = (props) => {
               ))}
             </div>
           )}
-          {value && (
-            <DropDown.ItemList items={data}>
-              {data.map((item) => {
-                if (
-                  item[props.field]
-                    .toString()
-                    .toLowerCase()
-                    .includes(value.toLowerCase())
-                ) {
-                  return (
-                    <DropDown.Item
-                      key={
-                        generateUniqueId() +
-                        "-" +
-                        item[props.field] +
-                        "-" +
-                        item.id
-                      }
-                      onClick={() => handleSelect(item)}
-                    >
-                      {props.field === "status" ? (
-                        <>
-                          <span
-                            className={
-                              "icon icon-circle err-type--" +
-                              getStatusColor(item[props.field])
-                            }
-                          ></span>
-                          <span className="txt">{item[props.field]}</span>
-                        </>
-                      ) : (
-                        <span>{formatResult(item, value, [props.field])}</span>
-                      )}
-                    </DropDown.Item>
-                  );
-                }
-                return null;
-              })}
-            </DropDown.ItemList>
-          )}
+          {/* {value && ( */}
+          <DropDown.ItemList items={data}>
+            {data.map((item) => {
+              // if (
+              //   item[props.field]
+              //     .toString()
+              //     .toLowerCase()
+              //     .includes(value.toLowerCase())
+              // ) {
+              return (
+                <DropDown.Item
+                  className={
+                    generateUniqueId() + "-" + item[props.field] + "-" + item.id
+                  }
+                  key={
+                    generateUniqueId() + "-" + item[props.field] + "-" + item.id
+                  }
+                  onClick={() => handleSelect(item)}
+                >
+                  {props.field === "status" ? (
+                    <>
+                      <span
+                        className={
+                          "icon icon-circle err-type--" +
+                          getStatusColor(item[props.field])
+                        }
+                      ></span>
+                      <span className="txt">{item[props.field]}</span>
+                    </>
+                  ) : (
+                    <span>{formatResult(item, value, [props.field])}</span>
+                  )}
+                </DropDown.Item>
+              );
+              // }
+              // return null;
+            })}
+          </DropDown.ItemList>
+          {/* )} */}
         </div>
       </DropDown>
     </>
