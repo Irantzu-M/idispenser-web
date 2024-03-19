@@ -228,6 +228,7 @@ const DefaultTable = (props) => {
                               "selectable-item dash") ||
                             (fieldToSearchIn != undefined &&
                               fieldToSearchIn != "" &&
+                              itemsToPop != "" &&
                               item[fieldToSearchIn]
                                 .toLowerCase()
                                 .includes(itemsToPop.toLowerCase()) &&

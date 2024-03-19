@@ -55,6 +55,7 @@ const FixedTableCols = (props) => {
                       .includes(props.itemsToPop.toLowerCase()) &&
                     "selectable-item dash") ||
                   (props.fieldToSearchIn != undefined &&
+                    itemsToPop != "" &&
                     props.fieldToSearchIn != "" &&
                     item[props.fieldToSearchIn]
                       .toLowerCase()

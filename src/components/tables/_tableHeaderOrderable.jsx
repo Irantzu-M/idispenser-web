@@ -23,6 +23,12 @@ const TableHeaderOrderable = (props) => {
     }
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleChange(event);
+    }
+  };
+
   const handleSelect = (item) => {
     setValue(item[props.field]);
     props.change(item[props.field], props.field);
@@ -67,13 +73,14 @@ const TableHeaderOrderable = (props) => {
             <span className="txt">Orden descendente</span>
           </div>
           <div className="tableheader--orderable--item">
-            <span className="icon icon-search"></span>
+            <span className="icon icon-search" onClick={handleChange}></span>
             <input
               type="text"
               className="tableheader--orderable--search d-inline-block"
               placeholder="Type to filter"
               value={value}
-              onChange={handleChange}
+              //onChange={handleChange}
+              onKeyDown={handleKeyPress}
             />
           </div>
           {(selectedItem != false || value >= 3) && (
