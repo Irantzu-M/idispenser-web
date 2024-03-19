@@ -123,7 +123,7 @@ function FilterHubs(props) {
               multiselect
               handleSelect={handleSelect}
               selectedItems={selectedItems}
-              data={itemsFound}
+              data={remapData}
               className="bg-lighter"
             ></DefaultTable>
           ) : (
