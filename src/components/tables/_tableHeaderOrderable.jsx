@@ -31,7 +31,7 @@ const TableHeaderOrderable = (props) => {
 
   const handleRemove = () => {
     setValue("");
-    props.change([], props.field);
+    props.change("", props.field);
     setSelectedItem(false);
   };
 
@@ -76,7 +76,7 @@ const TableHeaderOrderable = (props) => {
               onChange={handleChange}
             />
           </div>
-          {(selectedItem != false || value != "") && (
+          {(selectedItem != false || value >= 3) && (
             <div className="tableheader--orderable--selected px-3">
               <span
                 className="btn btn-secondary btn-sm"
