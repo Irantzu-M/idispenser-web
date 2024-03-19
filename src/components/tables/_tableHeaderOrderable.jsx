@@ -9,7 +9,7 @@ import {
 const TableHeaderOrderable = (props) => {
   const data = props.data;
   const selectedItems = props.selected;
-  const setSelectedItems = props.setSelectedItems;
+  const setSelectedItems = props.setSelected;
 
   const handleSortDataByFieldASC = props.handleSortDataByFieldASC;
   const handleSortDataByFieldDES = props.handleSortDataByFieldDES;
@@ -26,7 +26,7 @@ const TableHeaderOrderable = (props) => {
   const handleSelect = (item) => {
     setValue(item[props.field]);
     props.change(item[props.field], props.field);
-    setSelectedItems([...selectedItems, item]);
+    setSelectedItems(item);
     console.log("he seleccionado", item, "sekectedites", selectedItems);
   };
 
