@@ -39,8 +39,8 @@ function FiltersTabsContent(props) {
                 {item.name === "storage" && (
                   <FilterProductStores filter={item} />
                 )}
-                {item.name === "product" && <FilterProducts filter={item} />}
-                {item.name === "hub" && <FilterHubs filter={item} />} */}
+                {item.name === "product" && <FilterProducts filter={item} />}*/}
+                  {item.name === "hub" && <FilterHubs filter={item} />}
                   {item.name === "sensor" && <FilterSensor filter={item} />}
                   {item.name === "sensortype" && (
                     <FilterSensorType filter={item} />
