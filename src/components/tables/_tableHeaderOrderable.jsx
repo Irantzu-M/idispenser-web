@@ -72,7 +72,7 @@ const TableHeaderOrderable = (props) => {
             <span className="icon icon-arrow-up"></span>
             <span className="txt">Orden descendente</span>
           </div>
-          <div className="tableheader--orderable--item">
+          <div className="tableheader--orderable--item search-item">
             <span className="icon icon-search" onClick={handleChange}></span>
             <input
               type="text"
