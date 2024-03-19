@@ -132,7 +132,7 @@ const Results = (props) => {
                   <div>Buscando</div>
                 ) : (
                   <>
-                    {data[0] && (
+                    {data[0].id && (
                       <DefaultTable
                         striped
                         orderable

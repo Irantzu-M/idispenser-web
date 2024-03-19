@@ -253,7 +253,7 @@ const DefaultTable = (props) => {
                               } else {
                                 return (
                                   <ClayTable.Cell key={generateUniqueId()}>
-                                    -
+                                    - ::{item[allField]}::
                                   </ClayTable.Cell>
                                 );
                               }
