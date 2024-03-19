@@ -18,6 +18,14 @@ const Results = (props) => {
   const itemTypeToFind = useFilterButtonsStore((state) => state.itemTypeToFind);
   const filters = useFilterStore((state) => state.filters);
   let endpoint = itemTypeToFind + "/list?";
+  // TODO - borrar este if cuando este hecho en API
+  if (
+    itemTypeToFind == "articulos" ||
+    itemTypeToFind == "almacenes" ||
+    itemTypeToFind == "clients"
+  ) {
+    endpoint = itemTypeToFind + "?";
+  }
 
   const fetchResultData = useResultsStore((state) => state.fetchResultData);
   const updateResults = useResultsStore((state) => state.updateResults);

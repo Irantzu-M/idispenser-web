@@ -6,35 +6,35 @@ import { fetchApi } from "../api/idispenserApi";
 const dataFilterList = [
   {
     id: "1",
-    name: "client",
+    name: "clients",
     label: "Cliente",
     selectable: [],
     selected: [],
   },
   {
     id: "2",
-    name: "storage",
+    name: "almacenes",
     label: "Almacén",
     selectable: [],
     selected: [],
   },
   {
     id: "3",
-    name: "product",
+    name: "products",
     label: "Artículo",
     selectable: [],
     selected: [],
   },
   {
     id: "4",
-    name: "hub",
+    name: "hubs",
     label: "HUB",
     selectable: [],
     selected: [],
   },
   {
     id: "5",
-    name: "sensor",
+    name: "sensors",
     label: "Sensor",
     selectable: [],
     selected: [],
@@ -51,7 +51,7 @@ const dataFilterList = [
 const dataButtons = [
   {
     id: "1",
-    name: "products",
+    name: "articulos",
     label: "Artículos",
   },
   {
