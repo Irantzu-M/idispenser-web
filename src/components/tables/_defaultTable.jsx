@@ -114,7 +114,9 @@ const DefaultTable = (props) => {
                             headingCell
                             className={"tableheader--selectable "}
                             key={generateUniqueId()}
-                          ></ClayTable.Cell>
+                          >
+                            -
+                          </ClayTable.Cell>
                         )}
                         {data[0] &&
                           getAllFields().map((field) => {

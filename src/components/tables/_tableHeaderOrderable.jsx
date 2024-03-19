@@ -8,8 +8,8 @@ import {
 
 const TableHeaderOrderable = (props) => {
   const data = props.data;
-  const selectedItems = props.selected;
-  const setSelectedItems = props.setSelected;
+  const selectedItem = props.selected;
+  const setSelectedItem = props.setSelected;
 
   const handleSortDataByFieldASC = props.handleSortDataByFieldASC;
   const handleSortDataByFieldDES = props.handleSortDataByFieldDES;
@@ -26,12 +26,12 @@ const TableHeaderOrderable = (props) => {
   const handleSelect = (item) => {
     setValue(item[props.field]);
     props.change(item[props.field], props.field);
-    setSelectedItems(item);
-    console.log("he seleccionado", item, "sekectedites", selectedItems);
+    setSelectedItem(item);
+    console.log("he seleccionado", item, "sekectedites", selectedItem);
   };
 
   const handleRemove = (itemToRemove) => {
-    setSelectedItems(selectedItems.filter((item) => item !== itemToRemove));
+    setSelectedItem([]);
   };
 
   const handleBlur = () => {
@@ -75,55 +75,53 @@ const TableHeaderOrderable = (props) => {
               onChange={handleChange}
             />
           </div>
-          {selectedItems.length > 0 && (
+          {selectedItem && (
             <div className="selected-items">
-              {selectedItems.map((item) => (
-                <div key={generateUniqueId()} className="selected-item">
-                  <span>{item[props.field]}</span>
-                  <button
-                    className="remove-btn"
-                    onClick={() => handleRemove(item)}
-                  >
-                    X
-                  </button>
-                </div>
-              ))}
+              <div key={generateUniqueId()} className="selected-item">
+                <span>{selectedItem[props.field]}</span>
+                <button
+                  className="remove-btn"
+                  onClick={() => handleRemove(selectedItem)}
+                >
+                  X
+                </button>
+              </div>
             </div>
           )}
-          {/* {value && ( */}
-          <DropDown.ItemList items={data}>
-            {data.map((item) => {
-              // if (
-              //   item[props.field]
-              //     .toString()
-              //     .toLowerCase()
-              //     .includes(value.toLowerCase())
-              // ) {
-              return (
-                <DropDown.Item
-                  key={generateUniqueId()}
-                  onClick={() => handleSelect(item)}
-                >
-                  {props.field === "status" ? (
-                    <>
-                      <span
-                        className={
-                          "icon icon-circle err-type--" +
-                          getStatusColor(item[props.field])
-                        }
-                      ></span>
-                      <span className="txt">{item[props.field]}</span>
-                    </>
-                  ) : (
-                    <span>{formatResult(item, value, [props.field])}</span>
-                  )}
-                </DropDown.Item>
-              );
-              // }
-              // return null;
-            })}
-          </DropDown.ItemList>
-          {/* )} */}
+          {value && (
+            <DropDown.ItemList items={data}>
+              {data.map((item) => {
+                if (
+                  item[props.field]
+                    .toString()
+                    .toLowerCase()
+                    .includes(value.toLowerCase())
+                ) {
+                  return (
+                    <DropDown.Item
+                      key={generateUniqueId()}
+                      onClick={() => handleSelect(item)}
+                    >
+                      {props.field === "status" ? (
+                        <>
+                          <span
+                            className={
+                              "icon icon-circle err-type--" +
+                              getStatusColor(item[props.field])
+                            }
+                          ></span>
+                          <span className="txt">{item[props.field]}</span>
+                        </>
+                      ) : (
+                        <span>{formatResult(item, value, [props.field])}</span>
+                      )}
+                    </DropDown.Item>
+                  );
+                }
+                return null;
+              })}
+            </DropDown.ItemList>
+          )}
         </div>
       </DropDown>
     </>
