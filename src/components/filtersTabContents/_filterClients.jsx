@@ -84,7 +84,7 @@ function FilterSensor(props) {
         return {
           id: item.idClient,
           "ID cliente": item.idClient,
-          "Nombre ": item.cliKanal + " " + item.cliname1 + " " + cliname2,
+          "Nombre ": item.cliKanal + " " + item.cliname1 + " " + item.cliname2,
         };
       });
       return rmd;
@@ -105,7 +105,7 @@ function FilterSensor(props) {
           customHeader="Artículos seleccionados"
         ></DefaultTable>
       )} */}
-      {remapData[0] ? (
+      {remapData[0].id ? (
         <DefaultTable
           striped
           multiselect

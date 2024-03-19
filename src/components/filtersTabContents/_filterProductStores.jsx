@@ -107,7 +107,7 @@ function FilterSensor(props) {
           customHeader="Artículos seleccionados"
         ></DefaultTable>
       )} */}
-      {remapData[0] ? (
+      {remapData[0].id ? (
         <DefaultTable
           striped
           multiselect

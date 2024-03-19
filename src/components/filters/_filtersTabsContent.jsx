@@ -35,7 +35,6 @@ function FiltersTabsContent(props) {
                   </h2>
                 </div>
                 <div className="search-section--tab-body py-4">
-                  {item.name}
                   {item.name === "clients" && <FilterClients filter={item} />}
                   {item.name === "almacenes" && (
                     <FilterProductStores filter={item} />

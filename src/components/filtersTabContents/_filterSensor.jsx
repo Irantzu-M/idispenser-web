@@ -127,7 +127,7 @@ function FilterSensor(props) {
       )}
       {searchedText.length >= 6 && (
         <>
-          {remapData[0] ? (
+          {remapData[0].id ? (
             <DefaultTable
               striped
               multiselect
