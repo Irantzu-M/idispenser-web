@@ -73,7 +73,7 @@ const DefaultTable = (props) => {
 
   return (
     <>
-      {data[0] ? (
+      {data[0].id ? (
         <>
           <div
             className={
@@ -253,7 +253,7 @@ const DefaultTable = (props) => {
                               } else {
                                 return (
                                   <ClayTable.Cell key={generateUniqueId()}>
-                                    - ::{item[allField]}::
+                                    -
                                   </ClayTable.Cell>
                                 );
                               }
@@ -286,7 +286,7 @@ const DefaultTable = (props) => {
                               } else {
                                 return (
                                   <ClayTable.Cell key={generateUniqueId()}>
-                                    -
+                                    - ::item[allField]::
                                   </ClayTable.Cell>
                                 );
                               }
