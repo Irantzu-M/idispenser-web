@@ -49,7 +49,7 @@ const Results = (props) => {
         });
       }
     });
-
+    console.log("endpoint", endpoint);
     if (endpoint != "" && itemTypeToFind != "" && updateResults) {
       try {
         fetchResultData(endpoint)
@@ -75,20 +75,20 @@ const Results = (props) => {
       }
 
       // TODO - hacer un remap distinto para cada resultado
-      function remap(dataToremap) {
-        const rmd = dataToremap.map((item) => {
-          return {
-            id: item.idSensor,
-            "Código sensor": item.idSensor,
-            "Posición ": item.sensorPosition,
-            "HUB ": item.idConcentrador,
-            "Cliente ": item.idCliente,
-            "Almacén ": item.almacenName,
-            "Tipo ": item.tipoSensor,
-          };
-        });
-        return rmd;
-      }
+      // function remap(dataToremap) {
+      //   const rmd = dataToremap.map((item) => {
+      //     return {
+      //       id: item.idSensor,
+      //       "Código sensor": item.idSensor,
+      //       "Posición ": item.sensorPosition,
+      //       "HUB ": item.idConcentrador,
+      //       "Cliente ": item.idCliente,
+      //       "Almacén ": item.almacenName,
+      //       "Tipo ": item.tipoSensor,
+      //     };
+      //   });
+      //   return rmd;
+      // }
     }
   }, [itemTypeToFind, updateResults]);
 
