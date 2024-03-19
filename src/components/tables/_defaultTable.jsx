@@ -97,6 +97,7 @@ const DefaultTable = (props) => {
                     <ClayTable.Head>
                       <ClayTable.Row>
                         <ClayTable.Cell
+                          key={generateUniqueId()}
                           headingCell
                           colSpan={data[0] && getAllFields().length + 1}
                         >
@@ -248,7 +249,11 @@ const DefaultTable = (props) => {
                                   />
                                 );
                               } else {
-                                return <ClayTable.Cell></ClayTable.Cell>;
+                                return (
+                                  <ClayTable.Cell
+                                    key={generateUniqueId()}
+                                  ></ClayTable.Cell>
+                                );
                               }
                             })}
                         </ClayTable.Row>
@@ -276,7 +281,11 @@ const DefaultTable = (props) => {
                                   />
                                 );
                               } else {
-                                return <ClayTable.Cell></ClayTable.Cell>;
+                                return (
+                                  <ClayTable.Cell
+                                    key={generateUniqueId()}
+                                  ></ClayTable.Cell>
+                                );
                               }
                             })}
                         </ClayTable.Row>
