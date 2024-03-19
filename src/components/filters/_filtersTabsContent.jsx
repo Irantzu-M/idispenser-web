@@ -3,7 +3,7 @@ import useFilterStore from "../../stores/filtersStore";
 // import FilterClients from "../filtersTabContents/_filterClients";
 // import FilterProductStores from "../filtersTabContents/_filterProductStores";
 // import FilterProducts from "../filtersTabContents/_filterProducts";
-// import FilterHubs from "../filtersTabContents/_filterHub";
+import FilterHubs from "../filtersTabContents/_filterHub";
 import FilterSensor from "../filtersTabContents/_filterSensor";
 import FilterSensorType from "../filtersTabContents/_filterSensorType";
 
