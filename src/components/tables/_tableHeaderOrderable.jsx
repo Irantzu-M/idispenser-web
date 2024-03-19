@@ -79,7 +79,7 @@ const TableHeaderOrderable = (props) => {
               className="tableheader--orderable--search d-inline-block"
               placeholder="Type to filter"
               value={value}
-              //onChange={handleChange}
+              onChange={handleChange}
               onKeyDown={handleKeyPress}
             />
           </div>
