@@ -106,27 +106,13 @@ const DefaultTable = (props) => {
                     </ClayTable.Head>
                   )}
                   {!customHeader && (
-                    <ClayTable.Head
-                      className={"key--table-head-" + generateUniqueId()}
-                      key={"key--table-head-" + generateUniqueId()}
-                    >
+                    <ClayTable.Head key={generateUniqueId()}>
                       <ClayTable.Row className={multiselect && "multiselect"}>
                         {data[0] && (multiselect || select) && (
                           <ClayTable.Cell
                             headingCell
-                            className={
-                              "tableheader--selectable " +
-                              "key--" +
-                              generateUniqueId() +
-                              data[0].id +
-                              "-checkbox"
-                            }
-                            key={
-                              "key--" +
-                              generateUniqueId() +
-                              data[0].id +
-                              "-checkbox"
-                            }
+                            className={"tableheader--selectable "}
+                            key={generateUniqueId()}
                           ></ClayTable.Cell>
                         )}
                         {data[0] &&
@@ -135,25 +121,8 @@ const DefaultTable = (props) => {
                               return (
                                 <ClayTable.Cell
                                   headingCell
-                                  className={
-                                    "text-uppercase " +
-                                    "key--" +
-                                    generateUniqueId() +
-                                    data[0].id +
-                                    "-" +
-                                    field +
-                                    "-" +
-                                    data[0][field]
-                                  }
-                                  key={
-                                    "key--" +
-                                    generateUniqueId() +
-                                    data[0].id +
-                                    "-" +
-                                    field +
-                                    "-" +
-                                    data[0][field]
-                                  }
+                                  className={"text-uppercase "}
+                                  key={generateUniqueId()}
                                 >
                                   {orderable ? (
                                     <TableHeaderOrderable
@@ -191,20 +160,7 @@ const DefaultTable = (props) => {
                           handleSelect={handleSelect}
                           selectedItems={selectedItems}
                           item={item}
-                          className={
-                            "key--table-row--" +
-                            itemType +
-                            "-" +
-                            item.id +
-                            generateUniqueId()
-                          }
-                          key={
-                            "key--table-row--" +
-                            itemType +
-                            "-" +
-                            item.id +
-                            generateUniqueId()
-                          }
+                          key={generateUniqueId()}
                         >
                           {data[0] &&
                             getAllFields().map((allField) => {
@@ -215,20 +171,7 @@ const DefaultTable = (props) => {
                               ) {
                                 return (
                                   <IDispenserTableCell
-                                    className={
-                                      "key--" +
-                                      generateUniqueId() +
-                                      allField +
-                                      "-" +
-                                      item.id
-                                    }
-                                    key={
-                                      "key--" +
-                                      generateUniqueId() +
-                                      allField +
-                                      "-" +
-                                      item.id
-                                    }
+                                    key={generateUniqueId()}
                                     item={item}
                                     itemType={itemType}
                                     field={allField}
@@ -246,20 +189,7 @@ const DefaultTable = (props) => {
                           handleSelect={handleSelect}
                           selectedItems={selectedItems}
                           item={item}
-                          className={
-                            "key--tableselect--row--" +
-                            itemType +
-                            "-" +
-                            item.id +
-                            generateUniqueId()
-                          }
-                          key={
-                            "key--tableselect--row--" +
-                            itemType +
-                            "-" +
-                            item.id +
-                            generateUniqueId()
-                          }
+                          key={generateUniqueId()}
                         >
                           {data[0] &&
                             getAllFields().map((allField) => {
@@ -270,20 +200,7 @@ const DefaultTable = (props) => {
                               ) {
                                 return (
                                   <IDispenserTableCell
-                                    className={
-                                      "key--" +
-                                      generateUniqueId() +
-                                      allField +
-                                      "-" +
-                                      item.id
-                                    }
-                                    key={
-                                      "key--" +
-                                      generateUniqueId() +
-                                      allField +
-                                      "-" +
-                                      item.id
-                                    }
+                                    key={generateUniqueId()}
                                     item={item}
                                     itemType={itemType}
                                     field={allField}
@@ -313,13 +230,7 @@ const DefaultTable = (props) => {
                               "selectable-item pop ")
                           }
                           onClick={() => handleOpenModal(item)}
-                          key={
-                            "key--table--row--" +
-                            itemType +
-                            "-" +
-                            item.id +
-                            generateUniqueId()
-                          }
+                          key={generateUniqueId()}
                         >
                           {data[0] &&
                             getAllFields().map((allField) => {
@@ -330,20 +241,7 @@ const DefaultTable = (props) => {
                               ) {
                                 return (
                                   <IDispenserTableCell
-                                    className={
-                                      "key--" +
-                                      generateUniqueId() +
-                                      allField +
-                                      "-" +
-                                      item.id
-                                    }
-                                    key={
-                                      "key--" +
-                                      generateUniqueId() +
-                                      allField +
-                                      "-" +
-                                      item.id
-                                    }
+                                    key={generateUniqueId()}
                                     item={item}
                                     itemType={itemType}
                                     field={allField}
@@ -361,22 +259,7 @@ const DefaultTable = (props) => {
                       !select &&
                       !openDetails &&
                       data.map((item) => (
-                        <ClayTable.Row
-                          className={
-                            "key--table--row--" +
-                            itemType +
-                            "-" +
-                            item.id +
-                            generateUniqueId()
-                          }
-                          key={
-                            "key--table--row--" +
-                            itemType +
-                            "-" +
-                            item.id +
-                            generateUniqueId()
-                          }
-                        >
+                        <ClayTable.Row key={generateUniqueId()}>
                           {data[0] &&
                             getAllFields().map((allField) => {
                               if (
@@ -386,20 +269,7 @@ const DefaultTable = (props) => {
                               ) {
                                 return (
                                   <IDispenserTableCell
-                                    className={
-                                      "key--" +
-                                      generateUniqueId() +
-                                      allField +
-                                      "-" +
-                                      item.id
-                                    }
-                                    key={
-                                      "key--" +
-                                      generateUniqueId() +
-                                      allField +
-                                      "-" +
-                                      item.id
-                                    }
+                                    key={generateUniqueId()}
                                     item={item}
                                     itemType={itemType}
                                     field={allField}
