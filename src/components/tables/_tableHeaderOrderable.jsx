@@ -77,16 +77,16 @@ const TableHeaderOrderable = (props) => {
             />
           </div>
           {(selectedItem != false || value != "") && (
-            <div className="selected-items">
-              <div key={generateUniqueId()} className="selected-item">
-                <span
-                  className="btn btn-secondary btn-sm"
-                  onClick={() => handleRemove()}
-                >
-                  {selectedItem != false ? selectedItem[props.field] : value}{" "}
-                  <span className="icon icon-close"></span>
+            <div className="tableheader--orderable--selected px-3">
+              <span
+                className="btn btn-secondary btn-sm"
+                onClick={() => handleRemove()}
+              >
+                <span className="txt pr-1">
+                  {selectedItem != false ? selectedItem[props.field] : value}
                 </span>
-              </div>
+                <span className="icon icon-close"></span>
+              </span>
             </div>
           )}
           {value && (
