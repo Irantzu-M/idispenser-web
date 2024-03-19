@@ -1,7 +1,7 @@
 import React from "react";
 import useFilterStore from "../../stores/filtersStore";
-// import FilterClients from "../filtersTabContents/_filterClients";
-// import FilterProductStores from "../filtersTabContents/_filterProductStores";
+import FilterClients from "../filtersTabContents/_filterClients";
+import FilterProductStores from "../filtersTabContents/_filterProductStores";
 import FilterProducts from "../filtersTabContents/_filterProducts";
 import FilterHubs from "../filtersTabContents/_filterHub";
 import FilterSensor from "../filtersTabContents/_filterSensor";
@@ -35,13 +35,13 @@ function FiltersTabsContent(props) {
                   </h2>
                 </div>
                 <div className="search-section--tab-body py-4">
-                  {/* {item.name === "client" && <FilterClients filter={item} />}
-                {item.name === "storage" && (
-                  <FilterProductStores filter={item} />
-                )}*/}
-                  {item.name === "product" && <FilterProducts filter={item} />}
-                  {item.name === "hub" && <FilterHubs filter={item} />}
-                  {item.name === "sensor" && <FilterSensor filter={item} />}
+                  {item.name === "clients" && <FilterClients filter={item} />}
+                  {item.name === "almacenes" && (
+                    <FilterProductStores filter={item} />
+                  )}
+                  {item.name === "products" && <FilterProducts filter={item} />}
+                  {item.name === "hubs" && <FilterHubs filter={item} />}
+                  {item.name === "sensors" && <FilterSensor filter={item} />}
                   {item.name === "sensortype" && (
                     <FilterSensorType filter={item} />
                   )}

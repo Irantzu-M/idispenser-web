@@ -1,52 +1,57 @@
 import React, { useEffect, useState } from "react";
-// import SelectedItemsTable from "../filtersSelectableTables/_selectedItemsTable";
 import useFilterStore from "../../stores/filtersStore";
-// import useFilterStore from "http://127.0.0.1:5500/src/stores/filtersStore";
-// import FilterTable from "../filtersTabContents/_filterTable";
+import SearchSectionAutocomplete from "../customSearchSelect/_searchSectionAutocomplete";
 import DefaultTable from "../tables/_defaultTable";
 
-function FilterClients(props) {
-  // const [data, setData] = useState([]);
-  // const [remapData, setRemapData] = useState([]);
-  // TODO - Use api
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:5500/src/mocks/filters/_mockClients.json")
-  //     .then((response) => response.json())
-  //     .then((rawdata) => setData(rawdata));
-  // }, []);
+function FilterSensor(props) {
+  const [data, setData] = useFilterStore((state) => state.selecable) || [];
+  const [remapData, setRemapData] = useState([{}]);
+  // const fieldsToSearchIn = [
+  //   "Código sensor",
+  //   "Posición ",
+  //   "HUB ",
+  //   "Cliente ",
+  //   "Almacén ",
+  //   "Tipo ",
+  // ];
+  // const fieldsToDisplay = ["ID almacén", "Nombre", "ID Cliente", "Descripción"];
 
-  // useEffect(() => {
-  //   async function remap() {
-  //     setRemapData(
-  //       data.map((item) => {
-  //         return {
-  //           id: item.id,
-  //           "Código ": item.id,
-  //           "Nombre ": item["Cliente"],
-  //         };
-  //       })
-  //     );
-  //   }
-  //   remap();
-  // }, [data]);
-
-  const [tabs, setTabs] = useState(useFilterStore((state) => state.filters));
+  // TABS LATERALES
+  const tabs = useFilterStore((state) => state.filters);
   const selectedTab = tabs.filter((tab) => {
-    if (tab.id === props.filter.id) {
+    if (tab.id == props.filter.id) {
       return tab;
     }
   });
-  const selectedItems = selectedTab[0].selected;
-  const removeFilterItem = useFilterStore((state) => state.removeFilterItem);
-  const handleRemove = (itemToRemove) => {
-    removeFilterItem(itemToRemove, selectedTab[0]);
-  };
 
-  //SELECTABLE para usar tablas default
+  // TABLA DE ELEMENTOS SELECCIONADOS
+  const [selectedItems, setSelectedItems] = useState(selectedTab[0].selected);
+
+  // TEXTO DE BÚSQUEDA
+  const [searchedText, setSearchedText] = useState("");
+  // const handleChange = (text) => {
+  //   setSearchedText(text);
+  // };
+
   const addFilterItem = useFilterStore((state) => state.addFilterItem);
+  const removeFilterItem = useFilterStore((state) => state.removeFilterItem);
   const handleAdd = (itemToAdd) => {
     addFilterItem(itemToAdd, selectedTab[0]);
+    setSelectedItems([...selectedItems, itemToAdd]);
   };
+  const handleRemove = (itemToRemove) => {
+    removeFilterItem(itemToRemove, selectedTab[0]);
+    setSelectedItems(selectedItems.filter((item) => item !== itemToRemove));
+  };
+
+  // const handleResetSelection = () => {
+  //   selectedItems.forEach((item) => {
+  //     removeFilterItem(item, selectedTab[0]);
+  //     setSearchedText("");
+  //   });
+  //   setSelectedItems([]);
+  // };
+
   const handleSelect = (checkSelected, item) => {
     if (!checkSelected) {
       handleAdd(item);
@@ -54,36 +59,43 @@ function FilterClients(props) {
       handleRemove(item);
     }
   };
-  // const updateChecked =
-  //   useFilterStore((state) =>
-  //     state.filters[state.filters.indexOf(props.filter)].selected.indexOf(
-  //       props.item
-  //     )
-  //   ) > -1;
 
-  // useEffect(() => {
-  //   console.log("selectedItems");
-  // }, [selectedItems]);
+  // LLAMADA A API
+  let endpoint = "clients";
+  const fetchFilterData = useFilterStore((state) => state.fetchFilterData);
+
+  useEffect(() => {
+    // if (searchedText.length >= 6) {
+    endpoint = `clients` + `?search=${searchedText}`;
+    try {
+      fetchFilterData(selectedTab, endpoint)
+        .then((data) => {
+          setRemapData(remap(data));
+        })
+        .catch((error) => {
+          console.error("Fallo", error);
+        });
+    } catch (error) {
+      console.error("Fallo al recuperar los datos del cliente");
+    }
+
+    function remap(dataToremap) {
+      const rmd = dataToremap.map((item) => {
+        return {
+          id: item.idClient,
+          "ID cliente": item.idClient,
+          "Nombre ": item.cliKanal + " " + item.cliname1 + " " + cliname2,
+        };
+      });
+      return rmd;
+    }
+    // }
+    // }, [searchedText]);
+  }, []);
 
   return (
     <>
-      {/* {selectedItems.length > 0 && (
-        <SelectedItemsTable
-          tabs={tabs}
-          filter={props.filter}
-          selectedItems={selectedItems}
-          removeAction={handleRemove}
-        ></SelectedItemsTable>
-      )} */}
-      {/* {remapData[0] && (
-        <FilterTable
-          getData={remapData}
-          tabs={tabs}
-          filter={props.filter}
-        ></FilterTable>
-      )} */}
-
-      {selectedItems.length > 0 && (
+      {/* {selectedItems[0] && (
         <DefaultTable
           striped
           multiselect
@@ -91,22 +103,22 @@ function FilterClients(props) {
           selectedItems={selectedItems}
           data={selectedItems}
           customHeader="Artículos seleccionados"
-          // itemType={"client"}
         ></DefaultTable>
+      )} */}
+      {remapData[0] ? (
+        <DefaultTable
+          striped
+          multiselect
+          handleSelect={handleSelect}
+          selectedItems={selectedItems}
+          data={remapData}
+          className="bg-lighter"
+        ></DefaultTable>
+      ) : (
+        <>No hay resultados</>
       )}
-      <DefaultTable
-        striped
-        multiselect
-        handleSelect={handleSelect}
-        selectedItems={selectedItems}
-        tableQuery={
-          "filters/_mockClients" + /*capitalize(itemTypeToFind) +*/ ".json"
-        }
-        // itemType={"clients"}
-        className="bg-lighter"
-      ></DefaultTable>
     </>
   );
 }
 
-export default FilterClients;
+export default FilterSensor;

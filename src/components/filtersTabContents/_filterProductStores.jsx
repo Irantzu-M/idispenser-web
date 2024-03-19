@@ -1,27 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useFilterStore from "../../stores/filtersStore";
-
+import SearchSectionAutocomplete from "../customSearchSelect/_searchSectionAutocomplete";
 import DefaultTable from "../tables/_defaultTable";
 
-function FilterProductStores(props) {
-  const [tabs, setTabs] =
-    useState(useFilterStore((state) => state.filters)) || [];
+function FilterSensor(props) {
+  const [data, setData] = useFilterStore((state) => state.selecable) || [];
+  const [remapData, setRemapData] = useState([{}]);
+  // const fieldsToSearchIn = [
+  //   "Código sensor",
+  //   "Posición ",
+  //   "HUB ",
+  //   "Cliente ",
+  //   "Almacén ",
+  //   "Tipo ",
+  // ];
+  // const fieldsToDisplay = ["ID almacén", "Nombre", "ID Cliente", "Descripción"];
+
+  // TABS LATERALES
+  const tabs = useFilterStore((state) => state.filters);
   const selectedTab = tabs.filter((tab) => {
-    if (tab.id === props.filter.id) {
+    if (tab.id == props.filter.id) {
       return tab;
     }
   });
-  const selectedItems = selectedTab[0].selected;
-  const removeFilterItem = useFilterStore((state) => state.removeFilterItem);
-  const handleRemove = (itemToRemove) => {
-    removeFilterItem(itemToRemove, selectedTab[0]);
-  };
 
-  //SELECTABLE para usar tablas default
+  // TABLA DE ELEMENTOS SELECCIONADOS
+  const [selectedItems, setSelectedItems] = useState(selectedTab[0].selected);
+
+  // TEXTO DE BÚSQUEDA
+  const [searchedText, setSearchedText] = useState("");
+  // const handleChange = (text) => {
+  //   setSearchedText(text);
+  // };
+
   const addFilterItem = useFilterStore((state) => state.addFilterItem);
+  const removeFilterItem = useFilterStore((state) => state.removeFilterItem);
   const handleAdd = (itemToAdd) => {
     addFilterItem(itemToAdd, selectedTab[0]);
+    setSelectedItems([...selectedItems, itemToAdd]);
   };
+  const handleRemove = (itemToRemove) => {
+    removeFilterItem(itemToRemove, selectedTab[0]);
+    setSelectedItems(selectedItems.filter((item) => item !== itemToRemove));
+  };
+
+  // const handleResetSelection = () => {
+  //   selectedItems.forEach((item) => {
+  //     removeFilterItem(item, selectedTab[0]);
+  //     setSearchedText("");
+  //   });
+  //   setSelectedItems([]);
+  // };
+
   const handleSelect = (checkSelected, item) => {
     if (!checkSelected) {
       handleAdd(item);
@@ -29,10 +59,45 @@ function FilterProductStores(props) {
       handleRemove(item);
     }
   };
-  // ROW
+
+  // LLAMADA A API
+  let endpoint = "almacenes";
+  const fetchFilterData = useFilterStore((state) => state.fetchFilterData);
+
+  useEffect(() => {
+    // if (searchedText.length >= 6) {
+    endpoint = `almacenes` + `?search=${searchedText}`;
+    try {
+      fetchFilterData(selectedTab, endpoint)
+        .then((data) => {
+          setRemapData(remap(data));
+        })
+        .catch((error) => {
+          console.error("Fallo", error);
+        });
+    } catch (error) {
+      console.error("Fallo al recuperar los datos del almacén");
+    }
+
+    function remap(dataToremap) {
+      const rmd = dataToremap.map((item) => {
+        return {
+          id: item.idAlmacen,
+          "ID almacén": item.idAlmacen,
+          "Nombre ": item.nombre,
+          "ID Cliente": item.idCliente,
+          "Descipción ": item.descripcion,
+        };
+      });
+      return rmd;
+    }
+    // }
+    // }, [searchedText]);
+  }, []);
+
   return (
     <>
-      {selectedItems.length > 0 && (
+      {/* {selectedItems[0] && (
         <DefaultTable
           striped
           multiselect
@@ -41,17 +106,21 @@ function FilterProductStores(props) {
           data={selectedItems}
           customHeader="Artículos seleccionados"
         ></DefaultTable>
+      )} */}
+      {remapData[0] ? (
+        <DefaultTable
+          striped
+          multiselect
+          handleSelect={handleSelect}
+          selectedItems={selectedItems}
+          data={remapData}
+          className="bg-lighter"
+        ></DefaultTable>
+      ) : (
+        <>No hay resultados</>
       )}
-      <DefaultTable
-        striped
-        multiselect
-        handleSelect={handleSelect}
-        selectedItems={selectedItems}
-        tableQuery={"filters/_mockProductstores" + ".json"}
-        className="bg-lighter"
-      ></DefaultTable>
     </>
   );
 }
 
-export default FilterProductStores;
+export default FilterSensor;
