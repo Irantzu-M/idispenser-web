@@ -101,7 +101,13 @@ const TableHeaderOrderable = (props) => {
                 ) {
                   return (
                     <DropDown.Item
-                      key={item[props.field] + "-" + item.id}
+                      key={
+                        generateUniqueId() +
+                        "-" +
+                        item[props.field] +
+                        "-" +
+                        item.id
+                      }
                       onClick={() => handleSelect(item)}
                     >
                       {props.field === "status" ? (
