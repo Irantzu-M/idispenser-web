@@ -9,8 +9,6 @@ import IDispenserTableCell from "./_idispenserTableCell";
 
 const DefaultTable = (props) => {
   // PROPERTIES OF TABLE
-
-  // PROPERTIES OF TABLE
   const {
     itemType = props.itemType || "",
     endpoint = props.endpoint || "",
@@ -37,7 +35,6 @@ const DefaultTable = (props) => {
   }, [props.data]);
 
   // Orderable headers
-  // TODO - Itemstopop
   const [selected, setSelected] = useState(false);
   const [fieldToSearchIn, setFieldToSearchIn] = useState("");
   const [itemsToPop, setItemsToPop] = useState("");
