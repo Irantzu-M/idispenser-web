@@ -169,6 +169,7 @@ const DefaultTable = (props) => {
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
+                                item[allField] != "" &&
                                 allField != "id" &&
                                 allField != "combinedField"
                               ) {
@@ -198,6 +199,7 @@ const DefaultTable = (props) => {
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
+                                item[allField] != "" &&
                                 allField != "id" &&
                                 allField != "combinedField"
                               ) {
@@ -239,6 +241,7 @@ const DefaultTable = (props) => {
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
+                                item[allField] != "" &&
                                 allField != "id" &&
                                 allField != "combinedField"
                               ) {
@@ -271,6 +274,7 @@ const DefaultTable = (props) => {
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
+                                item[allField] != "" &&
                                 allField != "id" &&
                                 allField != "combinedField"
                               ) {
