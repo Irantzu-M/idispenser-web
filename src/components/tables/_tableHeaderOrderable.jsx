@@ -18,9 +18,9 @@ const TableHeaderOrderable = (props) => {
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    if (event.target.value.length >= 3) {
-      props.change(event.target.value, props.field);
-    }
+    // if (event.target.value.length >= 3) {
+    //   props.change(event.target.value, props.field);
+    // }
   };
 
   const handleKeyPress = (event) => {
