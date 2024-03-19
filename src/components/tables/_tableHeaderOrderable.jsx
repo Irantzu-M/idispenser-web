@@ -9,6 +9,7 @@ import {
 const TableHeaderOrderable = (props) => {
   const data = props.data;
   const selectedItem = props.selected;
+  console.log("selecteditem inicial", selectedItem);
   const setSelectedItem = props.setSelected;
 
   const handleSortDataByFieldASC = props.handleSortDataByFieldASC;
@@ -24,15 +25,18 @@ const TableHeaderOrderable = (props) => {
   };
 
   const handleSelect = (item) => {
+    console.log("item[props.field]", item[props.field]);
     setValue(item[props.field]);
     props.change(item[props.field], props.field);
     setSelectedItem(item);
+    console.log("selecteditem tras handleselect", selectedItem);
   };
 
   const handleRemove = () => {
     setValue("");
     props.change([], props.field);
     setSelectedItem(undefined);
+    console.log("selecteditem handleremove", selectedItem);
   };
 
   const handleBlur = () => {
@@ -76,21 +80,22 @@ const TableHeaderOrderable = (props) => {
               onChange={handleChange}
             />
           </div>
-          {selectedItem != undefined && value != "" && (
-            <div className="selected-items">
-              <div key={generateUniqueId()} className="selected-item">
-                <span
-                  className="btn btn-secondary btn-sm"
-                  onClick={() => handleRemove()}
-                >
-                  {selectedItem != undefined
-                    ? selectedItem[props.field]
-                    : value}{" "}
-                  <span className="icon icon-close"></span>
-                </span>
+          {selectedItem != undefined ||
+            (value != "" && (
+              <div className="selected-items">
+                <div key={generateUniqueId()} className="selected-item">
+                  <span
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => handleRemove()}
+                  >
+                    {selectedItem != undefined
+                      ? selectedItem[props.field]
+                      : value}{" "}
+                    <span className="icon icon-close"></span>
+                  </span>
+                </div>
               </div>
-            </div>
-          )}
+            ))}
           {value && (
             <DropDown.ItemList items={data}>
               {data.map((item) => {
