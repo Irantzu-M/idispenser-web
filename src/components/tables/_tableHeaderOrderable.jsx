@@ -35,12 +35,12 @@ const TableHeaderOrderable = (props) => {
   const handleRemove = () => {
     setValue("");
     props.change([], props.field);
-    setSelectedItem(undefined);
+    setSelectedItem(false);
     console.log("selecteditem handleremove", selectedItem);
   };
 
   const handleBlur = () => {
-    setValue("");
+    //setValue("");
   };
 
   return (
@@ -80,7 +80,7 @@ const TableHeaderOrderable = (props) => {
               onChange={handleChange}
             />
           </div>
-          {selectedItem != undefined ||
+          {selectedItem != false ||
             (value != "" && (
               <div className="selected-items">
                 <div key={generateUniqueId()} className="selected-item">
@@ -88,9 +88,7 @@ const TableHeaderOrderable = (props) => {
                     className="btn btn-secondary btn-sm"
                     onClick={() => handleRemove()}
                   >
-                    {selectedItem != undefined
-                      ? selectedItem[props.field]
-                      : value}{" "}
+                    {selectedItem != false ? selectedItem[props.field] : value}{" "}
                     <span className="icon icon-close"></span>
                   </span>
                 </div>

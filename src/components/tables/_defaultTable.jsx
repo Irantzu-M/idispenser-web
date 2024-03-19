@@ -126,7 +126,9 @@ const DefaultTable = (props) => {
                                 >
                                   {orderable ? (
                                     <TableHeaderOrderable
-                                      className={selected[0] && "text-primary"}
+                                      className={
+                                        selected != false && "text-primary"
+                                      }
                                       data={data}
                                       field={field}
                                       change={handleItemsToSearchChange}
