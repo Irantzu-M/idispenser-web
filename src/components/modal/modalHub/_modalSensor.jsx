@@ -33,10 +33,8 @@ const ModalSensor = (props) => {
   // TEXTO DE BÚSQUEDA
   const [searchedText, setSearchedText] = useState("");
   const handleChange = (text) => {
-    console.log(text);
     if (text != "" && text != undefined) {
-      //setSearchedText(text);
-      console.log("if");
+      setSearchedText(text);
     }
   };
 
