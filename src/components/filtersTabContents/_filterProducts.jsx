@@ -70,7 +70,7 @@ function FilterSensor(props) {
             console.error("Fallo", error);
           });
       } catch (error) {
-        console.error("Fallo al recuperar los datos del sensor");
+        console.error("Fallo al recuperar los datos del artículo");
       }
 
       function remap(dataToremap) {

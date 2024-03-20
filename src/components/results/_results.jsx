@@ -104,10 +104,10 @@ const Results = (props) => {
 
   // MODAL
   const [openModal, setOpenModal] = useState(false);
-  const [item, setItem] = useState([]);
+  const [modalItem, setModalItem] = useState([]);
   const handleOpenModal = (item) => {
     setOpenModal(!openModal);
-    setItem(item);
+    setModalItem(item);
   };
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -156,7 +156,7 @@ const Results = (props) => {
         <ModalEdit
           openModal={openModal}
           handleCloseModal={handleCloseModal}
-          item={item}
+          item={modalItem}
           itemType={itemTypeToFind}
         ></ModalEdit>
       )}

@@ -4,12 +4,13 @@ import useFilterStore from "../../stores/filtersStore";
 import DefaultTable from "../tables/_defaultTable";
 
 function FilterSensorType(props) {
-  const [data, setData] = useState([
-    { id: "PUSHERS", label: "pusher", selected: false },
-    { id: "ULTRASOUND", label: "ustrasound", selected: false },
-    { id: "WEIGHING", label: "weighing", selected: false },
-    { id: "CUSTODY", label: "custody", selected: false },
-  ]);
+  const [data, setData] = useFilterStore((state) =>
+    state.filters.filter((option) => {
+      if (option.name == "sensortype") {
+        return option;
+      }
+    })
+  );
   // useEffect(() => {
   //   setData([
   //     { id: "PUSHERS", label: "pusher", selected: false },

@@ -43,7 +43,12 @@ const dataFilterList = [
     id: "6",
     name: "sensortype",
     label: "Tipología de sensor",
-    selectable: [],
+    selectable: [
+      { id: "PUSHERS", label: "pusher", selected: false },
+      { id: "ULTRASOUND", label: "ustrasound", selected: false },
+      { id: "WEIGHING", label: "weighing", selected: false },
+      { id: "CUSTODY", label: "custody", selected: false },
+    ],
     selected: [],
   },
 ];

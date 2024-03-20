@@ -7,60 +7,44 @@ import { capitalize } from "../../../functions/functions";
 import DefaultTable from "../../tables/_defaultTable";
 import ClayButton from "@clayui/button";
 import SearchSectionAutocomplete from "../../customSearchSelect/_searchSectionAutocomplete";
-//--clayui import { ClaySelect } from "@clayui/form";
+import useFilterStore from "../../../stores/filtersStore";
+import { ClaySelect } from "@clayui/form";
+import useResultsStore from "../../../stores/resultsStore";
+import { fetchApi } from "../../../api/idispenserApi";
 
 const ModalSensor = (props) => {
   const modalItemType = props.itemType;
-  // CAMPOS A MOSTRAR - código de artículo y descripción.
-  // const fieldsToSearchIn = ["reference", "label"];
+  const sensorTypes = useFilterStore((state) =>
+    state.filters.filter((option) => {
+      if (option.name == "sensortype") {
+        return option;
+      }
+    })
+  );
 
-  // TODO - Use api
-  const [modalItem, setModalItem] = useState([]);
-  //const [replaceItem, setReplaceItem] = useState([]);
-  useEffect(() => {
-    async function fetchModalItem() {
-      fetch(
-        "http://127.0.0.1:5500/src/mocks/modals/_mockModal" +
-          capitalize(modalItemType) +
-          props.item.id +
-          ".json"
-      )
-        .then((response) => response.json())
-        .then((itemData) => setModalItem(itemData[0]));
-    }
-    if (!modalItem[0]) {
-      fetchModalItem();
-    }
-  }, [modalItem]);
-
+  const modalItem = props.item;
   const [searchedText, setSearchedText] = useState("");
   const handleChange = (text) => {
     setSearchedText(text);
   };
 
-  // TODO - Sensortype haccer referencial
+  // LLAMADA A API para Artículos
+  const [products, setProducts] = useState([{}]);
+  let endpoint = "articulos";
+  const fetchFilterData = useResultsStore((state) => state.fetchFilterData);
 
-  const sensorTypes = [
-    { id: "pusher" },
-    { id: "ustrasound" },
-    { id: "weighing" },
-    { id: "custody" },
-  ];
-
-  // TODO - Use api y que filtre cosas
-  const [products, setProducts] = useState([]);
   useEffect(() => {
-    async function fetchProducts() {
-      fetch("http://127.0.0.1:5500/src/mocks/results/_mockResultsProducts.json")
-        .then((response) => response.json())
-        .then((rawdata) => {
-          setProducts(rawdata);
-        });
+    if (searchedText.length >= 6) {
+      endpoint = `articulos` + `?search=${searchedText}`;
+
+      let resultData;
+      try {
+        fetchApi(endpoint).then((data) => setProducts(data["items"]));
+      } catch (error) {
+        throw error;
+      }
     }
-    if (props.itemType) {
-      fetchProducts();
-    }
-  }, [props.itemType]);
+  }, [searchedText]);
 
   return (
     <>
@@ -96,30 +80,29 @@ const ModalSensor = (props) => {
               </div>
               <div className="col-lg-8">
                 <span>
-                  {modalItem["customer id"] + " " + modalItem["customer"]}
+                  // TODO - necesito el cientenombre pero no lo recibo de la api
+                  {modalItem.idSensor + " " /*+ modalItem.clienteNombre*/}
                 </span>
               </div>
               <div className="col-lg-4 mb-3">
                 <span>Sensor ID: </span>
               </div>
               <div className="col-lg-8">
-                <span>{modalItem["sensor id"]}</span>
+                <span>{modalItem.idSensor}</span>
               </div>
               <div className="col-lg-4 mb-3">
                 <span>Almacén: </span>
               </div>
               <div className="col-lg-8">
                 <span>
-                  {modalItem["warehouse id"] +
-                    " " +
-                    modalItem["warehouse name"]}
+                  {modalItem.idAlmacenQuirofano + " " + modalItem.almacenName}
                 </span>
               </div>
               <div className="col-lg-4 mb-3">
                 <span>HUB: </span>
               </div>
               <div className="col-lg-8">
-                <span>{modalItem["hub"]}</span>
+                <span>{modalItem.idConcentrador}</span>
               </div>
             </div>
             <div className="">
@@ -129,16 +112,15 @@ const ModalSensor = (props) => {
                 </div>
                 <div className="col-lg-8 mb-3">
                   <div className="select-wrapper">
-                    {/* //--clayui  
                     <ClaySelect aria-label="Select Label" id="mySelectId">
                       {sensorTypes.map((item) => (
                         <ClaySelect.Option
-                          key={item.id}
+                          key={item.idS}
                           label={item.id}
                           value={item.id}
                         />
                       ))}
-                    </ClaySelect>*/}
+                    </ClaySelect>
                   </div>
                 </div>
               </div>
@@ -169,7 +151,7 @@ const ModalSensor = (props) => {
                     className="form-control"
                     type="text"
                     name="position"
-                    defaultValue={modalItem["position"]}
+                    defaultValue={modalItem.sensorPosition}
                   />
                 </div>
               </div>
@@ -182,7 +164,7 @@ const ModalSensor = (props) => {
                     className="form-control"
                     type="text"
                     name="maxHeight"
-                    defaultValue={modalItem["max height"]}
+                    defaultValue={modalItem.maxHeight}
                   />
                 </div>
               </div>
@@ -191,7 +173,7 @@ const ModalSensor = (props) => {
                   <span
                     className="txt"
                     name="comments"
-                    defaultValue={modalItem["comments"]}
+                    defaultValue={modalItem.comments}
                   >
                     Comentarios:{" "}
                   </span>
