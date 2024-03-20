@@ -80,6 +80,8 @@ const Results = (props) => {
           "almacenName",
           "idConcentrador",
         ]);
+      } else {
+        setFixedTableCols([]);
       }
 
       // TODO - hacer un remap distinto para cada resultado

@@ -50,12 +50,20 @@ const capitalize = (str) => {
 
 const getStatusColor = (status) => {
   switch (status) {
-    case "OK":
+    case "ERROR 0 - Concentrador sin cliente asignado":
       return "0";
-    case "ERROR 1- Conexion Sensor":
+    case "ERROR 1 - Conexion Sensor":
       return "1";
-    case "Error de parámetros":
+    case "ERROR 2 - Concentrador en almacén desactivado":
       return "2";
+    case "ERROR 3 - Concentrador sin sensores asignados":
+      return "3";
+    case "ERROR 4 - Conexion concentrador":
+      return "4";
+    case "Error de parámetros":
+      return "5";
+    case "OK":
+      return "6";
   }
 };
 

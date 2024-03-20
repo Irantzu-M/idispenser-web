@@ -95,14 +95,14 @@ function FilterSensor(props) {
 
   return (
     <>
-      {selectedItems != [] && (
+      {selectedItems[0] && (
         <DefaultTable
           striped
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}
           data={selectedItems}
-          customHeader="Artículos seleccionados"
+          customHeader="Clientes seleccionados"
         ></DefaultTable>
       )}
       {remapData != [] ? (
