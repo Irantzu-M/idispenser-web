@@ -1,19 +1,17 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import ClayModal from "@clayui/modal";
-import ModalSensorConfirm from "./_modalSensorConfirm";
-import ClayTable from "@clayui/table";
-import { capitalize, generateUniqueId } from "../../../functions/functions";
-import DefaultTable from "../../tables/_defaultTable";
 import ClayButton from "@clayui/button";
-import SearchSectionAutocomplete from "../../customSearchSelect/_searchSectionAutocomplete";
-import useFilterStore from "../../../stores/filtersStore";
 import { ClaySelect } from "@clayui/form";
-import useResultsStore from "../../../stores/resultsStore";
 import { fetchApi } from "../../../api/idispenserApi";
+import { generateUniqueId } from "../../../functions/functions";
+import useFilterStore from "../../../stores/filtersStore";
+import useResultsStore from "../../../stores/resultsStore";
+import SearchSectionAutocomplete from "../../customSearchSelect/_searchSectionAutocomplete";
+import ModalSensorConfirm from "./_modalSensorConfirm";
 
 const ModalSensor = (props) => {
-  const modalItemType = props.itemType;
+  // const modalItemType = props.itemType;
   // const sensorTypes = useFilterStore((state) =>
   //   state.filters.filter((option) => {
   //     if (option.name == "sensortype") {
@@ -31,11 +29,17 @@ const ModalSensor = (props) => {
 
   const modalItem = props.item;
 
+  const [newModalItem, setNewModalItem] = useState(item);
+
   // Artículos
   // TEXTO DE BÚSQUEDA
   const [searchedText, setSearchedText] = useState("");
   const handleChange = (text) => {
-    setSearchedText(text);
+    console.log(text);
+    if (text != "" && text != undefined) {
+      //setSearchedText(text);
+      console.log("if");
+    }
   };
 
   // LLAMADA A API para Artículos
@@ -52,11 +56,19 @@ const ModalSensor = (props) => {
 
           if (rawData[0]) {
             console.log("rawData", rawData);
-            setProducts(rawData);
+            setProducts(remap(rawData));
           }
           //return rawData;
         } catch (error) {
           throw error;
+        }
+
+        function remap(dataToRemap) {
+          const rmd = dataToRemap.map((item) => {
+            const id = item.idArticulo;
+            return { ...item, id };
+          });
+          return rmd;
         }
       };
 
@@ -99,7 +111,7 @@ const ModalSensor = (props) => {
               </div>
               <div className="col-lg-8">
                 <span>
-                  {/* TODO - necesito el cientenombre pero no lo recibo de la api */}
+                  {/* TODO - necesito el clientenombre pero no lo recibo de la api */}
                   {modalItem.idSensor + " " /*+ modalItem.clienteNombre*/}
                 </span>
               </div>
