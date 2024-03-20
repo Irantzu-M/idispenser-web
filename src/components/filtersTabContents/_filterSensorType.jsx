@@ -4,15 +4,20 @@ import useFilterStore from "../../stores/filtersStore";
 import DefaultTable from "../tables/_defaultTable";
 
 function FilterSensorType(props) {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    setData([
-      { id: "PUSHERS", label: "pusher", selected: false },
-      { id: "ULTRASOUND", label: "ustrasound", selected: false },
-      { id: "WEIGHING", label: "weighing", selected: false },
-      { id: "CUSTODY", label: "custody", selected: false },
-    ]);
-  }, []);
+  const [data, setData] = useState([
+    { id: "PUSHERS", label: "pusher", selected: false },
+    { id: "ULTRASOUND", label: "ustrasound", selected: false },
+    { id: "WEIGHING", label: "weighing", selected: false },
+    { id: "CUSTODY", label: "custody", selected: false },
+  ]);
+  // useEffect(() => {
+  //   setData([
+  //     { id: "PUSHERS", label: "pusher", selected: false },
+  //     { id: "ULTRASOUND", label: "ustrasound", selected: false },
+  //     { id: "WEIGHING", label: "weighing", selected: false },
+  //     { id: "CUSTODY", label: "custody", selected: false },
+  //   ]);
+  // }, []);
 
   // const [anySensorSelected, setAnySensorSelected] = useState("");
   const [tabs, setTabs] = useState(useFilterStore((state) => state.filters));
@@ -49,16 +54,20 @@ function FilterSensorType(props) {
     <>
       <p>Selecciona la tipología del sensor:</p>
 
-      <DefaultTable
-        striped
-        select
-        handleSelect={handleSelect}
-        selectedItems={selectedItems}
-        data={data}
-        customHeader="none"
-        itemType={"sensortype"}
-        className="table--sm"
-      />
+      {data[0].id ? (
+        <DefaultTable
+          striped
+          select
+          handleSelect={handleSelect}
+          selectedItems={selectedItems}
+          data={data}
+          customHeader="none"
+          itemType={"sensortype"}
+          className="table--sm"
+        />
+      ) : (
+        <>No hay resultados</>
+      )}
     </>
   );
 }
