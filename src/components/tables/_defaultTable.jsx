@@ -161,7 +161,6 @@ const DefaultTable = (props) => {
                           item={item}
                           key={generateUniqueId()}
                         >
-                          {item[allField]} //TODO - borrar
                           {data != [] &&
                             getAllFields().map((allField) => {
                               if (
