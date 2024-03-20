@@ -54,7 +54,7 @@ function FilterSensorType(props) {
     <>
       <p>Selecciona la tipología del sensor:</p>
 
-      {data[0].id ? (
+      {data[0] ? (
         <DefaultTable
           striped
           select
