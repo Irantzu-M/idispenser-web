@@ -105,7 +105,7 @@ function FilterHubs(props) {
         />
       </div>
 
-      {selectedItems != [] && (
+      {selectedItems[0] && (
         <DefaultTable
           striped
           multiselect

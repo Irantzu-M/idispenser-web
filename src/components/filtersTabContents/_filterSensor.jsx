@@ -115,7 +115,7 @@ function FilterSensor(props) {
           placeholder="Search by code or name"
         />
       </div>
-      {selectedItems != [] && (
+      {selectedItems[0] && (
         <DefaultTable
           striped
           multiselect

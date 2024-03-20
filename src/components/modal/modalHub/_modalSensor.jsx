@@ -51,11 +51,10 @@ const ModalSensor = (props) => {
           const rawData = await response["items"];
 
           if (rawData[0]) {
-            setData({
-              data: rawData,
-            });
+            console.log("rawData", rawData);
+            setProducts(rawData);
           }
-          return rawData;
+          //return rawData;
         } catch (error) {
           throw error;
         }
