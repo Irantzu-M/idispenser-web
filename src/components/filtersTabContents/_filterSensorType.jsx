@@ -4,21 +4,23 @@ import useFilterStore from "../../stores/filtersStore";
 import DefaultTable from "../tables/_defaultTable";
 
 function FilterSensorType(props) {
-  const [data, setData] = useFilterStore((state) =>
-    state.filters.filter((option) => {
-      if (option.name == "sensortype") {
-        return option;
-      }
-    })
-  );
-  // useEffect(() => {
-  //   setData([
-  //     { id: "PUSHERS", label: "pusher", selected: false },
-  //     { id: "ULTRASOUND", label: "ustrasound", selected: false },
-  //     { id: "WEIGHING", label: "weighing", selected: false },
-  //     { id: "CUSTODY", label: "custody", selected: false },
-  //   ]);
-  // }, []);
+  // const [data, setData] = useFilterStore((state) =>
+  //   state.filters.filter((option) => {
+  //     if (option.name == "sensortype") {
+  //       return option;
+  //     }
+  //   })
+  // );
+  const [data, setData] = useState([]);
+  // TODO - intentar no tener que ponerlo a fuego
+  useEffect(() => {
+    setData([
+      { id: "PUSHERS", label: "pusher", selected: false },
+      { id: "ULTRASOUND", label: "ustrasound", selected: false },
+      { id: "WEIGHING", label: "weighing", selected: false },
+      { id: "CUSTODY", label: "custody", selected: false },
+    ]);
+  }, []);
 
   // const [anySensorSelected, setAnySensorSelected] = useState("");
   const [tabs, setTabs] = useState(useFilterStore((state) => state.filters));

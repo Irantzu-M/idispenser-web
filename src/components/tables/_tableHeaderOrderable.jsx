@@ -83,7 +83,7 @@ const TableHeaderOrderable = (props) => {
               onKeyDown={handleKeyPress}
             />
           </div>
-          {(selectedItem != false || value >= 3) && (
+          {((selectedItem != false && selectedItem != "") || value >= 3) && (
             <div className="tableheader--orderable--selected px-3">
               <span
                 className="btn btn-secondary btn-sm"

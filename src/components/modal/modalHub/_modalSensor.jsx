@@ -14,13 +14,20 @@ import { fetchApi } from "../../../api/idispenserApi";
 
 const ModalSensor = (props) => {
   const modalItemType = props.itemType;
-  const sensorTypes = useFilterStore((state) =>
-    state.filters.filter((option) => {
-      if (option.name == "sensortype") {
-        return option;
-      }
-    })
-  );
+  // const sensorTypes = useFilterStore((state) =>
+  //   state.filters.filter((option) => {
+  //     if (option.name == "sensortype") {
+  //       return option;
+  //     }
+  //   })
+  // );
+  // TODO - Intentar ponerlo desde el useFilterStore
+  const sensorTypes = [
+    { id: "PUSHERS", label: "pusher", selected: false },
+    { id: "ULTRASOUND", label: "ustrasound", selected: false },
+    { id: "WEIGHING", label: "weighing", selected: false },
+    { id: "CUSTODY", label: "custody", selected: false },
+  ];
 
   const modalItem = props.item;
   const [searchedText, setSearchedText] = useState("");
