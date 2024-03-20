@@ -73,7 +73,7 @@ const DefaultTable = (props) => {
 
   return (
     <>
-      {data[0].id ? (
+      {data != [] ? (
         <>
           <div
             className={
@@ -96,7 +96,7 @@ const DefaultTable = (props) => {
                         <ClayTable.Cell
                           key={generateUniqueId()}
                           headingCell
-                          colSpan={data[0] && getAllFields().length + 1}
+                          colSpan={data != [] && getAllFields().length + 1}
                         >
                           {customHeader}
                         </ClayTable.Cell>
@@ -106,7 +106,7 @@ const DefaultTable = (props) => {
                   {!customHeader && (
                     <ClayTable.Head key={generateUniqueId()}>
                       <ClayTable.Row className={multiselect && "multiselect"}>
-                        {data[0] && (multiselect || select) && (
+                        {data != [] && (multiselect || select) && (
                           <ClayTable.Cell
                             headingCell
                             className={"tableheader--selectable "}
@@ -115,7 +115,7 @@ const DefaultTable = (props) => {
                             -
                           </ClayTable.Cell>
                         )}
-                        {data[0] &&
+                        {data != [] &&
                           getAllFields().map((field) => {
                             if (field != "id" && field != "combinedField") {
                               return (
@@ -161,7 +161,7 @@ const DefaultTable = (props) => {
                           item={item}
                           key={generateUniqueId()}
                         >
-                          {data[0] &&
+                          {data != [] &&
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
@@ -191,7 +191,7 @@ const DefaultTable = (props) => {
                           item={item}
                           key={generateUniqueId()}
                         >
-                          {data[0] &&
+                          {data != [] &&
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
@@ -234,7 +234,7 @@ const DefaultTable = (props) => {
                           onClick={() => handleOpenModal(item)}
                           key={generateUniqueId()}
                         >
-                          {data[0] &&
+                          {data != [] &&
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
@@ -267,7 +267,7 @@ const DefaultTable = (props) => {
                       !openDetails &&
                       data.map((item) => (
                         <ClayTable.Row key={generateUniqueId()}>
-                          {data[0] &&
+                          {data != [] &&
                             getAllFields().map((allField) => {
                               if (
                                 item[allField] != undefined &&
