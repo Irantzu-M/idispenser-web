@@ -85,7 +85,7 @@ const ModalSensor = (props) => {
               </div>
               <div className="col-lg-8">
                 <span>
-                  // TODO - necesito el cientenombre pero no lo recibo de la api
+                  {/* TODO - necesito el cientenombre pero no lo recibo de la api */}
                   {modalItem.idSensor + " " /*+ modalItem.clienteNombre*/}
                 </span>
               </div>
@@ -134,17 +134,15 @@ const ModalSensor = (props) => {
                   <span className="txt">Artículo: </span>
                 </div>
                 <div className="col-lg-8 mb-3">
-                  {products[0] && (
-                    <div className="select-wrapper">
-                      <SearchSectionAutocomplete
-                        options={products}
-                        formControl={true}
-                        handleChange={handleChange}
-                        cellsToDisplay={["id", "product name"]}
-                        placeholder={modalItem["warehouse id"]}
-                      />
-                    </div>
-                  )}
+                  <div className="select-wrapper">
+                    <SearchSectionAutocomplete
+                      options={products}
+                      formControl={true}
+                      handleChange={handleChange}
+                      cellsToDisplay={["id", "product name"]}
+                      placeholder={modalItem.idArticulo}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="row">
@@ -175,16 +173,14 @@ const ModalSensor = (props) => {
               </div>
               <div className="row">
                 <div className="col-lg-4">
-                  <span
-                    className="txt"
-                    name="comments"
-                    defaultValue={modalItem.comments}
-                  >
-                    Comentarios:{" "}
-                  </span>
+                  <span className="txt">Comentarios: </span>
                 </div>
                 <div className="col-lg-8 mb-3">
-                  <textarea className="form-control"></textarea>
+                  <textarea
+                    className="form-control"
+                    name="comments"
+                    defaultValue={modalItem.comments}
+                  ></textarea>
                 </div>
               </div>
             </div>
