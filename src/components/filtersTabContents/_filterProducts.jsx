@@ -7,8 +7,9 @@ function FilterSensor(props) {
   const [data, setData] = useFilterStore((state) => state.selecable) || [];
   const [remapData, setRemapData] = useState([{}]);
 
-  const fieldsToSearchIn = ["Código de artículo", "Descripción "];
-  const fieldsToDisplay = ["Código de artículo", "Descripción "];
+  // TODO - deberiamos poner almacen en lugar de nombre pero no lo devuelve la api
+  const fieldsToSearchIn = ["Código de artículo", "Nombre "];
+  const fieldsToDisplay = ["Código de artículo", "Nombre "];
   // TABS LATERALES
   const tabs = useFilterStore((state) => state.filters);
   const selectedTab = tabs.filter((tab) => {
