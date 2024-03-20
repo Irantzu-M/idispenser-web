@@ -29,8 +29,6 @@ const ModalSensor = (props) => {
 
   const modalItem = props.item;
 
-  const [newModalItem, setNewModalItem] = useState(item);
-
   // Artículos
   // TEXTO DE BÚSQUEDA
   const [searchedText, setSearchedText] = useState("");
