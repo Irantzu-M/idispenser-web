@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const AutocompleteComponent = (props) => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] =
+    useState(props.placeholder) || useState("");
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const options = props.items || [];

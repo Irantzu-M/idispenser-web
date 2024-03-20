@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ClayModal from "@clayui/modal";
 import ModalSensorConfirm from "./_modalSensorConfirm";
 import ClayTable from "@clayui/table";
-import { capitalize } from "../../../functions/functions";
+import { capitalize, generateUniqueId } from "../../../functions/functions";
 import DefaultTable from "../../tables/_defaultTable";
 import ClayButton from "@clayui/button";
 import SearchSectionAutocomplete from "../../customSearchSelect/_searchSectionAutocomplete";
@@ -30,6 +30,9 @@ const ModalSensor = (props) => {
   ];
 
   const modalItem = props.item;
+
+  // Artículos
+  // TEXTO DE BÚSQUEDA
   const [searchedText, setSearchedText] = useState("");
   const handleChange = (text) => {
     setSearchedText(text);
@@ -38,16 +41,28 @@ const ModalSensor = (props) => {
   // LLAMADA A API para Artículos
   const [products, setProducts] = useState([{}]);
   let endpoint = "articulos";
-  const fetchFilterData = useResultsStore((state) => state.fetchFilterData);
+  // const fetchFilterData = useResultsStore((state) => state.fetchFilterData);
 
   useEffect(() => {
     if (searchedText.length >= 6) {
-      endpoint = `articulos` + `?search=${searchedText}`;
-      try {
-        fetchApi(endpoint).then((data) => setProducts(data["items"]));
-      } catch (error) {
-        throw error;
-      }
+      const fetchData = async (endpoint) => {
+        try {
+          const response = await fetchApi(endpoint);
+          const rawData = await response["items"];
+
+          if (rawData[0]) {
+            setData({
+              data: rawData,
+            });
+          }
+          return rawData;
+        } catch (error) {
+          throw error;
+        }
+      };
+
+      const endpoint = `articulos?search=${searchedText}`;
+      fetchData(endpoint);
     }
   }, [searchedText]);
 
@@ -120,7 +135,7 @@ const ModalSensor = (props) => {
                     <ClaySelect aria-label="Select Label" id="mySelectId">
                       {sensorTypes.map((item) => (
                         <ClaySelect.Option
-                          key={item.idS}
+                          key={generateUniqueId()}
                           label={item.id}
                           value={item.id}
                         />
@@ -139,7 +154,6 @@ const ModalSensor = (props) => {
                       options={products}
                       formControl={true}
                       handleChange={handleChange}
-                      cellsToDisplay={["id", "product name"]}
                       placeholder={modalItem.idArticulo}
                     />
                   </div>
