@@ -107,14 +107,16 @@ function FilterSensor(props) {
         />
       </div>
       {selectedItems[0] && (
-        <DefaultTable
-          striped
-          multiselect
-          handleSelect={handleSelect}
-          selectedItems={selectedItems}
-          data={selectedItems}
-          customHeader="Artículos seleccionados"
-        ></DefaultTable>
+        <div className="mb-3">
+          <DefaultTable
+            striped
+            multiselect
+            handleSelect={handleSelect}
+            selectedItems={selectedItems}
+            data={selectedItems}
+            customHeader="Artículos seleccionados"
+          ></DefaultTable>
+        </div>
       )}
       {searchedText.length >= 6 && (
         <>

@@ -156,14 +156,14 @@ const ModalSensor = (props) => {
                   <span className="txt">Artículo: </span>
                 </div>
                 <div className="col-lg-8 mb-3">
-                  <div className="select-wrapper">
-                    <SearchSectionAutocomplete
-                      options={products}
-                      formControl={true}
-                      handleChange={handleChange}
-                      placeholder={modalItem.idArticulo}
-                    />
-                  </div>
+                  {/* <div className="select-wrapper"> */}
+                  <SearchSectionAutocomplete
+                    options={products}
+                    formControl={true}
+                    handleChange={handleChange}
+                    placeholder={modalItem.idArticulo}
+                  />
+                  {/* </div> */}
                 </div>
               </div>
               <div className="row">

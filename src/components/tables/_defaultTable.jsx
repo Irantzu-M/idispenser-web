@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ClayTable from "@clayui/table";
-import { useEffect, useState } from "react";
+
 import TableHeaderOrderable from "./_tableHeaderOrderable";
 import { generateUniqueId, sortASC, sortDES } from "../../functions/functions";
 import FixedTableCols from "./_fixedTableCols";
@@ -73,7 +73,7 @@ const DefaultTable = (props) => {
 
   return (
     <>
-      {data != [] ? (
+      {data != undefined && data != [] ? (
         <>
           <div
             className={
@@ -151,8 +151,7 @@ const DefaultTable = (props) => {
                     </ClayTable.Head>
                   )}
                   <ClayTable.Body>
-                    {data != undefined &&
-                      multiselect &&
+                    {multiselect &&
                       data.map((item) => (
                         <SelectableDEFAULTTableRow
                           multiselect={multiselect}
@@ -161,29 +160,34 @@ const DefaultTable = (props) => {
                           item={item}
                           key={generateUniqueId()}
                         >
-                          {data != [] &&
-                            getAllFields().map((allField) => {
-                              if (
-                                item[allField] != undefined &&
-                                item[allField] != "" &&
-                                allField != "id" &&
-                                allField != "combinedField"
-                              ) {
-                                return (
-                                  <IDispenserTableCell
-                                    key={generateUniqueId()}
-                                    item={item}
-                                    itemType={itemType}
-                                    field={allField}
-                                  />
-                                );
-                              }
-                            })}
+                          {getAllFields().map((allField) => {
+                            console.log("164");
+                            if (
+                              item[allField] != undefined &&
+                              item[allField] != "" &&
+                              allField != "id" &&
+                              allField != "combinedField"
+                            ) {
+                              return (
+                                <IDispenserTableCell
+                                  key={generateUniqueId()}
+                                  item={item}
+                                  itemType={itemType}
+                                  field={allField}
+                                />
+                              );
+                            } else {
+                              return (
+                                <ClayTable.Cell key={generateUniqueId()}>
+                                  -
+                                </ClayTable.Cell>
+                              );
+                            }
+                          })}
                         </SelectableDEFAULTTableRow>
                       ))}
 
-                    {data != undefined &&
-                      select &&
+                    {select &&
                       data.map((item) => (
                         <SelectableDEFAULTTableRow
                           handleSelect={handleSelect}
@@ -207,13 +211,18 @@ const DefaultTable = (props) => {
                                     field={allField}
                                   />
                                 );
+                              } else {
+                                return (
+                                  <ClayTable.Cell key={generateUniqueId()}>
+                                    -
+                                  </ClayTable.Cell>
+                                );
                               }
                             })}
                         </SelectableDEFAULTTableRow>
                       ))}
 
-                    {data != undefined &&
-                      openDetails &&
+                    {openDetails &&
                       data.map((item) => (
                         <ClayTable.Row
                           className={
@@ -261,8 +270,7 @@ const DefaultTable = (props) => {
                         </ClayTable.Row>
                       ))}
 
-                    {data != undefined &&
-                      !multiselect &&
+                    {!multiselect &&
                       !select &&
                       !openDetails &&
                       data.map((item) => (
@@ -286,7 +294,7 @@ const DefaultTable = (props) => {
                               } else {
                                 return (
                                   <ClayTable.Cell key={generateUniqueId()}>
-                                    - ::item[allField]::
+                                    -
                                   </ClayTable.Cell>
                                 );
                               }

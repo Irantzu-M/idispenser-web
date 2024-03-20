@@ -131,7 +131,9 @@ const Results = (props) => {
               <div className="results--content bg-light  p-4">
                 <ResultsAppliedFilters />
                 {updateResults ? (
-                  <div>Buscando</div>
+                  <div className="p-3 text-center">
+                    No se han encontrado resultados
+                  </div>
                 ) : (
                   <>
                     {data[0] != [] && (
