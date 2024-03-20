@@ -127,7 +127,7 @@ function FilterSensor(props) {
       )}
       {searchedText.length >= 6 && (
         <>
-          {remapData != [] ? (
+          {/* {remapData != [] ? (
             <DefaultTable
               striped
               multiselect
@@ -138,7 +138,7 @@ function FilterSensor(props) {
             ></DefaultTable>
           ) : (
             <>No hay resultados</>
-          )}
+          )} */}
         </>
       )}
     </>
