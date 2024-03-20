@@ -2,6 +2,7 @@ import React from "react";
 import ClayTable from "@clayui/table";
 import { useState } from "react";
 import Status from "../status/_status";
+import StatusTooltip from "../tooltips/_statusTooltip";
 import { generateUniqueId } from "../../functions/functions";
 
 const FixedTableCols = (props) => {
