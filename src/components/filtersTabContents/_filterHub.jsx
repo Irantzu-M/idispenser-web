@@ -105,7 +105,7 @@ function FilterHubs(props) {
         />
       </div>
 
-      {selectedItems[0] && (
+      {selectedItems != [] && (
         <DefaultTable
           striped
           multiselect
@@ -117,7 +117,7 @@ function FilterHubs(props) {
       )}
       {searchedText.length >= 6 && (
         <>
-          {remapData[0].id ? (
+          {remapData != [] ? (
             <DefaultTable
               striped
               multiselect

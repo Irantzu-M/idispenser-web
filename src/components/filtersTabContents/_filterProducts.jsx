@@ -106,7 +106,7 @@ function FilterSensor(props) {
           placeholder="Search by code or name"
         />
       </div>
-      {selectedItems[0] && (
+      {selectedItems != [] && (
         <DefaultTable
           striped
           multiselect
@@ -118,7 +118,7 @@ function FilterSensor(props) {
       )}
       {searchedText.length >= 6 && (
         <>
-          {remapData[0].id ? (
+          {remapData != [] ? (
             <DefaultTable
               striped
               multiselect
