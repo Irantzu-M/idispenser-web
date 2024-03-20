@@ -64,6 +64,8 @@ const getStatusColor = (status) => {
       return "5";
     case "OK":
       return "6";
+    default:
+      return "9";
   }
 };
 
