@@ -31,7 +31,7 @@ const ResultsAppliedFilters = (props) => {
               <div
                 className="results--applied-filters--item"
                 key={"results--applied-filters--item-" + item.name}
-                onClick={handleClick(item)}
+                onClick={() => handleClick(item)}
               >
                 {item.label}
                 <span className="icon icon-x"></span>

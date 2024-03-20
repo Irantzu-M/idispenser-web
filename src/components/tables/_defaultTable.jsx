@@ -179,7 +179,7 @@ const DefaultTable = (props) => {
                             } else {
                               return (
                                 <ClayTable.Cell key={generateUniqueId()}>
-                                  -
+                                  &nbsp;
                                 </ClayTable.Cell>
                               );
                             }
@@ -214,7 +214,7 @@ const DefaultTable = (props) => {
                               } else {
                                 return (
                                   <ClayTable.Cell key={generateUniqueId()}>
-                                    -
+                                    &nbsp;
                                   </ClayTable.Cell>
                                 );
                               }
@@ -262,7 +262,7 @@ const DefaultTable = (props) => {
                               } else {
                                 return (
                                   <ClayTable.Cell key={generateUniqueId()}>
-                                    -
+                                    &nbsp;
                                   </ClayTable.Cell>
                                 );
                               }
@@ -294,7 +294,7 @@ const DefaultTable = (props) => {
                               } else {
                                 return (
                                   <ClayTable.Cell key={generateUniqueId()}>
-                                    -
+                                    &nbsp;
                                   </ClayTable.Cell>
                                 );
                               }
