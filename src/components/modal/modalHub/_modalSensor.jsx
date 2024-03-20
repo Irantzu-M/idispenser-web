@@ -36,8 +36,6 @@ const ModalSensor = (props) => {
   useEffect(() => {
     if (searchedText.length >= 6) {
       endpoint = `articulos` + `?search=${searchedText}`;
-
-      let resultData;
       try {
         fetchApi(endpoint).then((data) => setProducts(data["items"]));
       } catch (error) {
