@@ -8,8 +8,8 @@ function FilterSensor(props) {
   const [remapData, setRemapData] = useState([{}]);
 
   // TODO - deberiamos poner almacen en lugar de nombre pero no lo devuelve la api
-  const fieldsToSearchIn = ["Código de artículo", "Nombre "];
-  const fieldsToDisplay = ["Código de artículo", "Nombre "];
+  const fieldsToSearchIn = ["idArticulo", "nombre"];
+  const fieldsToDisplay = ["idArticulo", "nombre"];
   // TABS LATERALES
   const tabs = useFilterStore((state) => state.filters);
   const selectedTab = tabs.filter((tab) => {
@@ -110,6 +110,7 @@ function FilterSensor(props) {
         <div className="mb-3">
           <DefaultTable
             striped
+            hover
             multiselect
             handleSelect={handleSelect}
             selectedItems={selectedItems}
@@ -123,6 +124,7 @@ function FilterSensor(props) {
           {remapData != [] ? (
             <DefaultTable
               striped
+              hover
               multiselect
               handleSelect={handleSelect}
               selectedItems={selectedItems}

@@ -51,7 +51,6 @@ const ModalSensor = (props) => {
           const rawData = await response["items"];
 
           if (rawData[0]) {
-            console.log("rawData", rawData);
             setProducts(remap(rawData));
           }
           //return rawData;

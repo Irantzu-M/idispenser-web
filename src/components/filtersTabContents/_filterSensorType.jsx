@@ -60,6 +60,7 @@ function FilterSensorType(props) {
       {data != [] ? (
         <DefaultTable
           striped
+          hover
           select
           handleSelect={handleSelect}
           selectedItems={selectedItems}

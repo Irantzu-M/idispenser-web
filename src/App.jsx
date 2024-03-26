@@ -5,10 +5,7 @@ import Results from "./components/results/_results";
 function App() {
   return (
     <>
-      <div className="container py-5">
-        <Filters />
-        <Results />
-      </div>
+      <div className="container py-5">aaaaa</div>
     </>
   );
 }

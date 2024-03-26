@@ -99,6 +99,7 @@ function FilterSensor(props) {
         <div className="mb-3">
           <DefaultTable
             striped
+            hover
             multiselect
             handleSelect={handleSelect}
             selectedItems={selectedItems}
@@ -110,6 +111,7 @@ function FilterSensor(props) {
       {remapData != [] ? (
         <DefaultTable
           striped
+          hover
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}

@@ -8,7 +8,7 @@ import { generateUniqueId } from "../../functions/functions";
 const FixedTableCols = (props) => {
   const data = props.data;
 
-  // TODO - hacer otra llamada cuando se clicke en la cabecera
+  // TODO - hacer otra llamada cuando se clicke en la cabecera?
   const [fieldToSearchIn, setFieldToSearchIn] = useState("");
   const [itemsToPop, setItemsToPop] = useState("");
 

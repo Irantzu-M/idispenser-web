@@ -83,10 +83,10 @@ function FilterSensor(props) {
       const rmd = dataToremap.map((item) => {
         return {
           id: item.idAlmacen,
-          "ID almacén": item.idAlmacen,
-          "Nombre ": item.nombre,
-          "ID Cliente": item.idCliente,
-          "Descipción ": item.descripcion,
+          idAlmacen: item.idAlmacen,
+          nombre: item.nombre,
+          idCliente: item.idCliente,
+          descripcion: item.descripcion,
         };
       });
       return rmd;
@@ -101,6 +101,7 @@ function FilterSensor(props) {
         <div className="mb-3">
           <DefaultTable
             striped
+            hover
             multiselect
             handleSelect={handleSelect}
             selectedItems={selectedItems}
@@ -112,6 +113,7 @@ function FilterSensor(props) {
       {remapData != [] ? (
         <DefaultTable
           striped
+          hover
           multiselect
           handleSelect={handleSelect}
           selectedItems={selectedItems}

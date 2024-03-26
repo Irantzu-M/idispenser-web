@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useResultsStore from "../../stores/resultsStore";
 
 const CommentTooltip = (props) => {
-  const [messageText, setMessageText] = useState("");
+  const [messageText, setMessageText] = useState(props[props.field]);
   const [tooltipState, setTooltipState] = useState("close"); // view | edit | close
   const [openTooltip, setOpenTooltip] = useState(false);
 
@@ -50,7 +50,7 @@ const CommentTooltip = (props) => {
         <span
           className={
             "comment-tooltip--icon icon icon-add-comment " +
-            (props.comentario?.length > 0 && "hascomment")
+            (messageText?.length > 0 && "hascomment")
           }
         ></span>
 
@@ -62,13 +62,14 @@ const CommentTooltip = (props) => {
             <div className="comment-tooltip--content">
               {tooltipState == "view" && props.comentario && (
                 <span className="d-block py-2">
-                  {props.comentario}
+                  {messageText}
                   <input
                     type="text"
                     className="focus-input"
                     autoFocus
                     onBlur={handleBlur}
                     onClick={handleEdit}
+                    defaultValue={messageText}
                   />
                 </span>
               )}
@@ -78,9 +79,7 @@ const CommentTooltip = (props) => {
                     type="text"
                     placeholder={"Add a comment"}
                     autoFocus
-                    defaultValue={
-                      props.comentario?.length > 0 ? props.comentario : ""
-                    }
+                    defaultValue={messageText?.length > 0 ? messageText : ""}
                     onFocus={(e) => e.target.select()}
                     onBlur={handleBlur}
                     onChange={handleChange}

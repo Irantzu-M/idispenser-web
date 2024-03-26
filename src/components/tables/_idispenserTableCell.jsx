@@ -11,7 +11,7 @@ const IDispenserTableCell = (props) => {
   return (
     <ClayTable.Cell key={"key--" + item.id + "-" + field + "-" + item[field]}>
       {/* <td key={"key--" + item.id + "-" + field + "-" + item[field]}> */}
-      {field === "comentario" ? (
+      {field === "comentario" || field === "comments" ? (
         <>
           <CommentTooltip {...item} field={field} />
         </>

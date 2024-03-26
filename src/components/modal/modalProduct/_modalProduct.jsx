@@ -6,83 +6,68 @@ import ClayButton from "@clayui/button";
 import ClayTable from "@clayui/table";
 import ClayTableRow from "@clayui/table/lib/Row";
 import ClayTableCell from "@clayui/table/lib/Cell";
-import ReplaceTable from "./_modalReplaceProductTable";
-import SensorSelectTable from "./_modalSensorSelectTable";
+// import ReplaceTable from "./_modalReplaceProductTable";
+// import SensorSelectTable from "./_modalSensorSelectTable";
 import SearchSectionAutocomplete from "../../customSearchSelect/_searchSectionAutocomplete";
-import { capitalize } from "../../../functions/functions";
+// import { capitalize } from "../../../functions/functions";
 import DefaultTable from "../../tables/_defaultTable";
 
 const ModalProduct = (props) => {
   const modalItemType = props.itemType;
+  const modalItem = props.item;
+
   // CAMPOS A MOSTRAR - código de artículo y descripción.
-  const fieldsToSearchIn = ["Código de artículo", "Descripción "];
-  const fieldsToDisplay = ["Código de artículo", "Descripción "];
+  // const fieldsToSearchIn = ["Código de artículo", "Descripción "];
+  // const fieldsToDisplay = ["Código de artículo", "Descripción "];
 
-  // TODO - Use api
-  const [modalItem, setModalItem] = useState([]);
-  //const [replaceItem, setReplaceItem] = useState([]);
-  const [data, setData] = useState([]);
-  const [remapData, setRemapData] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      fetch(
-        "http://127.0.0.1:5500/src/mocks/modals/_mockModalResults" +
-          capitalize(modalItemType) +
-          ".json"
-      )
-        .then((response) => response.json())
-        .then((rawData) => setData(rawData));
+  // ---------------------- CLIENTES
+  // TEXTO DE BÚSQUEDA
+  const [clientSearchedText, setClientSearchedText] = useState("");
+  const handleClientChange = (text) => {
+    if (text != "" && text != undefined) {
+      setClientSearchedText(text);
     }
-    if (!remapData[0]) {
-      fetchData();
-    }
-  }, [data]);
-
-  useEffect(() => {
-    async function fetchModalItem() {
-      fetch(
-        "http://127.0.0.1:5500/src/mocks/modals/_mockModal" +
-          capitalize(modalItemType) +
-          props.item.id +
-          ".json"
-      )
-        .then((response) => response.json())
-        .then((itemData) => setModalItem(itemData));
-    }
-    if (!modalItem[0]) {
-      fetchModalItem();
-    }
-  });
-
-  useEffect(() => {
-    async function remap() {
-      setRemapData(
-        data.map((item) => {
-          return {
-            id: item.id,
-            "Código de artículo": item.id,
-            "Descripción ": item["product name"],
-          };
-        })
-      );
-    }
-    remap();
-  }, [data]);
-
-  // TEXTO DE BUSQUEDA
-  const [searchedText, setSearchedText] = useState("");
-  const handleChange = (text) => {
-    setSearchedText(text);
   };
 
-  // ITEMS TO DISPLAY IN THE TABLE AFTER SEARCHING
-  const itemsFound = remapData.filter((item) => {
-    if (
-      item.combinedField?.toLowerCase().includes(searchedText.toLowerCase())
-    ) {
-      return item;
+  // LLAMADA A API para SENSORES
+  const [sensors, setSensors] = useState([{}]);
+  sensorFieldsToDisplay = [
+    "idConcentrador",
+    "idArticulo",
+    "idSensor",
+    "sensorPosition",
+    "comments",
+  ];
+  useEffect(() => {
+    const fetchData = async (sensorsEndpoint) => {
+      try {
+        const response = await fetchApi(sensorsEndpoint);
+        const rawData = await response["items"];
+
+        if (rawData[0]) {
+          setSensors(remap(rawData));
+        }
+        //return rawData;
+      } catch (error) {
+        throw error;
+      }
+
+      function remap(dataToRemap) {
+        const rmd = dataToRemap.map((item) => {
+          const id = item.idSensor;
+          return { ...item, id };
+        });
+        return rmd;
+      }
+    };
+
+    {
+      /* TODO - asegurarme de que este endpoint va a dar los resultados del HUB y no de otros hubs también */
     }
-  });
+    const sensorsEndpoint = `sensors/list?concentradorIds=${modalItem.idConcentrador}`;
+    fetchData(sensorsEndpoint);
+  }, []);
+  // ---------------------- fin SENSORES
 
   return (
     <>
@@ -91,7 +76,7 @@ const ModalProduct = (props) => {
           <div className="modal--name">
             <h4 className="modal--name--txt">
               Modificar borrar artículo / sensor
-              {" " + modalItem.id}
+              {modalItem.idArticulo}
             </h4>
           </div>
           <div className="d-flex justify-content-end">
@@ -128,9 +113,7 @@ const ModalProduct = (props) => {
                         </ClayTable.Cell>
                         <ClayTable.Cell className="fw-bold">
                           <span>
-                            {modalItem["customer id"] +
-                              " " +
-                              modalItem["customer name"]}
+                            {modalItem.idCliente + " " + modalItem.clienteName}
                           </span>
                         </ClayTable.Cell>
                       </ClayTable.Row>
@@ -161,7 +144,12 @@ const ModalProduct = (props) => {
                   <div className="row">
                     <div className="col-lg-3">Sensor ID y ubicación:</div>
                     <div className="col-lg-9">
-                      <SensorSelectTable />
+                      {/* <SensorSelectTable /> */}
+                      <DefaultTable
+                        multiselect
+                        fieldsToDisplay={sensorFieldsToDisplay}
+                        data={sensors}
+                      ></DefaultTable>
                     </div>
                   </div>
                 </div>

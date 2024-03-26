@@ -6,15 +6,24 @@ import DefaultTable from "../tables/_defaultTable";
 function FilterSensor(props) {
   const [data, setData] = useFilterStore((state) => state.selecable) || [];
   const [remapData, setRemapData] = useState([{}]);
+  // const fieldsToSearchIn = [
+  //   "Código sensor",
+  //   "Posición ",
+  //   "HUB ",
+  //   "Cliente ",
+  //   "Almacén ",
+  //   "Tipo ",
+  // ];
   const fieldsToSearchIn = [
-    "Código sensor",
-    "Posición ",
-    "HUB ",
-    "Cliente ",
-    "Almacén ",
-    "Tipo ",
+    "idSensor",
+    "sensorPosition",
+    "idConcentrador",
+    "idCliente",
+    "almacenName",
+    "tipoSensor",
   ];
-  const fieldsToDisplay = ["Código sensor", "HUB ", "Tipo "];
+  // const fieldsToDisplay = ["Código sensor", "HUB ", "Tipo "];
+  const fieldsToDisplay = ["idSensor", "idConcentrador", "tipoSensor"];
 
   // TABS LATERALES
   const tabs = useFilterStore((state) => state.filters);
@@ -81,15 +90,17 @@ function FilterSensor(props) {
 
       function remap(dataToremap) {
         const rmd = dataToremap.map((item) => {
-          return {
-            id: item.idSensor,
-            "Código sensor": item.idSensor,
-            "Posición ": item.sensorPosition,
-            "HUB ": item.idConcentrador,
-            "Cliente ": item.idCliente,
-            "Almacén ": item.almacenName,
-            "Tipo ": item.tipoSensor,
-          };
+          const id = item.idSensor;
+          return { ...item, id };
+          // return {
+          //   id: item.idSensor,
+          //   "Código sensor": item.idSensor,
+          //   "Posición ": item.sensorPosition,
+          //   "HUB ": item.idConcentrador,
+          //   "Cliente ": item.idCliente,
+          //   "Almacén ": item.almacenName,
+          //   "Tipo ": item.tipoSensor,
+          // };
         });
         return rmd;
       }
@@ -119,6 +130,7 @@ function FilterSensor(props) {
         <div className="mb-3">
           <DefaultTable
             striped
+            hover
             multiselect
             handleSelect={handleSelect}
             selectedItems={selectedItems}
@@ -132,6 +144,7 @@ function FilterSensor(props) {
           {remapData != [] ? (
             <DefaultTable
               striped
+              hover
               multiselect
               handleSelect={handleSelect}
               selectedItems={selectedItems}

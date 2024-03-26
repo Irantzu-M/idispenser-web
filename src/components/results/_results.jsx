@@ -32,6 +32,7 @@ const Results = (props) => {
   const setUpdateResults = useResultsStore((state) => state.setUpdateResults);
 
   const [fixedTableCols, setFixedTableCols] = useState([]);
+  const [displayCols, setDisplayCols] = useState([]);
 
   useEffect(() => {
     filters.map((item) => {
@@ -57,7 +58,7 @@ const Results = (props) => {
         });
       }
     });
-    console.log("endpoint", endpoint);
+
     if (endpoint != "" && itemTypeToFind != "" && updateResults) {
       try {
         fetchResultData(endpoint)
@@ -75,31 +76,67 @@ const Results = (props) => {
       if (itemTypeToFind == "sensors") {
         setFixedTableCols([
           "status",
+          "comments",
+          "idCliente",
+          "tipoSensor",
+          "idSensor",
+          "sensorPosition",
+        ]);
+        setDisplayCols([
+          "idConcentrador",
+          "concentradorPosition",
+          "idAlmacenQuirofano",
+          "idArticulo",
+          "articuloName",
+          "height",
+          "maxHeight",
+          "weight",
+          "width",
+          "length",
+          "schema",
+          "maxUnits",
+          "currentUnits",
+          "currentMeasure",
+          "lastConnect",
+        ]);
+      } else if (itemTypeToFind == "hubs") {
+        setDisplayCols([
+          "status",
           "idCliente",
           "idAlmacenQuirofano",
           "almacenName",
           "idConcentrador",
+          "concentradorPosition",
+          "lastConnect",
+          "aliasIDC",
+          "sensors",
+          // TODO - de dónde saco este campo
+          // "sensorsError",
+          "roundingRef",
+          "idConcentrador",
+          "samplingPeriod",
         ]);
+        // } else if (itemTypeToFind == "products") {
+        //   setDisplayCols([
+        //     // TODO - no estoy recibiendo más que id y nombre
+        //     // "status",
+        //     // "idCliente",
+        //     // "idAlmacenQuirofano",
+        //     // "almacenName",
+        //     // "idConcentrador",
+        //     // "concentradorPosition",
+        //     // "lastConnect",
+        //     // "aliasIDC",
+        //     // "sensors",
+        //     // "roundingRef",
+        //     // "idConcentrador",
+        //     // "samplingPeriod",
+        //   ]);
       } else {
         setFixedTableCols([]);
       }
-
-      // TODO - hacer un remap distinto para cada resultado
-      // function remap(dataToremap) {
-      //   const rmd = dataToremap.map((item) => {
-      //     return {
-      //       id: item.idSensor,
-      //       "Código sensor": item.idSensor,
-      //       "Posición ": item.sensorPosition,
-      //       "HUB ": item.idConcentrador,
-      //       "Cliente ": item.idCliente,
-      //       "Almacén ": item.almacenName,
-      //       "Tipo ": item.tipoSensor,
-      //     };
-      //   });
-      //   return rmd;
-      // }
     }
+    console.log("resultsendpoint", endpoint);
   }, [itemTypeToFind, updateResults]);
 
   // MODAL
@@ -139,6 +176,7 @@ const Results = (props) => {
                     {data[0] != [] && (
                       <DefaultTable
                         striped
+                        hover
                         orderable
                         customHeader=""
                         // endpoint={endpoint}

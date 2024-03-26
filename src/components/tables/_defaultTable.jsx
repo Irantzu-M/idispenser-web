@@ -13,6 +13,7 @@ const DefaultTable = (props) => {
     itemType = props.itemType || "",
     endpoint = props.endpoint || "",
     striped = props.striped || false,
+    hover = props.hover || false,
     customHeader = props.customHeader || false,
     // Checkbox single select
     select = props.select || false,
@@ -25,6 +26,8 @@ const DefaultTable = (props) => {
     orderable = props.orderable || false,
     fixedTableCols = props.fixedTableCols || false,
     openDetails = props.openDetails || false,
+
+    fieldsToDisplay = props.fieldsToDisplay || false,
   } = props;
 
   // Get table data
@@ -54,17 +57,26 @@ const DefaultTable = (props) => {
     if (Array.isArray(fixedTableCols)) {
       fixedTableCols.forEach((field) => allFields.add(field));
     }
-
-    data.forEach((item) => {
-      Object.keys(item).forEach((field) => {
-        // Si el campo no está en fixedTableCols, agregarlo al conjunto
-        if (!fixedTableCols || !fixedTableCols.includes(field)) {
-          allFields.add(field);
-        }
+    if (Array.isArray(fieldsToDisplay)) {
+      fieldsToDisplay.forEach((field) => allFields.add(field));
+    } else {
+      data.forEach((item) => {
+        Object.keys(item).forEach((field) => {
+          // Si el campo no está en fixedTableCols, agregarlo al conjunto
+          if (
+            (!fixedTableCols || !fixedTableCols.includes(field)) &&
+            (!fieldsToDisplay || !fieldsToDisplay.includes(field))
+          ) {
+            allFields.add(field);
+          }
+        });
       });
-    });
+    }
     return Array.from(allFields);
   };
+
+  // const f = "idAlmacen";
+  // console.log("LFT: ", Liferay.Language.get("com.hartmann.idispenser." + f));
 
   const handleOpenModal = (item) => {
     props.openDetails(item);
@@ -85,25 +97,29 @@ const DefaultTable = (props) => {
                 <ClayTable
                   borderedColumns={false}
                   borderless={true}
-                  hover={true}
+                  hover={hover}
                   className={
-                    "idispenser-table" + (striped ? " table-striped" : "")
+                    "idispenser-table" +
+                    (striped != false ? " table-striped" : "")
                   }
                 >
-                  {customHeader && customHeader != "none" && (
+                  {customHeader && customHeader != "none" ? (
                     <ClayTable.Head>
                       <ClayTable.Row>
                         <ClayTable.Cell
                           key={generateUniqueId()}
                           headingCell
-                          colSpan={data != [] && getAllFields().length + 1}
+                          colSpan={
+                            multiselect
+                              ? getAllFields().length + 1
+                              : getAllFields().length
+                          }
                         >
-                          {customHeader}
+                          {customHeader + " "}
                         </ClayTable.Cell>
                       </ClayTable.Row>
                     </ClayTable.Head>
-                  )}
-                  {!customHeader && (
+                  ) : (
                     <ClayTable.Head key={generateUniqueId()}>
                       <ClayTable.Row className={multiselect && "multiselect"}>
                         {data != [] && (multiselect || select) && (
@@ -112,7 +128,7 @@ const DefaultTable = (props) => {
                             className={"tableheader--selectable "}
                             key={generateUniqueId()}
                           >
-                            -
+                            &nbsp;
                           </ClayTable.Cell>
                         )}
                         {data != [] &&
@@ -141,7 +157,23 @@ const DefaultTable = (props) => {
                                       {field}
                                     </TableHeaderOrderable>
                                   ) : (
-                                    <span>{field}</span>
+                                    <span>
+                                      {field +
+                                        " - TERM :: " +
+                                        "com.hartmann.idispenser." +
+                                        field +
+                                        " - LANGUAGE :: " +
+                                        Liferay.Language.get(
+                                          "com.hartmann.idispenser." + field
+                                        )}
+                                      {/* {Liferay.Language.get(
+                                        "com.hartmann.idispenser.idAlmacen"
+                                      ) != ""
+                                        ? Liferay.Language.get(
+                                            "com.hartmann.idispenser.idArticulo"
+                                          )
+                                        : field} */}
+                                    </span>
                                   )}
                                 </ClayTable.Cell>
                               );
@@ -161,7 +193,6 @@ const DefaultTable = (props) => {
                           key={generateUniqueId()}
                         >
                           {getAllFields().map((allField) => {
-                            console.log("164");
                             if (
                               item[allField] != undefined &&
                               item[allField] != "" &&
@@ -307,6 +338,8 @@ const DefaultTable = (props) => {
                 {props.fixedTableCols !== undefined &&
                   props.fixedTableCols[0] !== "" && (
                     <FixedTableCols
+                      hover={hover}
+                      striped={striped}
                       data={data}
                       itemType={itemType}
                       fixedTableCols={fixedTableCols}

@@ -6,8 +6,15 @@ import DefaultTable from "../tables/_defaultTable";
 function FilterHubs(props) {
   const [data, setData] = useFilterStore((state) => state.selecable) || [];
   const [remapData, setRemapData] = useState([{}]);
-  const fieldsToSearchIn = ["Código HUB", "Cliente ", "Almacén ", "Alias "];
-  const fieldsToDisplay = ["Código HUB", "Almacén ", "Alias "];
+  // const fieldsToSearchIn = ["Código HUB", "Cliente ", "Almacén ", "Alias "];
+  // const fieldsToDisplay = ["Código HUB", "Almacén ", "Alias "];
+  const fieldsToSearchIn = [
+    "idConcentrador",
+    "idCliente",
+    "idAlmacenQuirofano",
+    "aliasIDC",
+  ];
+  const fieldsToDisplay = ["idConcentrador", "idAlmacenQuirofano", "aliasIDC"];
 
   // TABS LATERALES
   const tabs = useFilterStore((state) => state.filters);
@@ -74,12 +81,14 @@ function FilterHubs(props) {
 
       function remap(dataToremap) {
         const rmd = dataToremap.map((item) => {
-          return {
-            id: item.idConcentrador,
-            "Código HUB": item.idConcentrador,
-            "Almacén ": item.idAlmacenQuirofano,
-            "Alias ": item.aliasIDC,
-          };
+          const id = item.idConcentrador;
+          return { ...item, id };
+          // return {
+          //   id: item.idConcentrador,
+          //   "Código HUB": item.idConcentrador,
+          //   "Almacén ": item.idAlmacenQuirofano,
+          //   "Alias ": item.aliasIDC,
+          // };
         });
         return rmd;
       }
@@ -109,6 +118,7 @@ function FilterHubs(props) {
         <div className="mb-3">
           <DefaultTable
             striped
+            hover
             multiselect
             handleSelect={handleSelect}
             selectedItems={selectedItems}
@@ -122,6 +132,7 @@ function FilterHubs(props) {
           {remapData != [] ? (
             <DefaultTable
               striped
+              hover
               multiselect
               handleSelect={handleSelect}
               selectedItems={selectedItems}

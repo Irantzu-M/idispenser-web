@@ -3,7 +3,7 @@ import ClayModal, { useModal } from "@clayui/modal";
 import { useEffect } from "react";
 import ModalProduct from "./modalProduct/_modalProduct";
 import ModalHub from "./modalHub/_modalHub";
-import ModalSensor from "./modalHub/_modalSensor";
+import ModalSensor from "./modalSensor/_modalSensor";
 import ModalErrorSensor from "./modalError/_modalErrorSensor";
 import ModalErrorProduct from "./modalError/_modalErrorProduct";
 import ModalHuberror from "./modalError/_modalHuberror";

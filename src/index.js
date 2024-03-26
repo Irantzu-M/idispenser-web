@@ -13,20 +13,9 @@ import App from "./App";
  * @param  {Object} params a hash with values of interest to the portlet
  * @return {void}
  */
-export default function main({
-  portletNamespace,
-  contextPath,
-  portletElementId,
-}) {
-  ReactDOM.render(
-    <>
-      {/* <AppComponent
-        portletNamespace={portletNamespace}
-        contextPath={contextPath}
-        portletElementId={portletElementId}
-      /> */}
-      <App />
-    </>,
-    document.getElementById(portletElementId)
-  );
+export default function main(portletElementId) {
+    ReactDOM.render(
+        <App/>,
+        document.getElementById(portletElementId)
+    );
 }

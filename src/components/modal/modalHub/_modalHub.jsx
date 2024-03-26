@@ -8,81 +8,166 @@ import ClayTableCell from "@clayui/table/lib/Cell";
 import { capitalize } from "../../../functions/functions";
 import DefaultTable from "../../tables/_defaultTable";
 import SearchSectionAutocomplete from "../../customSearchSelect/_searchSectionAutocomplete";
+import { fetchApi } from "../../../api/idispenserApi";
 //--clayuiform import { ClaySelect } from "@clayui/form";
 
 const ModalHub = (props) => {
   const modalItemType = props.itemType;
-  // CAMPOS A MOSTRAR - código de artículo y descripción.
-  // const fieldsToSearchIn = ["reference", "label"];
+  const modalItem = props.item;
 
-  // TODO - Use api
-  const [modalItem, setModalItem] = useState([]);
-  //const [replaceItem, setReplaceItem] = useState([]);
-  const [data, setData] = useState([]);
+  // ---------------------- CLIENTES
+  // TEXTO DE BÚSQUEDA
+  const [clientSearchedText, setClientSearchedText] = useState("");
+  const handleClientChange = (text) => {
+    if (text != "" && text != undefined) {
+      setClientSearchedText(text);
+    }
+  };
+  // LLAMADA A API para CLIENTES
+  const [clients, setClients] = useState([{}]);
   useEffect(() => {
-    async function fetchData() {
-      fetch(
-        "http://127.0.0.1:5500/src/mocks/modals/_mockModalResults" +
-          capitalize(modalItemType) +
-          ".json"
-      )
-        .then((response) => response.json())
-        .then((rawData) => setData(rawData));
-    }
-    if (!data[0]) {
-      fetchData();
-    }
-    async function fetchModalItem() {
-      fetch(
-        "http://127.0.0.1:5500/src/mocks/modals/_mockModal" +
-          // TODO - recuperar esto
-          //capitalize(modalItemType) +
-          //props.item.id +
-          "Hubs111111" +
-          ".json"
-      )
-        .then((response) => response.json())
-        .then((itemData) => setModalItem(itemData[0]));
-    }
-    if (!modalItem[0]) {
-      fetchModalItem();
-    }
-  }, [data, modalItem]);
+    if (clientSearchedText.length >= 3) {
+      const fetchData = async (clientEndpoint) => {
+        try {
+          const response = await fetchApi(clientEndpoint);
+          const rawData = await response["items"];
 
-  // SELECT
-  const [clients, setClients] = useState([]);
-  useEffect(() => {
-    async function fetchClients() {
-      fetch("http://127.0.0.1:5500/src/mocks/filters/_mockClients.json")
-        .then((response) => response.json())
-        .then((allClients) => {
-          setClients(allClients);
-        });
+          if (rawData[0]) {
+            setClients(remap(rawData));
+          }
+          //return rawData;
+        } catch (error) {
+          throw error;
+        }
+
+        function remap(dataToRemap) {
+          const rmd = dataToRemap.map((item) => {
+            const id = item.idClient;
+            return { ...item, id };
+          });
+          return rmd;
+        }
+      };
+
+      const clientEndpoint = `clients?search=${clientSearchedText}`;
+      fetchData(clientEndpoint);
     }
-    fetchClients();
-  }, []);
-  const [warehouses, setWarehouses] = useState([]);
-  useEffect(() => {
-    async function fetchWarehouses() {
-      fetch("http://127.0.0.1:5500/src/mocks/modals/_mockWarehouses.json")
-        .then((response) => response.json())
-        .then((allWarehouses) => {
-          setWarehouses(allWarehouses);
-        });
+  }, [clientSearchedText]);
+
+  // ---------------------- fin CLIENTES
+
+  // ---------------------- ALMACENES
+  // TEXTO DE BÚSQUEDA
+  const [warehouseSearchedText, setWarehouseSearchedText] = useState("");
+  const handleWarehouseChange = (text) => {
+    if (text != "" && text != undefined) {
+      setWarehouseSearchedText(text);
     }
-    fetchWarehouses();
-  }, []);
-  const [hubPosition, setHubPosition] = useState([]);
+  };
+  // LLAMADA A API para ALMACENES
+  const [warehouses, setWarehouses] = useState([{}]);
   useEffect(() => {
-    async function fetchHubPosition() {
-      fetch("http://127.0.0.1:5500/src/mocks/modals/_mockHubPosition.json")
-        .then((response) => response.json())
-        .then((allHubs) => {
-          setHubPosition(allHubs);
-        });
+    if (warehouseSearchedText.length >= 3) {
+      const fetchData = async (clientEndpoint) => {
+        try {
+          const response = await fetchApi(clientEndpoint);
+          const rawData = await response["items"];
+
+          if (rawData[0]) {
+            setWarehouses(remap(rawData));
+          }
+          //return rawData;
+        } catch (error) {
+          throw error;
+        }
+
+        function remap(dataToRemap) {
+          const rmd = dataToRemap.map((item) => {
+            const id = item.idWarehouse;
+            return { ...item, id };
+          });
+          return rmd;
+        }
+      };
+
+      const clientEndpoint = `almacenes?search=${searchedText}`;
+      fetchData(clientEndpoint);
     }
-    fetchHubPosition();
+  }, [warehouseSearchedText]);
+  // ---------------------- fin ALMACENES
+
+  // ---------------------- POSICIONHUB
+  // TEXTO DE BÚSQUEDA
+  const [posicionHubSearchedText, setPosicionHubSearchedText] = useState("");
+  const handlePosicionHubChange = (text) => {
+    if (text != "" && text != undefined) {
+      setPosicionHubSearchedText(text);
+    }
+  };
+  // LLAMADA A API para POSICIONHUB
+  const [posicionHubs, setPosicionHubs] = useState([{}]);
+  useEffect(() => {
+    if (posicionHubSearchedText.length >= 3) {
+      const fetchData = async (posicionHubEndpoint) => {
+        try {
+          const response = await fetchApi(posicionHubEndpoint);
+          const rawData = await response["items"];
+
+          if (rawData[0]) {
+            setPosicionHubs(remap(rawData));
+          }
+          //return rawData;
+        } catch (error) {
+          throw error;
+        }
+
+        function remap(dataToRemap) {
+          const rmd = dataToRemap.map((item) => {
+            const id = item.idPosicionHub;
+            return { ...item, id };
+          });
+          return rmd;
+        }
+      };
+
+      const posicionHubEndpoint = `hubs/list?search=${searchedText}`;
+      fetchData(posicionHubEndpoint);
+    }
+  }, [posicionHubSearchedText]);
+  // ---------------------- fin POSICIONHUB
+
+  // LLAMADA A API para SENSORES
+  const [sensors, setSensors] = useState([{}]);
+  useEffect(() => {
+    const fetchData = async (sensorsEndpoint) => {
+      try {
+        const response = await fetchApi(sensorsEndpoint);
+        const rawData = await response["items"];
+
+        if (rawData[0]) {
+          setSensors(remap(rawData));
+        }
+        //return rawData;
+      } catch (error) {
+        throw error;
+      }
+
+      function remap(dataToRemap) {
+        const rmd = dataToRemap.map((item) => {
+          const id = item.idSensor;
+          return { ...item, id };
+        });
+        return rmd;
+      }
+    };
+
+    {
+      /* TODO - asegurarme de que este endpoint va a dar los resultados del HUB y no de otros hubs también */
+    }
+    const sensorsEndpoint = `sensors/list?concentradorIds=${modalItem.idConcentrador}`;
+    fetchData(sensorsEndpoint);
   }, []);
+  // ---------------------- fin SENSORES
 
   // SEARCH TEXT
   const fieldsToSearchIn = ["Código", "Cliente"];
@@ -91,7 +176,6 @@ const ModalHub = (props) => {
   const handleChange = (text) => {
     setSearchedText(text);
   };
-
   return (
     <>
       <div className="modal--section borderless">
@@ -132,7 +216,7 @@ const ModalHub = (props) => {
                       <span>HUB ID: </span>
                     </ClayTable.Cell>
                     <ClayTable.Cell className="fw-bold">
-                      <span>{modalItem["id"]}</span>
+                      <span>{modalItem.idConcentrador}</span>
                     </ClayTable.Cell>
                   </ClayTable.Row>
                   <ClayTable.Row>
@@ -140,7 +224,7 @@ const ModalHub = (props) => {
                       <span>Last connection: </span>
                     </ClayTable.Cell>
                     <ClayTable.Cell className="fw-bold">
-                      <span>{modalItem["last connection"]}</span>
+                      <span>{modalItem.lastConnect}</span>
                     </ClayTable.Cell>
                   </ClayTable.Row>
                   <ClayTable.Row>
@@ -148,8 +232,7 @@ const ModalHub = (props) => {
                       <span>Alias IDC: </span>
                     </ClayTable.Cell>
                     <ClayTable.Cell className="fw-bold">
-                      {/* //TODO - alias IDC */}
-                      <span>ALIAS IDC</span>
+                      <span>{modalItem.aliasIDC}</span>
                     </ClayTable.Cell>
                   </ClayTable.Row>
                   <ClayTable.Row>
@@ -158,7 +241,8 @@ const ModalHub = (props) => {
                     </ClayTable.Cell>
                     <ClayTable.Cell className="fw-bold">
                       <span>
-                        {modalItem["identificador armario sensorbox"]}
+                        {/* TODO - comprobar que este es el campo */}
+                        {modalItem.idAlmacenQuirofano}
                       </span>
                     </ClayTable.Cell>
                   </ClayTable.Row>
@@ -167,7 +251,7 @@ const ModalHub = (props) => {
                       <span>Período de muestreo: </span>
                     </ClayTable.Cell>
                     <ClayTable.Cell className="fw-bold">
-                      <span>{modalItem["periodo de muestreo"]}</span>
+                      <span>{modalItem.samplingPeriod}</span>
                     </ClayTable.Cell>
                   </ClayTable.Row>
                 </ClayTable.Body>
@@ -194,7 +278,7 @@ const ModalHub = (props) => {
                           handleChange={handleChange}
                           cellsToDisplay={fieldsToDisplay}
                           cellsToSearchIn={fieldsToSearchIn}
-                          placeholder={modalItem["customer"]}
+                          placeholder={modalItem.idCliente}
                         />
                       )}
                     </ClayTable.Cell>
@@ -211,7 +295,7 @@ const ModalHub = (props) => {
                           handleChange={handleChange}
                           cellsToDisplay={fieldsToDisplay}
                           cellsToSearchIn={fieldsToSearchIn}
-                          placeholder={modalItem["warehouse id"]}
+                          placeholder={modalItem.idAlmacenQuirofano}
                         />
                       )}
                     </ClayTable.Cell>
@@ -221,14 +305,14 @@ const ModalHub = (props) => {
                       <span>Posición del HUB: </span>
                     </ClayTable.Cell>
                     <ClayTable.Cell className="fw-bold">
-                      {hubPosition[0] && (
+                      {posicionHubSearchedText[0] && (
                         <SearchSectionAutocomplete
-                          options={hubPosition}
+                          options={posicionHubs}
                           formControl={true}
                           handleChange={handleChange}
                           cellsToDisplay={fieldsToDisplay}
                           cellsToSearchIn={fieldsToSearchIn}
-                          placeholder={modalItem["hub position"]}
+                          placeholder={modalItem.concentradorPosition}
                         />
                       )}
                     </ClayTable.Cell>
@@ -246,7 +330,7 @@ const ModalHub = (props) => {
                         ]}
                         formControl={true}
                         handleChange={handleChange}
-                        placeholder={modalItem["tipo de redondeo"]}
+                        placeholder={modalItem.roundingRef}
                       />
                     </ClayTable.Cell>
                   </ClayTable.Row>
@@ -255,18 +339,12 @@ const ModalHub = (props) => {
                       <span>Número de serie del armario: </span>
                     </ClayTable.Cell>
                     <ClayTable.Cell className="fw-bold">
-                      {clients[0] && (
+                      {warehouses[0] && (
                         <SearchSectionAutocomplete
-                          options={[
-                            { "ref num": "kghaodgaj" },
-                            { "ref num": "fslkafj0l" },
-                            { "ref num": "ragtsvbav" },
-                          ]}
+                          options={warehouses}
                           formControl={true}
                           handleChange={handleChange}
-                          placeholder={
-                            modalItem["identificador armario sensorbox"]
-                          }
+                          placeholder={modalItem.idAlmacenQuirofano}
                         />
                       )}
                     </ClayTable.Cell>
@@ -280,14 +358,27 @@ const ModalHub = (props) => {
         <div className="modal--section pt-5">
           <div className="row">
             <p className="mb-4">Sensores/Artículos asignados a este HUB:</p>
-            <DefaultTable
+            {/* <DefaultTable
               params={props.params}
               // TODO - Corregir esto de forma que sea dinámico y haga la llamada que tiene que hacer
               itemType={"sensors"}
               modalItem={modalItem}
               tableQuery={"/results/" + "_mockResultsSensors.json"}
               handleOpenModal={() => {}}
-            />
+            /> */}
+
+            <DefaultTable
+              data={sensors}
+              itemType={"sensors"}
+              fieldsToDisplay={[
+                "status",
+                "comments",
+                "idSensor",
+                "sensorPosition",
+                "articuloName",
+                "stock",
+              ]}
+            ></DefaultTable>
           </div>
         </div>
       </ClayModal.Body>
